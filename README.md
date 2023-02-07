@@ -6,7 +6,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 ## Team
 
 - Jessica Eisler
-- MEMBER2
+- Alexandria Pross
 - MEMBER3
 - MEMBER4
 - MEMBER5
