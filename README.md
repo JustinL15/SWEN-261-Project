@@ -8,7 +8,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 - Jessica Eisler
 - Alexandria Pross
 - Matthew London
-- MEMBER4
+- Justin Lin
 - MEMBER5
 
 ## Prerequisites
