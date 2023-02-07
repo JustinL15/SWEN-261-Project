@@ -5,15 +5,15 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
   
 ## Team
 
-- MEMBER1
+- Jessica Eisler
 - MEMBER2
 - MEMBER3
 - MEMBER4
-
+- MEMBER5
 
 ## Prerequisites
 
-- Java 8=>11 (Make sure to have correct JAVA_HOME setup in your environment)
+- Java 11 (Make sure to have correct JAVA_HOME setup in your environment)
 - Maven
 -  _add any other tech stack requirements_
 
