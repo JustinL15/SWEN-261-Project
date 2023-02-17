@@ -2,8 +2,12 @@ package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.ProductDAO;
+
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controls the REST requests and responses for a Propduct
  * 
  * @author Matt London
- * @author ADD NAMES HERE
+ * @author Alexandria Pross
  */
 @RestController
 @RequestMapping("product")
@@ -44,10 +48,30 @@ public class ProductController {
         return null;
     }
 
+    /**
+     * Responsible for get all products located in the inventory
+     * 
+     * @return Response entity with a list of all the products
+     * Status of OK
+     * Status of INTERNAL_SERVICE_ERROR otherwise
+     */
+
     @GetMapping("")
     public ResponseEntity<Product[]> getProducts() {
-        // TODO implement and write docstring
-        return null;
+
+        LOG.info("GET /products");
+        try {
+            Product[] product = productDAO.getProducts(); //creates variable for products
+            if(product != null) //if product is not null
+                return new ResponseEntity<Product[]>(HttpStatus.OK); //set status to ok
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); //set status to not found
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); //set status to internal service error
+        }
+        
     }
 
     @GetMapping("/")
