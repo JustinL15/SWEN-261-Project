@@ -162,7 +162,7 @@ public class ProductFileDAO  implements ProductDAO {
      * {@inheritDoc}
      */
     @Override
-    public Product createProduct(Product product) {
+    public Product createProduct(Product product) throws IOException {
         synchronized(productMap) {
             Product tmpProd = new Product(getNextId(), product.getName(), product.getPrice(),
                                             product.getQuantity(), product.getDescription());
@@ -179,7 +179,7 @@ public class ProductFileDAO  implements ProductDAO {
      * {@inheritDoc}
      */
     @Override
-    public Product updateProduct(Product product) {
+    public Product updateProduct(Product product) throws IOException {
         synchronized(productMap) {
             if (!productMap.containsKey(product.getId())) {
                 return null;
@@ -196,7 +196,7 @@ public class ProductFileDAO  implements ProductDAO {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteProduct(int id) {
+    public boolean deleteProduct(int id) throws IOException {
         synchronized (productMap) {
             if (!productMap.containsKey(id)) {
                 return false;
