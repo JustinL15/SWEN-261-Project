@@ -83,7 +83,7 @@ public class ProductController {
         return null;
     }
 
-    @PostMapping("")
+    
     /**
      * Creates a {@linkplain Product product} with product object
      * 
@@ -94,7 +94,7 @@ public class ProductController {
      *         product} object already exists
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("")
+    @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /products " + product);
         try {
