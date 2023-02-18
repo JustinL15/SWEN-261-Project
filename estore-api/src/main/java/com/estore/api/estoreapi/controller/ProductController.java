@@ -121,9 +121,9 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /products " + product);
         try {
-            Product[] products = productDAO.getProducts();
-            for (Product product2 : products) {
-                if (product.getName().equals(product2.getName()) || product.getId() == product2.getId()) {
+            Product[] products = productDAO.findProducts(product.getName());
+            for (Product currenProduct : products) {
+                if (product.getName().equals(currenProduct.getName())) {
                     return new ResponseEntity<>(HttpStatus.CONFLICT);
                 }
             }
