@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Controls the REST requests and responses for a Propduct
@@ -24,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Alexandria Pross
  */
 @RestController
-@RequestMapping("product")
+@RequestMapping("/products")
 public class ProductController {
     private static final Logger LOG = Logger.getLogger(ProductController.class.getName());
     private ProductDAO productDAO;
@@ -43,7 +45,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(int id) {
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
         // TODO implement and write docstring
         return null;
     }
@@ -80,20 +82,20 @@ public class ProductController {
         return null;
     }
 
-    @GetMapping("")
+    @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         // TODO implement and write docstring
         return null;
     }
 
-    @PutMapping
+    @PutMapping("")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
         // TODO implement and write docstring
         return null;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(int id) {
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         // TODO implement and write docstring
         return null;
     }
