@@ -17,7 +17,6 @@ import com.estore.api.estoreapi.model.Product;
  * Implementation of ProductDAO which will save to a file as a data store
  * 
  * @author Matt London
- * @author ADD NAMES HERE
  */
 @Component
 public class ProductFileDAO  implements ProductDAO {
@@ -79,8 +78,8 @@ public class ProductFileDAO  implements ProductDAO {
 
         for (Product product : productMap.values()) {
             // If no text, matching name, or matching description then add it
-            if (matching == null || product.getName().contains(matching)
-                    || product.getDescription().contains(matching)) {
+            if (matching == null || (product.getName() != null && product.getName().contains(matching))
+                    || (product.getDescription() != null && product.getDescription().contains(matching))) {
                         matchingProducts.add(product);
             }
         }
@@ -142,7 +141,6 @@ public class ProductFileDAO  implements ProductDAO {
      */
     @Override
     public Product[] findProducts(String matching) {
-
         synchronized(productMap) {
             return searchProducts(matching);
         }
