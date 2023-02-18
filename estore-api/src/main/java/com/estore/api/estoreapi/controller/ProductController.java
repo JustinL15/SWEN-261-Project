@@ -26,10 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 <<<<<<< HEAD
  * @author Alexandria Pross
  * @author Alexis Sanders
- * @author ADD NAMES HERE
-=======
- * @author Alexis Sanders
->>>>>>> 45c8a46 (Implementing Create and Delete Products)
  * @author Jessica Eisler
  */
 @RestController
@@ -107,6 +103,7 @@ public class ProductController {
         return null;
     }
 
+    
     /**
      * Creates a {@linkplain Product product} with product object
      * 
