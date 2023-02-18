@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Controls the REST requests and responses for a Propduct
  * 
  * @author Matt London
-<<<<<<< HEAD
  * @author Alexandria Pross
  * @author Alexis Sanders
  * @author Jessica Eisler
