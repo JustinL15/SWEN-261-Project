@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author Alexandria Pross
  * @author Alexis Sanders
  * @author Jessica Eisler
+ * @author Justin Lin
  */
 @RestController
 @RequestMapping("products")

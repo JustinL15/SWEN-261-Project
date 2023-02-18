@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Model for a product in the store
  * 
  * @author Matt London
- * @author ADD NAMES HERE
  */
 public class Product {
     private static final Logger LOG = Logger.getLogger(Product.class.getName());
