@@ -94,38 +94,25 @@ public class ProductFileDAO  implements ProductDAO {
     /**
      * Saves {@link Product} to the DAO file
      * 
-     * @return True if successfully saved, otherwise false
+     * @throws IOException If there is an error writing to the file
      */
-    private boolean save() {
+    private void save() throws IOException{
         Product[] allProducts = getProductsArray();
 
         // Uses object mapper to convert to json and write to file
-        try {
-            objectMapper.writeValue(new File(filename), allProducts);
-        } catch (IOException e) {
-            LOG.warning("Error writing to file: " + e.getMessage());
-            return false;
-        }
-        return true;
+        objectMapper.writeValue(new File(filename), allProducts);
     }
 
     /**
      * Load all {@link Product} from the DAO file and store in the map
      * 
-     * @return True if file was read, false otherwise
+     * @throws IOException If there is an error reading the file
      */
-    private boolean load() {
+    private void load() throws IOException {
         productMap = new TreeMap<>();
         nextId = 0;
 
-        Product[] serializedProducts;
-
-        try {
-            serializedProducts = objectMapper.readValue(new File(filename), Product[].class);
-        } catch (IOException e) {
-            LOG.warning("Error reading file: " + e.getMessage());
-            return false;
-        }
+        Product[] serializedProducts = objectMapper.readValue(new File(filename), Product[].class);
 
         // Add all products and keep track of the greatest id
         for (Product product: serializedProducts) {
@@ -137,7 +124,6 @@ public class ProductFileDAO  implements ProductDAO {
 
         // Incremement id again so it is ready to return the next id
         getNextId();
-        return true;
     }
 
     /**
