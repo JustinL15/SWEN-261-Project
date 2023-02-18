@@ -28,13 +28,10 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author Jessica Eisler
  */
 @RestController
-@RequestMapping("/products")
+@RequestMapping("products")
 public class ProductController {
     private static final Logger LOG = Logger.getLogger(ProductController.class.getName());
     private ProductDAO productDAO;
-
-    /// TODO This may need more functions to complete the sprint, these are the template ones I have
-    /// written so far
 
     /**
      * Construct a REST API controller for a {@link Product}
@@ -55,7 +52,7 @@ public class ProductController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(int id) {
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
         LOG.info("GET /products/" + id);
         try {
             Product product = productDAO.getProduct(id);
@@ -83,9 +80,9 @@ public class ProductController {
 
         LOG.info("GET /products");
         try {
-            Product[] product = productDAO.getProducts(); //creates variable for products
-            if(product != null) //if product is not null
-                return new ResponseEntity<Product[]>(HttpStatus.OK); //set status to ok
+            Product[] products = productDAO.getProducts(); //creates variable for products
+            if(products != null) //if product is not null
+                return new ResponseEntity<Product[]>(products, HttpStatus.OK); //set status to ok
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); //set status to not found
         }
@@ -97,7 +94,7 @@ public class ProductController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} whose name contains
+     * Responds to the GET request for all {@linkplain Product products} whose name or description contains
      * the text in name
      * 
      * @param text The text parameter which contains the text used to find the {@link Product products}
@@ -143,8 +140,15 @@ public class ProductController {
                     return new ResponseEntity<>(HttpStatus.CONFLICT);
                 }
             }
-            productDAO.createProduct(product);
-            return new ResponseEntity<Product>(product, HttpStatus.CREATED);
+
+            Product result = productDAO.createProduct(product);
+
+            if (result != null) {
+                return new ResponseEntity<Product>(result, HttpStatus.CREATED);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -184,7 +188,7 @@ public class ProductController {
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(int id) {
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("Delete /products/" + id);
         try {
             Product product = productDAO.getProduct(id);
