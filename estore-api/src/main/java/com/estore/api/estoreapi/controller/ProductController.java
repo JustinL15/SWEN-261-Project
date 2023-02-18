@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Controls the REST requests and responses for a Propduct
  * 
  * @author Matt London
- * @author ADD NAMES HERE
+ * @author Alexandria Pross
  */
 @RestController
-@RequestMapping("product")
+@RequestMapping("/products")
 public class ProductController {
     private static final Logger LOG = Logger.getLogger(ProductController.class.getName());
     private ProductDAO productDAO;
@@ -43,23 +45,43 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(int id) {
-        // TODO implement and write docstring
-        return null;
-    }
-
-    @GetMapping("")
-    public ResponseEntity<Product[]> getProducts() {
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
         // TODO implement and write docstring
         return null;
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} whose name contains
-     * the text in name
+     * Responsible for get all products located in the inventory
      * 
+     * @return Response entity with a list of all the products
+     * Status of OK
+     * Status of INTERNAL_SERVICE_ERROR otherwise
+     */
+
+    @GetMapping("")
+    public ResponseEntity<Product[]> getProducts() {
+
+        LOG.info("GET /products");
+        try {
+            Product[] product = productDAO.getProducts(); //creates variable for products
+            if(product != null) //if product is not null
+                return new ResponseEntity<Product[]>(HttpStatus.OK); //set status to ok
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); //set status to not found
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); //set status to internal service error
+        }
+        
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Product products} whose name or description contains
+     * the given text
+     *
      * @param text The text parameter which contains the text used to find the {@link Product products}
-     * 
+     *
      * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
@@ -80,7 +102,8 @@ public class ProductController {
         }
     }
 
-    @GetMapping("")
+
+    @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         // TODO implement and write docstring
         return null;
@@ -88,14 +111,14 @@ public class ProductController {
 
     /**
      * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
-     * 
+     *
      * @param product The {@link Product product} to update
-     * 
+     *
      * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping
+    @PutMapping("")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
         LOG.info("PUT /products " + product);
         try {
@@ -110,8 +133,10 @@ public class ProductController {
         }
     }
 
+
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(int id) {
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         // TODO implement and write docstring
         return null;
     }
