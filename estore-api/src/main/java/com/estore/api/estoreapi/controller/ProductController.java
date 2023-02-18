@@ -98,8 +98,8 @@ public class ProductController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} whose name contains
-     * the text in name
+     * Responds to the GET request for all {@linkplain Product products} whose name or description contains
+     * the given text
      *
      * @param text The text parameter which contains the text used to find the {@link Product products}
      *
