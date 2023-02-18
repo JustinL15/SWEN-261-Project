@@ -24,13 +24,14 @@ import org.springframework.web.bind.annotation.PostMapping;
  * 
  * @author Matt London
  * @author Alexandria Pross
+ * @author Alexis Sanders
+ * @author Jessica Eisler
  */
 @RestController
 @RequestMapping("/products")
 public class ProductController {
     private static final Logger LOG = Logger.getLogger(ProductController.class.getName());
     private ProductDAO productDAO;
-
 
     /// TODO This may need more functions to complete the sprint, these are the template ones I have
     /// written so far
@@ -44,10 +45,29 @@ public class ProductController {
         this.productDAO = productDAO;
     }
 
+    /**
+     * Responds to the GET request for a {@linkplain Product product} for the given id
+     * 
+     * @param id The id used to locate the {@link Product product}
+     * 
+     * @return ResponseEntity with {@link Product product} object and the HTTP status of OK if found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable int id) {
-        // TODO implement and write docstring
-        return null;
+    public ResponseEntity<Product> getProduct(int id) {
+        LOG.info("GET /products/" + id);
+        try {
+            Product product = productDAO.getProduct(id);
+            if (product != null)
+                return new ResponseEntity<Product>(product, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -102,10 +122,33 @@ public class ProductController {
         }
     }
 
+    
+    /**
+     * Creates a {@linkplain Product product} with product object
+     * 
+     * @param product - the {@link Product product} to create
+     * @return ResponseEntity with created {@link Product product} object and HTTP
+     *         status of CREATED
+     *         ResponseEntity with HTTP status of CONFLICT if {@link Product
+     *         product} object already exists
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        // TODO implement and write docstring
-        return null;
+        LOG.info("POST /products " + product);
+        try {
+            Product[] products = productDAO.findProducts(product.getName());
+            for (Product currenProduct : products) {
+                if (product.getName().equals(currenProduct.getName())) {
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
+            }
+            productDAO.createProduct(product);
+            return new ResponseEntity<Product>(product, HttpStatus.CREATED);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -132,9 +175,28 @@ public class ProductController {
         }
     }
 
+    /**
+     * Deletes a {@linkplain Product product} with the given id
+     * 
+     * @param id - the id of the {@link Product product} to delete
+     * @return ResponseEntity HTTP status of OK if deleted
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-        // TODO implement and write docstring
-        return null;
+    public ResponseEntity<Product> deleteProduct(int id) {
+        LOG.info("Delete /products/" + id);
+        try {
+            Product product = productDAO.getProduct(id);
+            if (product != null) {
+                productDAO.deleteProduct(id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
