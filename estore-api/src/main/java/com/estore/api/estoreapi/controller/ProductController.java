@@ -77,11 +77,11 @@ public class ProductController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} whose name or description contains
-     * the given text
-     *
+     * Responds to the GET request for all {@linkplain Product products} whose name contains
+     * the text in name
+     * 
      * @param text The text parameter which contains the text used to find the {@link Product products}
-     *
+     * 
      * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
@@ -101,7 +101,6 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -132,8 +131,6 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
