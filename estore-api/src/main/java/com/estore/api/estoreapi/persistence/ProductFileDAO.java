@@ -78,8 +78,10 @@ public class ProductFileDAO  implements ProductDAO {
 
         for (Product product : productMap.values()) {
             // If no text, matching name, or matching description then add it
-            if (matching == null || (product.getName() != null && product.getName().contains(matching))
-                    || (product.getDescription() != null && product.getDescription().contains(matching))) {
+            if (matching == null || (product.getName() != null
+                    && product.getName().toLowerCase().contains(matching.toLowerCase()))
+                    || (product.getDescription() != null
+                    && product.getDescription().toLowerCase().contains(matching.toLowerCase()))) {
                         matchingProducts.add(product);
             }
         }
