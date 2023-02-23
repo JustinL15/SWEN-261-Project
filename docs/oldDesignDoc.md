@@ -21,11 +21,11 @@ geometry: margin=1in
 This is a summary of the project.
 
 ### Purpose
->  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
+> _Provide a very brief statement about the project and the most
 > important user group and user goals._
 
 ### Glossary and Acronyms
-> _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
+> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
@@ -41,13 +41,13 @@ This section describes the features of the application.
 > maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
+> _Provide a simple description of the Minimum Viable Product._
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+> _Provide a list of top-level Epics and/or Stories of the MVP._
 
-### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+### Roadmap of Enhancements
+> _Provide a list of top-level features in the order you plan to consider them._
 
 
 ## Application Domain
@@ -56,7 +56,7 @@ This section describes the application domain.
 
 ![Domain Model](domain-model-placeholder.png)
 
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
+> _Provide a high-level overview of the domain for this application. You
 > can discuss the more important domain entities and their relationship
 > to each other._
 
@@ -90,25 +90,20 @@ with the e-store application.
 
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
+> _Provide a summary of the View Tier UI of your architecture.
 > Describe the types of components in the tier and describe their
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
+> _You must also provide sequence diagrams as is relevant to a particular aspects 
 > of the design that you are describing.  For example, in e-store you might create a 
 > sequence diagram of a customer searching for an item and adding to their cart. 
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
+> Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
 
-> _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
- >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
->* _A single class diagram of the overall system will not be effective. Consider breaking down into smaller sections._
- >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
- >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
-> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
+> _Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 
@@ -117,7 +112,7 @@ with the e-store application.
 
 
 ### Model Tier
-> _**[Sprint 2..4]** Provide a summary of this tier of your architecture. This
+> _Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 
@@ -125,29 +120,31 @@ with the e-store application.
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
 ### Static Code Analysis/Design Improvements
-> _**[Sprint 4]** Discuss the quality of your **current** design along with recommending **future** refactoring and other design improvements based on your analysis and review of the design against the object-oriented design principles covered in class._
+> _Discuss design improvements that you would make if the project were
+> to continue. These improvement should be based on your direct
+> analysis of where there are problems in the code base which could be
+> addressed with design changes, and describe those suggested design
+> improvements._
 
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
-> **Identify 3-4** areas within your code that have been flagged by the Static Code 
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.  
-> Include any relevant screenshot(s) with each area_
+> _With the results from the Static Code Analysis exercise, 
+> discuss the resulting issues/metrics measurements along with your analysis
+> and recommendations for further improvements. Where relevant, include 
+> screenshots from the tool and/or corresponding source code that was flagged._
 
 ## Testing
 > _This section will provide information about the testing performed
 > and the results of the testing._
 
 ### Acceptance Testing
-> _**[Sprint 2 & 4]** Report on the number of user stories that have passed all their
+> _Report on the number of user stories that have passed all their
 > acceptance criteria tests, the number that have some acceptance
 > criteria tests failing, and the number of user stories that
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
 ### Unit Testing and Code Coverage
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
+> _Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
-
->_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
+> code coverage met your targets. If there are any anomalies, discuss
 > those._
