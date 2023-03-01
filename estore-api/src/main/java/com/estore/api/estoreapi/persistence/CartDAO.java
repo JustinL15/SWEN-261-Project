@@ -28,6 +28,15 @@ public interface CartDAO {
     Cart getCart(int id) throws IOException;
 
     /**
+     * Updates a {@link Cart cart} in the data store
+     * 
+     * @param cart {@link Cart cart} to update
+     * @return {@link Cart cart} (null if not found)
+     * @throws IOException If the data store cannot be accessed
+     */
+    Cart updateCart(Cart cart) throws IOException;
+
+    /**
      * Adds an item to the cart
      * 
      * @param id Id of the cart
