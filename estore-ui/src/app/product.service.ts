@@ -45,7 +45,7 @@ export class ProductService {
   }
 
   /** GET products by id. Will 404 if id not found */
-  getHero(id: number): Observable<Product> {
+  getProduct(id: number): Observable<Product> {
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url).pipe(
       tap(_ => this.log(`fetched product id=${id}`)),
