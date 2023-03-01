@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import com.estore.api.estoreapi.model.Cart;
 
 /**
- * Implementation of ProductDAO which will save to a file as a data store
+ * Implementation of CartFileDAO which will save to a file as a data store
  * 
  * @author Matt London
  */
@@ -58,9 +58,9 @@ public class CartFileDAO  implements CartDAO {
     }
 
     /**
-     * Gets array of {@link Product products} from the file
+     * Gets array of {@link Cart carts} from the file
      * 
-     * @return Array of stored {@link Product products}, or empty array if none
+     * @return Array of stored {@link Cart carts}, or empty array if none
      */
     private Cart[] getCartsArray() {
         Cart[] cartArray = new Cart[cartMap.size()];
@@ -92,7 +92,7 @@ public class CartFileDAO  implements CartDAO {
 
         Cart[] serializedCarts = objectMapper.readValue(new File(filename), Cart[].class);
 
-        // Add all products and keep track of the greatest id
+        // Add all carts and keep track of the greatest id
         for (Cart cart: serializedCarts) {
             cartMap.put(cart.getId(), cart);
             if (cart.getId() > nextId) {
@@ -109,7 +109,6 @@ public class CartFileDAO  implements CartDAO {
      */
     @Override
     public Cart[] getCarts() {
-        // Synchronize on productMap so that it can't be modified while being read
         synchronized(cartMap) {
             return getCartsArray();
         }
