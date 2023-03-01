@@ -56,7 +56,7 @@ export class ProductService {
   /* GET products whose name contains search term */
   searchProducts(term: string): Observable<Product[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty product array.
       return of([]);
     }
     return this.http.get<Product[]>(`${this.productsUrl}/?name=${term}`).pipe(
@@ -72,7 +72,7 @@ export class ProductService {
   /** POST: add a new product to the server */
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
-      tap((newProduct: Product) => this.log(`added hero w/ id=${newProduct.id}`)),
+      tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
       catchError(this.handleError<Product>('addProduct'))
     );
   }
@@ -90,7 +90,7 @@ export class ProductService {
   /** PUT: update the Product on the server */
   updateProduct(product: Product): Observable<any> {
     return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${product.id}`)),
+      tap(_ => this.log(`updated product id=${product.id}`)),
       catchError(this.handleError<any>('updateProduct'))
     );
   }
