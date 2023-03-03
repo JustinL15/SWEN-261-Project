@@ -14,7 +14,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     AppComponent,
     DashboardComponent,
     ProductsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

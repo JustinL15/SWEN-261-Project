@@ -59,7 +59,7 @@ export class ProductService {
       // if not search term, return empty product array.
       return of([]);
     }
-    return this.http.get<Product[]>(`${this.productsUrl}/?name=${term}`).pipe(
+    return this.http.get<Product[]>(`${this.productsUrl}/?text=${term}`).pipe(
       tap(x => x.length ?
          this.log(`found products matching "${term}"`) :
          this.log(`no products matching "${term}"`)),
