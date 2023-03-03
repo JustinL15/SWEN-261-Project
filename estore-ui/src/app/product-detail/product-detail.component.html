@@ -1,0 +1,29 @@
+<div *ngIf="product">
+    <h2>{{product.name | uppercase}}</h2>
+    <div><span>Product ID: </span>{{product.id}}</div>
+    <div><span>Description: </span>{{product.description}}</div>
+
+    <br>
+    <!-- row and column need to be added to css to work -->
+    <div class="row">
+        <div class="column">
+            <!-- <img src="pic_trulli.jpg" alt="Italian Trulli"> -->
+            
+        </div>
+
+        <div class="column">
+            <div>
+                <label for="product-name">Product Name:</label>
+                <input id="product-name" [(ngModel)]="product.name" placeholder="Rename Product" />
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <input id="description" [(ngModel)]="product.description" placeholder="New Description" />
+            </div>
+        </div>
+    </div>
+    <!-- buttons for back and save -->
+    <button type="button" (click)="goBack()">back</button>
+    <button type="button" (click)="save()">save</button>
+
+</div>
