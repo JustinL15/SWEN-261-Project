@@ -13,6 +13,7 @@ import java.util.TreeMap;
 
 import com.estore.api.estoreapi.model.Order;
 
+@Component
 public class OrderFileDAO implements OrderDAO {
     private static final Logger LOG = Logger.getLogger(OrderFileDAO.class.getName());
     
