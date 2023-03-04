@@ -106,12 +106,6 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
         LOG.info("POST /order " + order);
         try {
-            Order[] orders = orderDAO.findOrders(order.getName());
-            for (Order currentOrder : orders) {
-                if (order.getName().equals(currentOrder.getName())) {
-                    return new ResponseEntity<>(HttpStatus.CONFLICT);
-                }
-            }
 
             Order result = orderDAO.createOrder(order);
 

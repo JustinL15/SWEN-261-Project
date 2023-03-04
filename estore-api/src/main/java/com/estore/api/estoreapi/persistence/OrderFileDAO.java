@@ -59,32 +59,13 @@ public class OrderFileDAO implements OrderDAO {
      * @return Array of stored {@link Order orders}, or empty array if none
      */
     private Order[] getOrdersArray() {
-        return searchOrders(null);
-    }
-
-    /**
-     * Searches through the array of {@link Order} for those matching some text
-     * 
-     * @param matching Text to match
-     * @return Matching {@link Order order}, or empty array if none
-     */
-    private Order[] searchOrders(String matching) {
-        List<Order> matchingOrders = new ArrayList<>();
-
-        for (Order order : orderMap.values()) {
-            // If no text, matching name, or matching description then add it
-            if (matching == null || (order.getName() != null
-                    && order.getName().toLowerCase().contains(matching.toLowerCase()))
-                    || (order.getProducts() != null
-                    && order.getProducts().toLowerCase().contains(matching.toLowerCase()))) {
-                        matchingOrders.add(order);
-            }
+        ArrayList<Order> orderList = new ArrayList<>();
+        for(Order currentOrder: orderMap.values()) {
+            orderList.add(currentOrder);
         }
-
-        Order[] orderArray = new Order[matchingOrders.size()];
-        matchingOrders.toArray(orderArray);
-
-        return orderArray;
+        Order[] returnValue = new Order[orderList.size()];
+        orderList.toArray(returnValue);
+        return returnValue;
     }
 
     /**
@@ -147,19 +128,9 @@ public class OrderFileDAO implements OrderDAO {
      * {@inheritDoc}
      */
     @Override
-    public Order[] findOrders(String matching) {
-        synchronized(orderMap) {
-            return searchOrders(matching);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Order createOrder(Order order) throws IOException {
         synchronized(orderMap) {
-            Order tmpOrd = new Order(getNextId(), order.getName(), order.getPrice(), order.getProducts());
+            Order tmpOrd = new Order(getNextId(), order.getTotalPrice(), order.getProducts(), order.getDateTime());
             
             // Add to map and save to DAO
             orderMap.put(tmpOrd.getId(), tmpOrd);

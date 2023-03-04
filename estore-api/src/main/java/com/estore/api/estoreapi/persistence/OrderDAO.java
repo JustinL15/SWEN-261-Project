@@ -4,6 +4,11 @@ import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Order;
 
+/**
+ * Interface for saving an Order to a data store
+ * 
+ * @author Alexandria Pross
+ */
 public interface OrderDAO {
 
     /**
@@ -29,16 +34,6 @@ public interface OrderDAO {
      * 
      * @param text Text that should match all returned
      * @return Array of matching {@link Order order}s, array may be empty
-     * @throws IOException If the data store cannot be accessed
-     */
-
-    Order[] findOrders(String text) throws IOException;
-
-    /**
-     * Saves a {@link Order order} to the data store
-     * 
-     * @param product Created {@link Order order} to save
-     * @return {@link Order order} (null if not found)
      * @throws IOException If the data store cannot be accessed
      */
 

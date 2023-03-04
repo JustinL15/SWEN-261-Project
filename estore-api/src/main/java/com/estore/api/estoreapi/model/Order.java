@@ -2,35 +2,37 @@ package com.estore.api.estoreapi.model;
 
 import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
+
+/**
+ * Model for a order in the store
+ * 
+ * @author Alexandria Pross
+ */
 
 public class Order {
     private static final Logger LOG = Logger.getLogger(Order.class.getName());
 
     /// Setup all parameters that the product should have
     @JsonProperty("id") private int id;
-    @JsonProperty("name") private String name;
-    @JsonProperty("price") private double price;
-    @JsonProperty("products") private String products;
+    @JsonProperty("totalPrice") private double totalPrice;
+    @JsonProperty("products") private Product[] products;
+    @JsonProperty("time") private LocalDateTime dateTime;
 
     /**
      * Constructor for the orders
      * 
      * @param id ID of the order
-     * @param name Name on the order
      * @param price Price of the order
      * @param products list of products
+     * @param dateTime the date and time of the order
      */
-    public Order(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price,
-                    @JsonProperty("products") String products) {
+    public Order(@JsonProperty("id") int id, @JsonProperty("totalPrice") double totalPrice,
+                    @JsonProperty("products") Product[] products, @JsonProperty("time") LocalDateTime dateTime) {
         this.id = id;
-        this.name = name;
-        this.price = price;
-        if (products == null) {
-            this.products = "";
-        }
-        else {
-            this.products = products;
-        }
+        this.totalPrice = totalPrice;
+        this.products = products;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -52,30 +54,12 @@ public class Order {
     }
 
     /**
-     * Get the name on the order
-     * 
-     * @return Name on the order
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Set the name on the order
-     * 
-     * @param name Name on the order
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Get the price of the products
      * 
      * @return Price of the products
      */
-    public double getPrice() {
-        return price;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     /**
@@ -83,8 +67,8 @@ public class Order {
      * 
      * @param price Price of the products
      */
-    public void setPrice(double price) {
-        this.price = price;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     /**
@@ -92,7 +76,7 @@ public class Order {
      * 
      * @return Products in the order
      */
-    public String getProducts() {
+    public Product[] getProducts() {
         return products;
     }
 
@@ -101,17 +85,26 @@ public class Order {
      * 
      * @param quantity Products in the order
      */
-    public void setProducts(String products) {
+    public void setProducts(Product[] products) {
         this.products = products;
     }
 
+    /**
+     * Get the date and time of the order
+     * 
+     * @return date and time
+     */
+    public LocalDateTime getDateTime() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        return dateTime;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "Product [order id=" + id + ", customer name=" + name + ", products=" + products + ", total price=" + price + "]";
+        return "Product [order id: " + id +  ", products: " + products + ", total price: " + totalPrice + ", order time: " + dateTime + "]";
     }
     
 }
