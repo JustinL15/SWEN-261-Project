@@ -26,23 +26,29 @@ export class ShoppingCartComponent {
   }
 
   increase(product: Product): void {
+    // get the current number of products in the cart
     // check items are in inventory
     // add one item of the product to the shopping cart
   }
 
   decrease(product: Product): void {
+    // get the current number of products in the cart
     // remove one item of the product from shopping cart
     // if zero items of the product remove it from shopping cart
   }
 
   remove(product: Product): void {
-    // delete product from shopping cart
+    // change to deleteproduct in shopping cart
+    this.products = this.products.filter(p => p !== product);
+    this.productService.deleteProduct(product.id).subscribe();
   }
 
   checkout(): void {
+    // get the current number of products in the cart
     // check items are in inventory
     // remove items from inventory
     // remove items from shopping cart
+    // create snapshop of each product and quantity in cart
     // create an order
   }
 
