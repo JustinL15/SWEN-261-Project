@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Controls the REST requests and responses for an Order
+ * 
+ *@author Alexandria Pross
+ */
 @RestController
 @RequestMapping("orders")
 public class OrderController {
