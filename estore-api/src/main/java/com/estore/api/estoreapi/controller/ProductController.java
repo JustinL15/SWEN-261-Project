@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
+ * Controls the REST requests and responses for a Product
+ * 
  * @author Matt London
  * @author Alexandria Pross
  * @author Alexis Sanders

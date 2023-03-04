@@ -103,7 +103,7 @@ with the e-store application.
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
  >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
->* _A single class diagram of the overall system will not be effective. Consider breaking down into smaller sections._
+>* _A single class diagram of the entire system will not be effective. You may start with one, but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below._
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
@@ -112,25 +112,33 @@ with the e-store application.
 > section will follow the same instructions that are given for the View
 > Tier above._
 
-> _At appropriate places as part of this narrative provide one or more
+> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
-
+> 
+![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
-> _**[Sprint 2..4]** Provide a summary of this tier of your architecture. This
+> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 
-> _At appropriate places as part of this narrative provide one or more
+> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
+> 
+![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
 
-### Static Code Analysis/Design Improvements
-> _**[Sprint 4]** Discuss the quality of your **current** design along with recommending **future** refactoring and other design improvements based on your analysis and review of the design against the object-oriented design principles covered in class._
+## OO Design Principles
+> _**[Sprint 2, 3 & 4]** Discuss at least **4 key OO Principles** in your current design. This should be taken from your work in "Adherence to Architecture and Design Principles" that you have completed in a previous Sprint. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
+> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
+
+## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
 > **Identify 3-4** areas within your code that have been flagged by the Static Code 
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.  
-> Include any relevant screenshot(s) with each area_
+> Include any relevant screenshot(s) with each area._
+
+> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
 ## Testing
 > _This section will provide information about the testing performed
