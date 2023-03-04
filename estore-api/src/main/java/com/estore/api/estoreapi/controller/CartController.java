@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Cart;
+import com.estore.api.estoreapi.model.ProductReference;
 import com.estore.api.estoreapi.persistence.CartDAO;
 
 import java.io.IOException;
@@ -81,6 +82,74 @@ public class CartController {
 
             if (result != null) {
                 return new ResponseEntity<Cart>(result, HttpStatus.CREATED);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Adds an item to a {@linkplain Cart cart} with the given id
+     * 
+     * @param id Id of the {@link Cart cart} to add the item to
+     * @param productReference The {@link ProductReference productReference} to add to the {@link Cart cart}
+     * @return ResponseEntity with HTTP status of OK if added, NOT_FOUND if cart wasn't found
+     */
+    @PostMapping("addItem/{id}")
+    public ResponseEntity<Cart> addItemToCart(@PathVariable int id, @RequestBody ProductReference productReference) {
+        LOG.info("POST /carts/addItem/" + id + " " + productReference);
+        try {
+            boolean successful = cartDAO.addItem(id, productReference.getId(), productReference.getQuantity());
+
+            if (successful) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Removes an item from a {@linkplain Cart cart} with the given id
+     * 
+     * @param id Id of the {@link Cart cart} to remove the item from
+     * @param productId Id of the {@link Product product} to remove from the {@link Cart cart}
+     * @return ResponseEntity with HTTP status of OK if removed, NOT_FOUND if cart wasn't found
+     */
+    @PostMapping("removeItem/{id}")
+    public ResponseEntity<Cart> removeItemFromCart(@PathVariable int id, @RequestBody int productId) {
+        LOG.info("POST /carts/removeItem/" + id + " " + productId);
+        try {
+            boolean successful = cartDAO.removeItem(id, productId);
+
+            if (successful) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("editItem/{id}")
+    public ResponseEntity<Cart> editItemInCart(@PathVariable int id, @RequestBody ProductReference productReference) {
+        LOG.info("POST /carts/editItem/" + id + " " + productReference);
+        try {
+            boolean successful = cartDAO.editQuantity(id, productReference.getId(), productReference.getQuantity());
+
+            if (successful) {
+                return new ResponseEntity<>(HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
