@@ -1,3 +1,9 @@
 <h2>Shopping Cart</h2>
 
-<a routerLink="/cart"></a>
+<ul class="products">
+    <li *ngFor="let product of products">
+        <a routerLink="/cart">
+            <span class="badge">{{product.id}}</span> {{product.name}}
+        </a>
+    </li>
+</ul>
