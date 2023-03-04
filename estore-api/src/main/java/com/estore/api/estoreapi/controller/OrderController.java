@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * 
  *@author Alexandria Pross
  */
+ 
 @RestController
 @RequestMapping("orders")
 public class OrderController {
@@ -95,7 +96,7 @@ public class OrderController {
      * Creates a {@linkplain Order order} with product object
      * 
      * @param order - the {@link Order order} to create
-     * @return ResponseEntity with created {@link Product product} object and HTTP
+     * @return ResponseEntity with created {@link Order order} object and HTTP
      *         status of CREATED
      *         ResponseEntity with HTTP status of CONFLICT if {@link Product
      *         product} object already exists
