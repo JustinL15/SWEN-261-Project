@@ -1,0 +1,114 @@
+package com.estore.api.estoreapi.model;
+
+import java.util.logging.Logger;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
+
+/**
+ * Model for a order in the store
+ * 
+ * @author Alexandria Pross
+ */
+
+public class Order {
+    private static final Logger LOG = Logger.getLogger(Order.class.getName());
+
+    /// Setup all parameters that the product should have
+    @JsonProperty("id") private int id;
+    @JsonProperty("totalPrice") private double totalPrice;
+    @JsonProperty("products") private Product[] products;
+    @JsonProperty("time") private LocalDateTime dateTime;
+
+    /**
+     * Constructor for the orders
+     * 
+     * @param id ID of the order
+     * @param price Price of the order
+     * @param products list of products
+     * @param dateTime the date and time of the order
+     */
+    public Order(@JsonProperty("id") int id, @JsonProperty("totalPrice") double totalPrice,
+                    @JsonProperty("products") Product[] products, @JsonProperty("time") LocalDateTime dateTime) {
+        this.id = id;
+        this.totalPrice = totalPrice;
+        this.products = products;
+        if (dateTime == null) {
+            this.dateTime = LocalDateTime.now();
+       }
+       else {
+            this.dateTime = dateTime;
+       }
+    }
+
+    /**
+     * Get the ID of the order
+     * 
+     * @return ID of the order
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of the order
+     * 
+     * @param id ID of the order
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the price of the products
+     * 
+     * @return Price of the products
+     */
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    /**
+     * Set the price of the products
+     * 
+     * @param price Price of the products
+     */
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    /**
+     * Get the products in the order
+     * 
+     * @return Products in the order
+     */
+    public Product[] getProducts() {
+        return products;
+    }
+
+    /**
+     * Set the products in the order
+     * 
+     * @param quantity Products in the order
+     */
+    public void setProducts(Product[] products) {
+        this.products = products;
+    }
+
+    /**
+     * Get the date and time of the order
+     * 
+     * @return date and time
+     */
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Product [order id: " + id +  ", products: " + products + ", total price: " + totalPrice + ", order time: " + dateTime + "]";
+    }
+    
+}
