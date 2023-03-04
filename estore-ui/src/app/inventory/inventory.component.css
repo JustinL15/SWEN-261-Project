@@ -7,7 +7,7 @@
 
 input {
     display: block;
-    width: 100%;
+    width: 25%;
     padding: .5rem;
     margin: 1rem 0;
     box-sizing: border-box;
@@ -72,18 +72,38 @@ input {
     background-color: #42545C;
 }
 
-button.delete {
-    position: absolute;
-    left: 210px;
-    top: 5px;
-    background-color: white;
-    color: red;
-    font-size: 1.1rem;
-    margin: 0;
-    padding: 1px 10px 3px 10px;
+button.redir {
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
 }
 
-button.delete:hover {
-    background-color: #525252;
-    color: white;
+/* Split the screen in half */
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    /* top: 0; */
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+    left: 10;
+    width: 80%;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    width: 20%;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* text-align: center; */
 }
