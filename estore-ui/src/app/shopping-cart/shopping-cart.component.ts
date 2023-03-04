@@ -25,4 +25,16 @@ export class ShoppingCartComponent {
     this.productService.getProducts().subscribe(products => this.products = products);
   }
 
+  increase(product: Product): void {
+
+  }
+
+  decrease(product: Product): void {
+    
+  }
+
+  remove(product: Product): void {
+    
+  }
+
 }
