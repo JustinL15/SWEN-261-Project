@@ -43,8 +43,9 @@ public interface CartDAO {
      * @param productId Id of the product
      * @param quantity Quantity of the product
      * @throws IOException If the data store cannot be accessed
+     * @return True if the item was added, false if not
      */
-    void addItem(int id, int productId, int quantity) throws IOException;
+    boolean addItem(int id, int productId, int quantity) throws IOException;
 
     /**
      * Removes an item from the cart
@@ -52,8 +53,9 @@ public interface CartDAO {
      * @param id Id of the cart
      * @param productId Id of the product
      * @throws IOException If the data store cannot be accessed
+     * @return True if the item was removed, false if it was not found
      */
-    void removeItem(int id, int productId) throws IOException;
+    boolean removeItem(int id, int productId) throws IOException;
 
     /**
      * Edits the quantity of an item in the cart
@@ -62,8 +64,9 @@ public interface CartDAO {
      * @param productId Id of the product
      * @param quantity Quantity of the product
      * @throws IOException If the data store cannot be accessed
+     * @return True if the item was edited, false if it was not found
      */
-    void editQuantity(int id, int productId, int quantity) throws IOException;
+    boolean editQuantity(int id, int productId, int quantity) throws IOException;
 
     /**
      * Saves a {@link Cart cart} to the data store

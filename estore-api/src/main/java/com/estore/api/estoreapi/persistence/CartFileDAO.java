@@ -178,11 +178,15 @@ public class CartFileDAO  implements CartDAO {
      * {@inheritDoc}
      */
     @Override
-    public void addItem(int cartId, int productId, int quantity) throws IOException {
+    public boolean addItem(int cartId, int productId, int quantity) throws IOException {
         synchronized (cartMap) {
             Cart cart = cartMap.get(cartId);
+            if (cart == null) {
+                return false;
+            }
             cart.addItem(productId, quantity);
             save();
+            return true;
         }
     }
 
@@ -190,11 +194,15 @@ public class CartFileDAO  implements CartDAO {
      * {@inheritDoc}
      */
     @Override
-    public void removeItem(int cartId, int productId) throws IOException {
+    public boolean removeItem(int cartId, int productId) throws IOException {
         synchronized (cartMap) {
             Cart cart = cartMap.get(cartId);
+            if (cart == null) {
+                return false;
+            }
             cart.removeItem(productId);
             save();
+            return true;
         }
     }
 
@@ -202,11 +210,16 @@ public class CartFileDAO  implements CartDAO {
      * {@inheritDoc}
      */
     @Override
-    public void editQuantity(int cartId, int productId, int quantity) throws IOException {
+    public boolean editQuantity(int cartId, int productId, int quantity) throws IOException {
         synchronized (cartMap) {
             Cart cart = cartMap.get(cartId);
+            if (cart == null) {
+                return false;
+            }
+        
             cart.editQuantity(productId, quantity);
             save();
+            return true;
         }
     }
 }
