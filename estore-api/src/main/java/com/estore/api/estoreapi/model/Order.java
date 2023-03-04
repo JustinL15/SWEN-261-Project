@@ -32,7 +32,12 @@ public class Order {
         this.id = id;
         this.totalPrice = totalPrice;
         this.products = products;
-        this.dateTime = dateTime;
+        if (dateTime == null) {
+            this.dateTime = LocalDateTime.now();
+       }
+       else {
+            this.dateTime = dateTime;
+       }
     }
 
     /**
@@ -95,7 +100,6 @@ public class Order {
      * @return date and time
      */
     public LocalDateTime getDateTime() {
-        LocalDateTime dateTime = LocalDateTime.now();
         return dateTime;
     }
 
