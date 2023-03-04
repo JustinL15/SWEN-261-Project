@@ -78,9 +78,11 @@ public class CustomerFileDAO  implements CustomerDAO {
         List<Customer> matchingCustomers = new ArrayList<>();
 
         for (Customer customer : customerMap.values()) {
-            // If no text, matching name, or matching description then add it
-            if (name == null || (customer.getName() != null
-                    && customer.getName().toLowerCase().contains(name.toLowerCase()))) {
+            // Look for matching name or username
+            if ((name == null || (customer.getName() != null
+                    && customer.getName().toLowerCase().contains(name.toLowerCase())))
+                    || (name != null && customer.getUsername() != null
+                    && customer.getUsername().toLowerCase().contains(name.toLowerCase()))) {
                         matchingCustomers.add(customer);
             }
         }
