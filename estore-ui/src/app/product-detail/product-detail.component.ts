@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { InventoryComponent } from '../inventory/inventory.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,9 +17,9 @@ export class ProductDetailComponent {
     private route: ActivatedRoute,
     private productService: ProductService,
     private location: Location
-  ) {}
+  ) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getProduct();
   }
 
@@ -27,14 +28,21 @@ export class ProductDetailComponent {
     this.productService.getProduct(id).subscribe(product => this.product = product);
   }
 
-  goBack(): void{
+  goBack(): void {
     this.location.back();
   }
 
-  save(): void{
-    if(this.product){
+  save(): void {
+    if (this.product) {
       this.productService.updateProduct(this.product).subscribe(() => this.goBack());
     }
+  }
+
+  delete(product: Product): void {
+    // this.products = this.products.filter(p => p !== product);
+    
+    this.productService.deleteProduct(product.id).subscribe();
+    this.goBack();
   }
 
 }

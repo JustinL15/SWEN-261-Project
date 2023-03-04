@@ -19,11 +19,28 @@ button {
 
 button:hover {
     background-color: gray;
-    
 }
 
 button:disabled {
     background-color: #eee;
     color: blue;
     cursor: auto;
+}
+
+button.delete {
+    /* position: absolute;
+    left: 210px;
+    top: 5px;
+    background-color: white;
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 1px 10px 3px 10px; */
+    border-width: medium;
+    background-color: red;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: darkred;
+    color: white;
 }
