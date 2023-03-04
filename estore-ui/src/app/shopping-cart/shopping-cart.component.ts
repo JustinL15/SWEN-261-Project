@@ -26,15 +26,24 @@ export class ShoppingCartComponent {
   }
 
   increase(product: Product): void {
-
+    // check items are in inventory
+    // add one item of the product to the shopping cart
   }
 
   decrease(product: Product): void {
-    
+    // remove one item of the product from shopping cart
+    // if zero items of the product remove it from shopping cart
   }
 
   remove(product: Product): void {
-    
+    // delete product from shopping cart
+  }
+
+  checkout(): void {
+    // check items are in inventory
+    // remove items from inventory
+    // remove items from shopping cart
+    // create an order
   }
 
 }

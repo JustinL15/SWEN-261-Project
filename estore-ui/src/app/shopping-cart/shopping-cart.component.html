@@ -1,5 +1,8 @@
 <h2>Shopping Cart</h2>
 
+<button type="button" class="checkout" title="checkout"
+    (click)="checkout()">checkout</button>
+
 <ul class="products">
     <li *ngFor="let product of products">
         <a routerLink="/cart">
