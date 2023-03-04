@@ -25,6 +25,8 @@ public class Customer {
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
     @JsonProperty("passwordHash") private byte[] passwordHash;
+    // To be stored when sending a new customer to the backend and then immediately cleared
+    @JsonProperty("password") private String password;
 
     /**
      * Calculate the hash of the password entered
@@ -65,6 +67,7 @@ public class Customer {
         this.cartId = cartId;
         this.isAdmin = isAdmin;
         this.passwordHash = hashPassword(password);
+        this.password = null;
 
         this.orders = new ArrayList<>();
     }
@@ -103,6 +106,15 @@ public class Customer {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * Get the user's password. Only for instantiating a user, immediately clears the password
+     * 
+     * @return Password of user
+     */
+    public String getPassword() {
+        return password;
     }
 
     /**
