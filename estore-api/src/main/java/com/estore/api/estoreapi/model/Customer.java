@@ -66,9 +66,12 @@ public class Customer {
         this.name = name;
         this.cartId = cartId;
         this.isAdmin = isAdmin;
-        this.passwordHash = hashPassword(password);
+        if (password != null) {
+            this.passwordHash = hashPassword(password);
+        } else {
+            this.passwordHash = null;
+        }
         this.password = null;
-
         this.orders = new ArrayList<>();
     }
 
