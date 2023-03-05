@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the Product File DAO class
  * 
- * @author SWEN Faculty
+ * @author Alexis Sanders
  */
 @Tag("Persistence-tier")
 public class ProductFileDAOTest {

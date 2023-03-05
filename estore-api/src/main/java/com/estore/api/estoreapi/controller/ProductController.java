@@ -138,9 +138,11 @@ public class ProductController {
         LOG.info("POST /products " + product);
         try {
             Product[] products = productDAO.findProducts(product.getName());
-            for (Product currenProduct : products) {
-                if (product.getName().equals(currenProduct.getName())) {
-                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+            if(products != null){
+                for (Product currenProduct : products) {
+                    if (product.getName().equals(currenProduct.getName())) {
+                        return new ResponseEntity<>(HttpStatus.CONFLICT);
+                    }
                 }
             }
 
