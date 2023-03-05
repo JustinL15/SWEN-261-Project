@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ProductsComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
