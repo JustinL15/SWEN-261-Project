@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the Customer File DAO class
  * 
- * @author SWEN Faculty
  */
 @Tag("Persistence-tier")
 public class CustomerFileDAOTest {
