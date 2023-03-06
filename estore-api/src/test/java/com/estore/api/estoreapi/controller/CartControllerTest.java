@@ -120,6 +120,7 @@ public class CartControllerTest {
         ProductReference productRef = new ProductReference(80, 2);
 
         //when(mockCartDAO.createCart(cart)).thenReturn(null);
+        when(mockCartDAO.addItemToCart(cart.getId(), productRef)).thenReturn(cart);
         when(mockCartDAO.addItem(cart.getId(), 2, 1)).thenReturn(true);
         ResponseEntity<Cart> response = cartController.addItemToCart(cart.getId(), productRef);
 
