@@ -113,7 +113,7 @@ public class OrderController {
                 return new ResponseEntity<Order>(result, HttpStatus.CREATED);
             }
             else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
@@ -133,9 +133,7 @@ public class OrderController {
     public ResponseEntity<Order> deleteOrder(@PathVariable int id) {
         LOG.info("Delete /orders/" + id);
         try {
-            Order order = orderDAO.getOrder(id);
-            if (order != null) {
-                orderDAO.deleteOrder(id);
+            if (orderDAO.deleteOrder(id)) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
