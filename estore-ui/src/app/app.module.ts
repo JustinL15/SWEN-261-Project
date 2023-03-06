@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     DashboardComponent,
     ProductsComponent,
     ProductDetailComponent,
+    InventoryComponent,
+    EditProductDetailComponent
   ],
   imports: [
     BrowserModule,

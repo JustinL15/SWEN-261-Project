@@ -30,11 +30,11 @@ public class CartControllerTest {
     public void testGetCart() throws IOException{
         //setup
         Cart cart = new Cart(99);
-        when(mockCartDAO.createCart(cart)).thenReturn(null);
+        // when(mockCartDAO.createCart(cart)).thenReturn(null);
         int cartId = cart.getId();
         Cart[] carts = new Cart[1];
         carts[0] = new Cart(cartId);
-        when(mockCartDAO.getCart(cartId)).thenReturn(null);
+        // when(mockCartDAO.getCart(cartId)).thenReturn(null);
 
         ResponseEntity<Cart> response = cartController.getCart(cart.getId());
 

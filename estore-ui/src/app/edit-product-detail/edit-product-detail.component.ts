@@ -6,11 +6,11 @@ import { ProductService } from '../product.service';
 import { InventoryComponent } from '../inventory/inventory.component';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  selector: 'app-edit-product-detail',
+  templateUrl: './edit-product-detail.component.html',
+  styleUrls: ['./edit-product-detail.component.css']
 })
-export class ProductDetailComponent {
+export class EditProductDetailComponent {
   product: Product | undefined;
 
   constructor(
@@ -39,8 +39,6 @@ export class ProductDetailComponent {
   }
 
   delete(product: Product): void {
-    // this.products = this.products.filter(p => p !== product);
-    
     this.productService.deleteProduct(product.id).subscribe();
     this.goBack();
   }

@@ -18,7 +18,7 @@
 <div class="centered">
     <ul class="products">
         <li *ngFor="let product of products">
-            <a routerLink="/product-detail/{{product.id}}">
+            <a routerLink="/manage/{{product.id}}">
                 <span class="badge">{{product.id}}</span> {{product.name}}
             </a>
         </li>
