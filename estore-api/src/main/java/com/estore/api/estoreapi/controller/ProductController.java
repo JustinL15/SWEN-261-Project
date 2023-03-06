@@ -200,9 +200,7 @@ public class ProductController {
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("Delete /products/" + id);
         try {
-            Product product = productDAO.getProduct(id);
-            if (product != null) {
-                productDAO.deleteProduct(id);
+            if (productDAO.deleteProduct(id)) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
