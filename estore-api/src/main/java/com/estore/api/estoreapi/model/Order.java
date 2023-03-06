@@ -110,5 +110,33 @@ public class Order {
     public String toString() {
         return "Product [order id: " + id +  ", products: " + products + ", total price: " + totalPrice + ", order time: " + dateTime + "]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Order) {
+            Order other = (Order) obj;
+
+            // Compare trivial fields first
+            boolean trivial = id == other.id && totalPrice == other.totalPrice && dateTime == other.dateTime;
+
+            // Compare products
+            if (products.length == other.products.length) {
+                for (int i = 0; i < products.length; i++) {
+                    if (!products[i].equals(other.products[i])) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+
+            return trivial;
+        }
+        return false;
+    }
     
 }
