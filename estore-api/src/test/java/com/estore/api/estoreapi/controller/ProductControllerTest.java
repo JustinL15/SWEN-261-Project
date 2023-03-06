@@ -52,6 +52,18 @@ public class ProductControllerTest {
     }
 
     @Test
+    public void testGetProductNull() throws IOException {  // getProduct may throw IOException
+        // When the same id is passed in, our mock Product DAO will return the Product object
+        when(mockProductDAO.getProduct(99)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Product> response = productController.getProduct(99);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
     public void testGetProductNotFound() throws Exception { // createProduct may throw IOException
         // Setup
         int productId = 99;
@@ -99,6 +111,40 @@ public class ProductControllerTest {
         // Analyze
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
         assertEquals(product,response.getBody());
+    }
+
+    @Test
+    public void testCreateProductNullResult() throws IOException {  // createProduct may throw IOException
+        // Setup
+        Product product = new Product(99, "coffee beans", 3.00, 4, "make coffee");
+        // when createProduct is called, return true simulating successful
+        // creation and save
+        when(mockProductDAO.createProduct(product)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Product> response = productController.createProduct(product);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testCreateProductNoConflict() throws IOException {  // createProduct may throw IOException
+        // Setup
+        Product product = new Product(99, "coffee cup", 5.00, 1, "drink out of");
+
+        // when createProduct is called, return false simulating failed
+        // creation and save
+        when(mockProductDAO.createProduct(product)).thenReturn(product);
+        Product[] products = new Product[1];
+        products[0] = new Product(100, "coffee mug", 5.00, 1, "drink out of");
+        when(mockProductDAO.findProducts(product.getName())).thenReturn(products);
+
+        // Invoke
+        ResponseEntity<Product> response = productController.createProduct(product);
+
+        // Analyze
+        assertEquals(HttpStatus.CREATED,response.getStatusCode());
     }
 
     @Test
@@ -197,6 +243,18 @@ public class ProductControllerTest {
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
         assertEquals(products,response.getBody());
+    }
+
+    @Test
+    public void testGetProductsNull() throws IOException { // getProductes may throw IOException
+        // When getProductes is called return the products created above
+        when(mockProductDAO.getProducts()).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Product[]> response = productController.getProducts();
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
     @Test
