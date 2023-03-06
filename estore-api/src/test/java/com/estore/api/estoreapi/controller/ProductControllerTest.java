@@ -105,12 +105,16 @@ public class ProductControllerTest {
     public void testCreateProductFailed() throws IOException {  // createProduct may throw IOException
         // Setup
         Product product = new Product(99, "coffee cup", 5.00, 1, "drink out of");
+        Product newProduct = new Product(99, "coffee cup", 5.00, 1, "drink out of");
+
         // when createProduct is called, return false simulating failed
         // creation and save
-        when(mockProductDAO.createProduct(product)).thenReturn(null);
+        when(mockProductDAO.createProduct(product)).thenReturn(product);
+
+        when(mockProductDAO.createProduct(newProduct)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = productController.createProduct(product);
+        ResponseEntity<Product> response = productController.createProduct(newProduct);
 
         // Analyze
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
@@ -179,7 +183,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testGetProductes() throws IOException { // getProductes may throw IOException
+    public void testGetProducts() throws IOException { // getProductes may throw IOException
         // Setup
         Product[] products = new Product[2];
         products[0] = new Product(99, "coffee mug", 3.50, 5, "keeps drink warm");
@@ -244,7 +248,12 @@ public class ProductControllerTest {
     @Test
     public void testDeleteProduct() throws IOException { // deleteProduct may throw IOException
         // Setup
+        Product product = new Product(99, "coffee", 2.00, 2, "good drink");
         int productId = 99;
+        
+        // When the same id is passed in, our mock Product DAO will return the Product object
+        when(mockProductDAO.getProduct(product.getId())).thenReturn(product);
+        
         // when deleteProduct is called return true, simulating successful deletion
         when(mockProductDAO.deleteProduct(productId)).thenReturn(true);
 
