@@ -105,16 +105,16 @@ public class ProductControllerTest {
     public void testCreateProductFailed() throws IOException {  // createProduct may throw IOException
         // Setup
         Product product = new Product(99, "coffee cup", 5.00, 1, "drink out of");
-        Product newProduct = new Product(99, "coffee cup", 5.00, 1, "drink out of");
 
         // when createProduct is called, return false simulating failed
         // creation and save
         when(mockProductDAO.createProduct(product)).thenReturn(product);
-
-        when(mockProductDAO.createProduct(newProduct)).thenReturn(null);
+        Product[] products = new Product[1];
+        products[0] = new Product(99, "coffee cup", 5.00, 1, "drink out of");
+        when(mockProductDAO.findProducts(product.getName())).thenReturn(products);
 
         // Invoke
-        ResponseEntity<Product> response = productController.createProduct(newProduct);
+        ResponseEntity<Product> response = productController.createProduct(product);
 
         // Analyze
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
