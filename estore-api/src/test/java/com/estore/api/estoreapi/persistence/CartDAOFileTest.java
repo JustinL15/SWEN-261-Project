@@ -7,6 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Tag("Controller-tier")
 @SpringBootTest
 public class CartDAOFileTest {
+
+    @Test
+    void testCartFileDAO(){
+        CartFileDAO cFileDAO = new CartFileDAO("products", null);
+    }
     
     @Test
     void testGetCartsArray(){
