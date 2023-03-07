@@ -15,6 +15,8 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.estore.api.estoreapi.model.Cart;
+import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.model.ProductReference;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -65,6 +67,64 @@ public class CartDAOFileTest {
 
         // Analzye
         assertEquals(cart,testCarts[0]);
+    }
+
+    @Test
+    public void testRemoveItem() throws IOException {
+        // Invoke
+        Cart cart = cartFileDAO.getCart(99);
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        CartDAO mockCartDAO = mock(CartDAO.class);
+        mockCartDAO.addItem(cart.getId(), product.getId(), 1);
+        // When createHero is called on the Mock Hero DAO, throw an IOException
+        // ProductReference productRef = new ProductReference(80, 1);
+        // Analyze
+        doThrow(new IOException()).when(mockCartDAO).removeItem(cart.getId(), product.getId());
+        boolean removeProduct = cartFileDAO.removeItem(cart.getId(), product.getId());
+
+        Boolean result = assertDoesNotThrow(() -> cartFileDAO.removeItem(cart.getId(), product.getId()),
+        "Unexpected exception thrown");
+
+        assertNotNull(result);
+
+        assertEquals(result, removeProduct);
+    }
+
+    @Test
+    public void testAddItemToCart() throws IOException {
+        // Invoke
+        Cart cart = cartFileDAO.getCart(99);
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        CartDAO mockCartDAO = mock(CartDAO.class);
+        mockCartDAO.addItem(cart.getId(), product.getId(), 1);
+        // Analyze
+        boolean removeProduct = cartFileDAO.addItem(cart.getId(), product.getId(), 1);
+
+        Boolean result = assertDoesNotThrow(() -> cartFileDAO.removeItem(cart.getId(), product.getId()),
+        "Unexpected exception thrown");
+
+        assertNotNull(result);
+
+        assertEquals(result, removeProduct);
+    }
+
+    @Test
+    public void testEditQuantity() throws IOException {
+        // Invoke
+        Cart cart = cartFileDAO.getCart(99);
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        CartDAO mockCartDAO = mock(CartDAO.class);
+        mockCartDAO.addItem(cart.getId(), product.getId(), 1);
+        // Analyze
+        boolean editQuan = cartFileDAO.addItem(cart.getId(), product.getId(), 1);
+        
+        editQuan = cartFileDAO.editQuantity(cart.getId(), product.getId(), 1);
+        Boolean result = assertDoesNotThrow(() -> cartFileDAO.editQuantity(cart.getId(), product.getId(), 2),
+        "Unexpected exception thrown");
+
+        assertNotNull(result);
+
+        assertEquals(result, editQuan);
     }
 
     @Test
