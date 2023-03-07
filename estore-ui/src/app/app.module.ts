@@ -10,6 +10,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
+import { OrderViewComponent } from './order-view/order-view.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { EditProductDetailComponent } from './edit-product-detail/edit-product-d
     ProductDetailComponent,
     InventoryComponent,
     EditProductDetailComponent
+    OrderViewComponent,
   ],
   imports: [
     BrowserModule,

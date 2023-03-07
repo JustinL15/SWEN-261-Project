@@ -123,12 +123,13 @@ public class CustomerController {
         LOG.info("POST /customers " + customer);
         try {
             Customer[] matchingCustomers = customerDAO.findCustomers(customer.getUsername());
-            for (Customer currentCustomer : matchingCustomers) {
-                if (currentCustomer.getUsername().equals(customer.getUsername())) {
-                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+            if(matchingCustomers != null) {
+                for (Customer currentCustomer : matchingCustomers) {
+                    if (currentCustomer.getUsername().equals(customer.getUsername())) {
+                        return new ResponseEntity<>(HttpStatus.CONFLICT);
+                    }
                 }
             }
-
             Customer result = customerDAO.createCustomer(customer);
 
             if (result != null) {
@@ -177,10 +178,7 @@ public class CustomerController {
     public ResponseEntity<Customer> deleteCustomer(@PathVariable int id) {
         LOG.info("Delete /customers/" + id);
         try {
-            Customer customer = customerDAO.getCustomer(id);
-            if (customer != null) {
-                customerDAO.deleteCustomer(id);
-
+            if (customerDAO.deleteCustomer(id)) {
                 return new ResponseEntity<>(HttpStatus.OK);
 
             } else {

@@ -1,0 +1,14 @@
+<table style="width: 100%;">
+    <tr>
+        <th style="width: 70%;" align="left"><h2>Orders</h2></th>
+        <th align="right"><button type="button" class="redir">Inventory</button></th>
+    </tr>
+</table>
+
+<div class="centered">
+    <ul class="orders">
+        <li *ngFor="let order of orders">
+            <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.products}}, {{order.dateTime}}
+        </li>
+    </ul>
+</div>

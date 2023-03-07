@@ -41,7 +41,6 @@ public class Customer {
         }
         // This is impossible since I am hardcoding the algorithm
         catch (NoSuchAlgorithmException e) {
-            LOG.severe("Could not find SHA-256 algorithm");
             return null;
         }
 
@@ -66,9 +65,12 @@ public class Customer {
         this.name = name;
         this.cartId = cartId;
         this.isAdmin = isAdmin;
-        this.passwordHash = hashPassword(password);
+        if (password != null) {
+            this.passwordHash = hashPassword(password);
+        } else {
+            this.passwordHash = null;
+        }
         this.password = null;
-
         this.orders = new ArrayList<>();
     }
 
