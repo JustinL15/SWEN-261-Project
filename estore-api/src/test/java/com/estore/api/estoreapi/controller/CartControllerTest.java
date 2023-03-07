@@ -54,10 +54,10 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testGetCartHandleException() throws Exception { // createHero may throw IOException
+    public void testGetCartHandleException() throws Exception { // getCart may throw IOException
         // Setup
         int cartId = 99;
-        // When getHero is called on the Mock Hero DAO, throw an IOException
+        // When getCart is called on the Mock Cart DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).getCart(cartId);
 
         // Invoke
@@ -80,10 +80,10 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testCreateCartFailed() throws IOException { // createHero may throw IOException
+    public void testCreateCartFailed() throws IOException { // createCart may throw IOException
         // Setup
         Cart cart = new Cart(99);
-        // when createHero is called, return false simulating failed
+        // when createCart is called, return false simulating failed
         // creation and save
         when(mockCartDAO.createCart(null)).thenReturn(null);
 
@@ -95,11 +95,11 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testCreateCartHandleException() throws IOException { // createHero may throw IOException
+    public void testCreateCartHandleException() throws IOException { // createCart may throw IOException
         // Setup
         Cart cart = new Cart(99);
 
-        // When createHero is called on the Mock Hero DAO, throw an IOException
+        // When createCart is called on the Mock Cart DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).createCart(cart);
 
         // Invoke
@@ -133,7 +133,7 @@ public class CartControllerTest {
 
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
-        // when createHero is called, return false simulating failed
+        // when addItemToCart is called, return false simulating failed
         // creation and save
         ProductReference productRef = new ProductReference(80, 1);
         when(mockCartDAO.addItem(cart.getId(), 2, 1)).thenReturn(false);
@@ -153,7 +153,7 @@ public class CartControllerTest {
 
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
-        // When createHero is called on the Mock Hero DAO, throw an IOException
+        // When addItemToCart is called on the Mock Cart DAO, throw an IOException
         ProductReference productRef = new ProductReference(80, 1);
         doThrow(new IOException()).when(mockCartDAO).addItem(cart.getId(), 80, 1);
         // Invoke
@@ -252,7 +252,7 @@ public class CartControllerTest {
         // Setup
         Cart cart = new Cart(99);
         Product product = new Product(1, "logger", 10, 20, "log spoon");
-        // when updateHero is called, return true simulating successful
+        // when editItemInCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.editQuantity(cart.getId(), product.getId(), 1)).thenReturn(false);
 
@@ -274,7 +274,7 @@ public class CartControllerTest {
         
         ProductReference productRef = new ProductReference(80, 2);
 
-        // When createHero is called on the Mock Hero DAO, throw an IOException
+        // When editItemInCart is called on the Mock Cart DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).editQuantity(cart.getId(), productRef.getId(), productRef.getQuantity());
 
         // Invoke
@@ -285,10 +285,10 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testUpdateCart() throws IOException { // updateHero may throw IOException
+    public void testUpdateCart() throws IOException { // createCart may throw IOException
         // Setup
         Cart cart = new Cart(99);
-        // when updateHero is called, return true simulating successful
+        // when createCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.updateCart(cart)).thenReturn(cart);
         ResponseEntity<Cart> response = cartController.updateCart(cart);
@@ -302,10 +302,10 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testUpdateCartFailed() throws IOException { // updateHero may throw IOException
+    public void testUpdateCartFailed() throws IOException { // createCart may throw IOException
         // Setup
         Cart cart = new Cart(99);
-        // when updateHero is called, return true simulating successful
+        // when createCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.updateCart(cart)).thenReturn(null);
 
@@ -317,10 +317,10 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testUpdateCartHandleException() throws IOException { // updateHero may throw IOException
+    public void testUpdateCartHandleException() throws IOException { // createCart may throw IOException
         // Setup
         Cart cart = new Cart(99);
-        // When updateHero is called on the Mock Hero DAO, throw an IOException
+        // When createCart is called on the Mock Cart DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).updateCart(cart);
 
         // Invoke
@@ -349,7 +349,7 @@ public class CartControllerTest {
     public void testDeleteCartFailed() throws IOException {
         // Setup
         Cart cart = new Cart(99);
-        // when updateHero is called, return true simulating successful
+        // when deleteCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.deleteCart(0)).thenReturn(false);
 
@@ -364,7 +364,7 @@ public class CartControllerTest {
     public void testDeleteCartHandleExpception() throws IOException {
         // Setup
         int id = 99;
-        // When updateHero is called on the Mock Hero DAO, throw an IOException
+        // When deleteCart is called on the Mock Cart DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).deleteCart(id);
         doThrow(new IOException()).when(mockCartDAO).getCart(id);
 

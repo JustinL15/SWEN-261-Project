@@ -42,7 +42,7 @@ public class CartDAOFileTest {
         testCarts[2] = new Cart(101);
 
         // When the object mapper is supposed to read from the file
-        // the mock object mapper will return the hero array above
+        // the mock object mapper will return the cart array above
         when(mockObjectMapper
             .readValue(new File("doesnt_matter.txt"),Cart[].class))
                 .thenReturn(testCarts);
@@ -76,7 +76,7 @@ public class CartDAOFileTest {
         Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
         CartDAO mockCartDAO = mock(CartDAO.class);
         mockCartDAO.addItem(cart.getId(), product.getId(), 1);
-        // When createHero is called on the Mock Hero DAO, throw an IOException
+        // When createCart is called on the Mock Cart DAO, throw an IOException
         // ProductReference productRef = new ProductReference(80, 1);
         // Analyze
         doThrow(new IOException()).when(mockCartDAO).removeItem(cart.getId(), product.getId());
@@ -136,8 +136,8 @@ public class CartDAOFileTest {
         // Analzye
         assertEquals(result,true);
         // We check the internal tree map size against the length
-        // of the test heroes array - 1 (because of the delete)
-        // Because heroes attribute of HeroFileDAO is package private
+        // of the test carts array - 1 (because of the delete)
+        // Because carts attribute of CartFileDAO is package private
         // we can access it directly
         assertEquals(cartFileDAO.getCarts().length,testCarts.length-1);
     }
@@ -186,7 +186,7 @@ public class CartDAOFileTest {
     }
 
     @Test
-    public void testGetHeroNotFound() {
+    public void testGetCartNotFound() {
         // Invoke
         Cart cart = cartFileDAO.getCart(98);
 
@@ -195,7 +195,7 @@ public class CartDAOFileTest {
     }
 
     @Test
-    public void testDeleteHeroNotFound() {
+    public void testDeleteCartNotFound() {
         // Invoke
         boolean result = assertDoesNotThrow(() -> cartFileDAO.deleteCart(98),
                                                 "Unexpected exception thrown");
@@ -206,7 +206,7 @@ public class CartDAOFileTest {
     }
 
     @Test
-    public void testUpdateHeroNotFound() {
+    public void testUpdateCartNotFound() {
         // Setup
         Cart cart = new Cart(98);
 
@@ -226,7 +226,7 @@ public class CartDAOFileTest {
         // exception was raised during JSON object deseerialization
         // into Java objects
         // When the Mock Object Mapper readValue method is called
-        // from the HeroFileDAO load method, an IOException is
+        // from the CartFileDAO load method, an IOException is
         // raised
         doThrow(new IOException())
             .when(mockObjectMapper)
