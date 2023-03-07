@@ -164,78 +164,85 @@ public class CartControllerTest {
 
     @Test
     public void testRemoveItemFromCart() throws IOException {
-        // Cart cart = new Cart(99);
-        // Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Cart cart = new Cart(99);
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
         
-        // ProductDAO mockProductDAO = mock(ProductDAO.class);
-        // mockProductDAO.createProduct(product);
-        
-        // ProductReference productRef = new ProductReference(80, 2);
+        ProductReference productRef = new ProductReference(product.getId(), 2);
 
-        // // cart.addItem(product.getId(), 2);
+        // Remove item that exists
+        when(mockCartDAO.removeItem(cart.getId(), productRef.getId())).thenReturn(true);
 
-        // when(mockCartDAO.removeItem(cart.getId(), 2)).thenReturn(true);
-        // when(mockCartDAO.addItem(cart.getId(), 80, 1)).thenReturn(true);
 
-        // ResponseEntity<Cart> response = cartController.addItemToCart(cart.getId(), productRef);
-        // response = cartController.removeItemFromCart(cart.getId(), productRef.getId());
+        ResponseEntity<Cart> responseSuccess = cartController.removeItemFromCart(cart.getId(), productRef.getId());
 
-        // assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK, responseSuccess.getStatusCode());
     }
 
     @Test
     public void testRemoveItemFromCartFailed() throws IOException {
         // Setup
-        // Cart cart = new Cart(99);
-        // Product product = new Product(1, "logger", 10, 20, "log spoon");
-        // // when createHero is called, return false simulating failed
-        // // creation and save
-        // when(mockCartDAO.removeItem(cart.getId(), product.getId())).thenReturn(false);
+        Cart cart = new Cart(99);
+        Product product = new Product(1, "logger", 10, 20, "log spoon");
+        // creation and save
+        when(mockCartDAO.removeItem(cart.getId(), product.getId())).thenReturn(false);
 
-        // // Invoke
-        // ResponseEntity<Cart> response = cartController.addItemToCart(cart.getId(), null);
+        // Invoke
+        ResponseEntity<Cart> response = cartController.removeItemFromCart(cart.getId(), product.getId());
 
-        // // Analyze
-        // assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
     public void testRemoveItemFromCartHandleException() throws IOException {
         // Setup
-        // Cart cart = new Cart(99);
+        Cart cart = new Cart(99);
 
-        // Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
         
-        // ProductDAO mockProductDAO = mock(ProductDAO.class);
-        // mockProductDAO.createProduct(product);
-        
-        // ProductReference productRef = new ProductReference(80, 2);
+        doThrow(new IOException()).when(mockCartDAO).removeItem(cart.getId(), product.getId());
 
-        // // When createHero is called on the Mock Hero DAO, throw an IOException
-        // doThrow(new IOException()).when(mockCartDAO).removeItem(cart.getId(), 0)
+        // Invoke
+        ResponseEntity<Cart> response = cartController.removeItemFromCart(cart.getId(), product.getId());
 
-        // // Invoke
-        // ResponseEntity<Cart> response = cartController.addItemToCart(cart.getId(), null);
-
-        // // Analyze
-        // assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
     @Test
     public void testEditItemInCart() throws IOException {
-        // Cart cart = new Cart(99);
-        // Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Cart cart = new Cart(99);
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
         
-        // ProductDAO mockProductDAO = mock(ProductDAO.class);
-        // mockProductDAO.createProduct(product);
+        ProductDAO mockProductDAO = mock(ProductDAO.class);
+        mockProductDAO.createProduct(product);
         
-        // ProductReference productRef = new ProductReference(cart.getId(), 2);
+        ProductReference productRef = new ProductReference(product.getId(), 2);
 
-        // when(mockCartDAO.editQuantity(cart.getId(), product.getId(), product.getQuantity())).thenReturn(true);
+        when(mockCartDAO.editQuantity(cart.getId(), productRef.getId(), productRef.getQuantity())).thenReturn(true);
 
-        // ResponseEntity<Cart> response = cartController.editItemInCart(cart.getId(), productRef);
+        ResponseEntity<Cart> response = cartController.editItemInCart(cart.getId(), productRef);
+        response = cartController.editItemInCart(cart.getId(), productRef); // Add another 2 to the cart
 
-        // assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testEditItemInCartNotFound() throws IOException {
+        Cart cart = new Cart(99);
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        
+        ProductDAO mockProductDAO = mock(ProductDAO.class);
+        mockProductDAO.createProduct(product);
+        
+        ProductReference productRef = new ProductReference(product.getId(), 2);
+
+        when(mockCartDAO.editQuantity(cart.getId(), productRef.getId(), productRef.getQuantity())).thenReturn(false);
+
+        ResponseEntity<Cart> response = cartController.editItemInCart(cart.getId(), productRef);
+        response = cartController.editItemInCart(cart.getId(), productRef); // Add another 2 to the cart
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
@@ -266,12 +273,10 @@ public class CartControllerTest {
         ProductReference productRef = new ProductReference(80, 2);
 
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockCartDAO).addItem(cart.getId(), 2, 1);
-        doThrow(new IOException()).when(mockCartDAO).getCart(cart.getId());
+        doThrow(new IOException()).when(mockCartDAO).editQuantity(cart.getId(), productRef.getId(), productRef.getQuantity());
 
         // Invoke
         ResponseEntity<Cart> response = cartController.editItemInCart(cart.getId(), productRef);
-        response = cartController.getCart(cart.getId());
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
