@@ -41,7 +41,6 @@ public class Customer {
         }
         // This is impossible since I am hardcoding the algorithm
         catch (NoSuchAlgorithmException e) {
-            LOG.severe("Could not find SHA-256 algorithm");
             return null;
         }
 

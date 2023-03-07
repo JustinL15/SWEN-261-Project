@@ -57,6 +57,7 @@ public class CartTest {
         int quantity_2 = 1;
         cart.addItem(product_id, quantity);
         cart.addItem(product_id_2, quantity_2);
+        cart.addItem(product_id, quantity_2);
         cart.removeItem(product_id_2);
         cart.editQuantity(product_id, quantity_2);
         HashMap<Integer, ProductReference> inventory;

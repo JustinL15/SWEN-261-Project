@@ -55,10 +55,10 @@ public class CustomerTest {
         String expected_username = "user9876";
 
         // Invoke
-        customer.setName(expected_username);
+        customer.setUsername(expected_username);
 
         // Analyze
-        assertEquals(expected_username,customer.getName());
+        assertEquals(expected_username,customer.getUsername());
     }
 
     @Test
@@ -100,6 +100,24 @@ public class CustomerTest {
 
         // Analyze
         assertEquals(orders,customer.getOrders());
+    }
+
+    @Test
+    public void testPassword() {
+        // Setup
+        int id = 99;
+        String username = "user1234";
+        String name = "John Smith";
+        int cartId = 77;
+        boolean isAdmin = false;
+        String password = "Sw3niZcooL";
+        Customer customer = new Customer(id,username,name,cartId,isAdmin,password);
+
+        // Invoke
+        password = null;
+
+        // Analyze
+        assertEquals(password,customer.getPassword());
     }
 
 }
