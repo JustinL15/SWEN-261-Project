@@ -107,14 +107,6 @@ public class Order {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        return "Product [order id: " + id +  ", products: " + products + ", total price: " + totalPrice + ", order time: " + dateTime + "]";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean equals(Object obj) {
         if (obj instanceof Order) {
             Order other = (Order) obj;
