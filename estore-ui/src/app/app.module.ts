@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 
 @NgModule({
@@ -16,6 +18,8 @@ import { OrderViewComponent } from './order-view/order-view.component';
     DashboardComponent,
     ProductsComponent,
     ProductDetailComponent,
+    InventoryComponent,
+    EditProductDetailComponent
     OrderViewComponent,
   ],
   imports: [
