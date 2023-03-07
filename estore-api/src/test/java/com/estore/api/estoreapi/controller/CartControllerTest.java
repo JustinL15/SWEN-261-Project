@@ -217,7 +217,9 @@ public class CartControllerTest {
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
         
-        ProductReference productRef = new ProductReference(product.getId(), 2);
+        ProductReference productRef = new ProductReference(0, 2);
+        // Also cover the set ID case for product ref
+        productRef.setId(product.getId());
 
         when(mockCartDAO.editQuantity(cart.getId(), productRef.getId(), productRef.getQuantity())).thenReturn(true);
 
