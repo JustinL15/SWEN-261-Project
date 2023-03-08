@@ -49,8 +49,8 @@ public class OrderFileDAOTest {
         exampleProducts0[0] = new Product(1, "Coffee filter", 4.99, 10, "Filters for coffee");
         exampleProducts0[1] = new Product(2, "Coffee mug", 9.99, 10, "Mug for coffee");
         
-        exampleOrders[0] = new Order(1, 10.99, exampleProducts0, null);
-        exampleOrders[1] = new Order(2, 0, new Product[0], null);
+        exampleOrders[0] = new Order(1, 10.99, exampleProducts0, false, null);
+        exampleOrders[1] = new Order(2, 0, new Product[0], false, null);
 
         // Link the mapper to these values
         when(mockObjectMapper.readValue(new File("foo.txt"), Order[].class))
@@ -125,7 +125,7 @@ public class OrderFileDAOTest {
         // Create the order
         Product[] newProducts = new Product[1];
         newProducts[0] = new Product(3, "Coffee maker", 10, 1, "Makes coffee");
-        Order order = new Order(4, 10, newProducts, null);
+        Order order = new Order(4, 10, newProducts, true, null);
 
         // Add it to the DAO
         Order result = assertDoesNotThrow(() -> orderFileDAO.createOrder(order),
@@ -135,6 +135,7 @@ public class OrderFileDAOTest {
         assertNotNull(result);
         Order pulledOrder = orderFileDAO.getOrder(result.getId());
         assertEquals(pulledOrder.getId(), result.getId());
+        assertEquals(pulledOrder.isComplete(), result.isComplete());
         assertEquals(pulledOrder, result);
     }
 
@@ -149,7 +150,7 @@ public class OrderFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Order[].class));
 
-        Order order = new Order(3, 10, new Product[0], null);
+        Order order = new Order(3, 10, new Product[0], false, null);
 
 
         assertThrows(IOException.class,
