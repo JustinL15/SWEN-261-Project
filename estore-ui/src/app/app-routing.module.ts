@@ -6,6 +6,7 @@ import { ProductsComponent } from './products/products.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
+import { UserLoginComponent } from './userlogin/userlogin.component';
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'manage/:id', component: EditProductDetailComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'orders', component: OrderViewComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: 'login', component: UserLoginComponent},
 ];
 
 @NgModule({

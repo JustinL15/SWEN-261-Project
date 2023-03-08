@@ -1,0 +1,13 @@
+<ul class="products" *ngIf="!(isLoggedIn)">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" name="username" #username>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" #password>
+
+    <button (click)="login(username.value, password.value)">Login</button>
+  </div>
+</ul>
+
+<button (click)="logout()">Logout</button>

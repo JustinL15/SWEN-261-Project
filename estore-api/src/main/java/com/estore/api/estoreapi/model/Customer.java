@@ -24,7 +24,7 @@ public class Customer {
     @JsonProperty("cartId") private int cartId;
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
-    @JsonProperty("passwordHash") private byte[] passwordHash;
+    @JsonProperty("passwordHash") private String passwordHash;
     // To be stored when sending a new customer to the backend and then immediately cleared
     @JsonProperty("password") private String password;
 
@@ -66,7 +66,7 @@ public class Customer {
         this.cartId = cartId;
         this.isAdmin = isAdmin;
         if (password != null) {
-            this.passwordHash = hashPassword(password);
+            this.passwordHash =  new String(hashPassword(password), StandardCharsets.UTF_8);
         } else {
             this.passwordHash = null;
         }
