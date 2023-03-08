@@ -61,6 +61,10 @@ public class OrderTest {
         order.setTotalPrice(totalPrice);
         assertEquals(totalPrice, order.getTotalPrice());
 
+        boolean complete = true;
+        order.setComplete(complete);
+        assertEquals(complete, order.isComplete());
+
     }
 
     /**
