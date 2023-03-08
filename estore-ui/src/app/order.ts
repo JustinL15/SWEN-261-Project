@@ -1,14 +1,9 @@
-export interface Product {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    description: string;
-}
+import { Product } from './product';
 
 export interface Order {
     id: number;
     totalPrice: number;
     products: Array<Product>;
+    complete: boolean;
     dateTime: Date;
 }
