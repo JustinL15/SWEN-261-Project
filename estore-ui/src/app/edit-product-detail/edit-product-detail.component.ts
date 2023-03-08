@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { InventoryComponent } from '../inventory/inventory.component';
 
 @Component({
   selector: 'app-edit-product-detail',

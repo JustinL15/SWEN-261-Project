@@ -1,8 +1,12 @@
 <table style="width: 100%;">
     <tr>
-        <th style="width: 70%;" align="left"><h2>Inventory</h2></th>
+        <th style="width: 70%;" align="left">
+            <h2>Inventory</h2>
+        </th>
         <!-- button needs to link to the order-view -->
-        <th align="right"><button type="button" class="redir">Orders</button></th>
+        <a routerLink="/orders">
+            <th align="right"><button type="button" class="redir">Orders</button></th>
+        </a>
     </tr>
 </table>
 
@@ -10,26 +14,32 @@
     <label for="new-product">Product name: </label>
     <input id="new-product" #productName />
     <label for="new-price">Price: </label>
-    <input  id="new-price"  #productPrice />
+    <input id="new-price" #productPrice />
     <label for="new-quantity">Quantity: </label>
     <input id="new-quantity" #productQuantity />
     <label for="new-description">Description: </label>
     <input inputmode="numeric" id="new-description" #productDescription />
 
-<!-- need to be able to add description, price and quantity -->
     <!-- (click) passes input value to add() and then clears the input -->
-    <button type="button" class="add-button" (click)="add(productName.value, productPrice.value, productQuantity.value, productDescription.value); productName.value=''; productQuantity.value=''; productPrice.value=''; productDescription.value=''">
+    <button type="button" class="add-button"
+        (click)="add(productName.value, productPrice.value, productQuantity.value, productDescription.value); productName.value=''; productQuantity.value=''; productPrice.value=''; productDescription.value=''">
         Add product
     </button>
+    <button type="button" class="test" onclick="this.disabled=true">test</button>
 </div>
 
 <div class="centered">
     <ul class="products">
-        <li *ngFor="let product of products">
-            <a routerLink="/manage/{{product.id}}">
-                <span class="badge">{{product.id}}</span> {{product.name}}
-            </a>
-        </li>
+        <div>
+            <label class="id-label">ID</label>
+            <label class="product-label">Product Name</label>
+            <label class="quantity-label">Qty.</label>
+            <li *ngFor="let product of products">
+                <a routerLink="/manage/{{product.id}}">
+                    <span class="badge">{{product.id}}</span> {{product.name}} <span
+                        class="qbadge">{{product.quantity}}</span>
+                </a>
+            </li>
+        </div>
     </ul>
 </div>
-

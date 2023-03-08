@@ -22,4 +22,13 @@ export class OrderViewComponent implements OnInit {
     .subscribe(orders => this.orders = orders);
   }
 
+  delete(order: Order): void {
+    this.orders = this.orders.filter(h => h !== order);
+    this.orderService.deleteOrder(order.id).subscribe();
+  }
+
+  complete(order: Order): void{
+    
+  }
+
 }

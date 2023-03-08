@@ -1,20 +1,30 @@
 <div *ngIf="product">
-    <h2>{{product.name | uppercase}}</h2>
-    <div><span>Product ID: </span>{{product.id}}</div>
+    <h2>{{product.name | uppercase}}<div><span>Product ID: </span>{{product.id}}</div>
+    </h2>
+    <div><span>Price: </span>{{product.price}}</div>
+    <div><span>Quantity: </span>{{product.quantity}}</div>
     <div><span>Description: </span>{{product.description}}</div>
 
+
     <br>
-    <!-- row and column need to be added to css to work -->
     <div class="row">
         <div class="column">
             <!-- <img src="pic_trulli.jpg" alt="Italian Trulli"> -->
-            
+
         </div>
 
         <div class="column">
             <div>
                 <label for="product-name">Product Name:</label>
                 <input id="product-name" [(ngModel)]="product.name" placeholder="Rename Product" />
+            </div>
+            <div>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" [(ngModel)]="product.quantity" placeholder="New Quantity" />
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" id="price" [(ngModel)]="product.price" placeholder="New Price" />
             </div>
             <div>
                 <label for="description">Description:</label>

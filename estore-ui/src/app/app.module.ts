@@ -19,7 +19,7 @@ import { OrderViewComponent } from './order-view/order-view.component';
     ProductsComponent,
     ProductDetailComponent,
     InventoryComponent,
-    EditProductDetailComponent
+    EditProductDetailComponent,
     OrderViewComponent,
   ],
   imports: [

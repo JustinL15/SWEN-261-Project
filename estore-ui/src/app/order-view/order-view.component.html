@@ -1,14 +1,22 @@
 <table style="width: 100%;">
     <tr>
-        <th style="width: 70%;" align="left"><h2>Orders</h2></th>
-        <th align="right"><button type="button" class="redir">Inventory</button></th>
+        <th style="width: 70%;" align="left">
+            <h2>Orders</h2>
+        </th>
+        <!-- button needs to link to inventory -->
+        <a routerLink="/manage">
+            <th align="right"><button type="button" class="redir">Inventory</button></th>
+        </a>
     </tr>
 </table>
 
 <div class="centered">
     <ul class="orders">
         <li *ngFor="let order of orders">
+            <!-- add buttons for complete and to delete -->
             <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.products}}, {{order.dateTime}}
+            <button type="button" class="delete" title="delete order" (click)="delete(order)">x</button>
+            <button type="" class="complete" title="complete order">Complete</button>
         </li>
     </ul>
 </div>
