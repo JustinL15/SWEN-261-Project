@@ -2,8 +2,6 @@ package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -111,13 +109,16 @@ public class CustomerTest {
         int cartId = 77;
         boolean isAdmin = false;
         String password = "Sw3niZcooL";
+        String password2 = "Sw3niZcooL2";
         Customer customer = new Customer(id,username,name,cartId,isAdmin,password);
-
-        // Invoke
-        password = null;
 
         // Analyze
         assertEquals(password,customer.getPassword());
+
+        // Check setting password
+        customer.setPassword(password2);
+        assertEquals(password2,customer.getPassword());
+
     }
 
 }
