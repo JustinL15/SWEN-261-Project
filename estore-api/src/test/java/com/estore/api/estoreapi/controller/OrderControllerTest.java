@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import com.estore.api.estoreapi.controller.OrderController;
 import com.estore.api.estoreapi.model.Order;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.OrderDAO;
@@ -55,7 +54,7 @@ public class OrderControllerTest {
     @Test
     public void testGetOrder() throws IOException {
         // Assemble the order to be retrieved by the test
-        Order order = new Order(1, 9, new Product[0], null);
+        Order order = new Order(1, 9, new Product[0], false, null);
 
         // Setup the mock object to return this order when retrieved
         when(orderDAO.getOrder(order.getId())).thenReturn(order);
@@ -113,7 +112,7 @@ public class OrderControllerTest {
     @Test
     public void testCreateOrder() throws IOException {
         // Create an order and assign it's response
-        Order order = new Order(1, 0, new Product[0], null);
+        Order order = new Order(1, 0, new Product[0], true, null);
         when(orderDAO.createOrder(order)).thenReturn(order);
 
         // Call the controller and check for an equivalent response
@@ -132,7 +131,7 @@ public class OrderControllerTest {
     @Test
     public void testCreateOrderFailed() throws IOException {
         // Build a test order and assign it's response to null
-        Order order = new Order(1, 0, new Product[0], null);
+        Order order = new Order(1, 0, new Product[0], true, null);
 
         when(orderDAO.createOrder(order)).thenReturn(null);
 
@@ -166,7 +165,7 @@ public class OrderControllerTest {
     @Test
     public void testCreateOrderHandleException() throws IOException {
         // Set the response when attempting to create this order
-        Order order = new Order(1, 0, new Product[0], null);
+        Order order = new Order(1, 0, new Product[0], false, null);
 
         doThrow(new IOException()).when(orderDAO).createOrder(order);
 
@@ -185,8 +184,8 @@ public class OrderControllerTest {
     public void testGetOrders() throws IOException {
         // Create an array of orders to be returned by the DAO
         Order[] orders = new Order[2];
-        orders[0] = new Order(1, 0, new Product[0], null);
-        orders[1] = new Order(2, 0, new Product[0], null);
+        orders[0] = new Order(1, 0, new Product[0], true, null);
+        orders[1] = new Order(2, 0, new Product[0], false, null);
         
         // Return the array when we call getOrders()
         when(orderDAO.getOrders()).thenReturn(orders);
