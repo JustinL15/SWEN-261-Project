@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -22,12 +23,16 @@ export class InventoryComponent implements OnInit{
     this.productService.getProducts().subscribe(products => this.products = products);
   }
 
-  add(name: string): void {
+  add(name: string, prc: string, qty: string, description: string): void {
     name = name.trim();
-    if (!name) {
+    var price: number = +prc;
+    var quantity: number = +qty;
+    description = description.trim();
+    if (!name || !description || !quantity || !price) {
       return;
     }
-    this.productService.addProduct({ name } as Product).subscribe(product => { this.products.push(product) });
+    
+    this.productService.addProduct({ name, price, quantity, description } as Product).subscribe(product => { this.products.push(product) });
   }
 
   delete(product: Product): void {
