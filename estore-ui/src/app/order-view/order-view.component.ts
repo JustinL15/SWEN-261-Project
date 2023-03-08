@@ -28,7 +28,7 @@ export class OrderViewComponent implements OnInit {
   }
 
   complete(order: Order): void{
-    
+    this.orders
   }
 
 }
