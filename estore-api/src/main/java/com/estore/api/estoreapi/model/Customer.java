@@ -24,28 +24,7 @@ public class Customer {
     @JsonProperty("cartId") private int cartId;
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
-    @JsonProperty("passwordHash") private byte[] passwordHash;
-    // To be stored when sending a new customer to the backend and then immediately cleared
     @JsonProperty("password") private String password;
-
-    /**
-     * Calculate the hash of the password entered
-     * 
-     * @param password Password to hash
-     * @return Byte array of the SHA256 hash
-     */
-    private static byte[] hashPassword(String password) {
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-        }
-        // This is impossible since I am hardcoding the algorithm
-        catch (NoSuchAlgorithmException e) {
-            return null;
-        }
-
-        return md.digest(password.getBytes(StandardCharsets.UTF_8));
-    }
 
     /**
      * Construct a new customer
@@ -65,12 +44,7 @@ public class Customer {
         this.name = name;
         this.cartId = cartId;
         this.isAdmin = isAdmin;
-        if (password != null) {
-            this.passwordHash = hashPassword(password);
-        } else {
-            this.passwordHash = null;
-        }
-        this.password = null;
+        this.password = password;
         this.orders = new ArrayList<>();
     }
 
@@ -117,6 +91,15 @@ public class Customer {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Set the password of customer
+     * 
+     * @param password customer password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
