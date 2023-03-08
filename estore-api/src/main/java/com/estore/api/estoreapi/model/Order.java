@@ -54,6 +54,15 @@ public class Order {
     }
 
     /**
+     * Set the status of the order
+     * 
+     * @param complete status of the order
+     */
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    /**
      * Get the ID of the order
      * 
      * @return ID of the order
