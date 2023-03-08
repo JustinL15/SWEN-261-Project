@@ -130,7 +130,7 @@ public class OrderFileDAO implements OrderDAO {
     @Override
     public Order createOrder(Order order) throws IOException {
         synchronized(orderMap) {
-            Order tmpOrd = new Order(getNextId(), order.getTotalPrice(), order.getProducts(), order.getDateTime());
+            Order tmpOrd = new Order(getNextId(), order.getTotalPrice(), order.getProducts(), order.isComplete(), order.getDateTime());
             
             // Add to map and save to DAO
             orderMap.put(tmpOrd.getId(), tmpOrd);
