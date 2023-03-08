@@ -4,16 +4,16 @@
     (click)="checkout()">checkout</button>
 
 <ul class="products">
-    <li *ngFor="let product of products">
+    <div *ngFor="let item of items | keyvalue">
         <a routerLink="/cart">
-            <span class="badge">{{product.name}}</span>
+            <span class="badge">{{item.key}}</span>
         </a>
         <button type="button" class="decrease" title="decrease product"
             (click)="decrease(product)">-</button>
-        {{product.quantity}}
+        {{item.value}}
         <button type="button" class="increase" title="increase product"
             (click)="increase(product)">+</button>
         <button type="button" class="remove" title="remove product"
             (click)="remove(product)">remove</button>
-    </li>
+    </div>
 </ul>

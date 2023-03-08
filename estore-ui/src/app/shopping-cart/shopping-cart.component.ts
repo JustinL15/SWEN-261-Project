@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Product } from '../product';
+import { Cart } from '../cart';
+import { CartService } from '../cart.service';
+import { ProductReference } from '../product-reference';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -8,48 +10,80 @@ import { ProductService } from '../product.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  products: Product[] = [];
+  cart: Cart = {inventory: {}};
 
-
-  constructor(private productService: ProductService) { }
+  constructor(
+    private cartService:CartService, 
+    private productService: ProductService
+    ) { }
 
 
   ngOnInit(): void {
-    // change to getproducts in shopping cart
-    this.getProducts();
+    this.getInventory();
   }
 
 
-  getProducts(): void {
-    // change to getproducts in shopping cart
-    this.productService.getProducts().subscribe(products => this.products = products);
+  getInventory(): void {
+    // this.cartService.getInventory().subscribe((cart: Cart) => this.cart = cart);
   }
 
-  increase(product: Product): void {
+  increase(product: ProductReference): void {
     // get the current number of products in the cart
-    // check items are in inventory
+    var inStock = 0;
+    this.productService.getProduct(product.id).subscribe(prod => inStock = prod.quantity);
+
     // add one item of the product to the shopping cart
+    if(product.quantity + 1 <= inStock){
+      product.quantity += 1;
+    }
   }
 
-  decrease(product: Product): void {
-    // get the current number of products in the cart
+  decrease(product: ProductReference): void {
     // remove one item of the product from shopping cart
+    product.quantity -= 1;
+
     // if zero items of the product remove it from shopping cart
+    if(product.quantity <= 0){
+      this.remove(product);
+    }
   }
 
-  remove(product: Product): void {
-    // change to deleteproduct in shopping cart
-    this.products = this.products.filter(p => p !== product);
-    this.productService.deleteProduct(product.id).subscribe();
+  remove(product: ProductReference): void {
+    // this.inventory = this.inventory.filter(i => i !== inventory);
+    // this.cartService.deleteProduct(product.id).subscribe();
   }
 
   checkout(): void {
-    // get the current number of products in the cart
-    // check items are in inventory
-    // remove items from inventory
-    // remove items from shopping cart
-    // create snapshop of each product and quantity in cart
-    // create an order
+    // loop through the current number of products in the cart
+    var totalPrice = 0;
+    var products = [];
+
+    for (const prodId in this.cart.inventory){
+      // get the current number of products in the cart
+      var inStock = 0;
+      var productId: number =+prodId;
+      this.productService.getProduct(productId).subscribe(prod => inStock = prod.quantity);
+
+      // check items are in inventory
+      var orderQuantity = 0; // get product quantity
+      var inStock = 0; // get inventory quantity
+      if(inStock < 1){
+        break;
+      } else if (inStock < 0/*this.cart.inventory*/){
+        orderQuantity = inStock;
+        // set inventory quantity to 0
+      } else{
+        // set inventory quantity to 'inventoryQuantity - orderQuantity'
+      }
+      totalPrice += orderQuantity * 0; // * get product price
+      // create snapshop of each product and quantity in cart
+      // add to products array
+    }
+    // clear shopping cart
+
+    if(products.length >= 1){
+      // create an order
+    }
   }
 
 }
