@@ -10,7 +10,7 @@ import { ProductService } from '../product.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  cart: Cart = {inventory: {}};
+  cart: Cart = {id: -1, inventory: {}};
 
   constructor(
     private cartService:CartService, 
@@ -19,12 +19,12 @@ export class ShoppingCartComponent {
 
 
   ngOnInit(): void {
-    this.getInventory();
+    this.getCart();
   }
 
 
-  getInventory(): void {
-    // this.cartService.getInventory().subscribe((cart: Cart) => this.cart = cart);
+  getCart(): void {
+    this.cartService.getCart(this.cart.id).subscribe((cart: Cart) => this.cart = cart);
   }
 
   increase(product: ProductReference): void {
@@ -50,7 +50,7 @@ export class ShoppingCartComponent {
 
   remove(product: ProductReference): void {
     // this.inventory = this.inventory.filter(i => i !== inventory);
-    // this.cartService.deleteProduct(product.id).subscribe();
+    this.cartService.removeProduct(this.cart.id, product.id).subscribe();
   }
 
   checkout(): void {
