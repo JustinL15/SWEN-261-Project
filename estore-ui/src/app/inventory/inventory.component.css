@@ -136,7 +136,3 @@ button.redir {
     transform: translate(-50%, -50%);
     /* text-align: center; */
 }
-
-.test:disabled{
-    background-color: red;
-}
