@@ -7,6 +7,5 @@ export interface Customer {
     cartId: number;
     orders: Array<Order>;
     isAdmin: boolean;
-    passwordHash: string;
     password: string;
 }

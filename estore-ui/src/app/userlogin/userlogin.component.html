@@ -11,3 +11,9 @@
 </ul>
 
 <button (click)="logout()">Logout</button>
+
+<li *ngFor="let customer of customers">
+  <a>
+    {{customer.username}}
+  </a>
+</li>

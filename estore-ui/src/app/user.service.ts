@@ -99,14 +99,14 @@ export class UserService {
   }
 
   /** log in the user */
-  login(username: string, password: string): void {
-    this.searchCustomers(username).subscribe((users: Customer[]) => {
-      const authUser = users[0];
-      if (authUser.passwordHash === sha256(password)) {
-        this.currentUser = authUser;
-        this.loggedIn = true;
-      }
-    });
+  login(username: string, password: string): boolean {
+    var userlist: Customer[]; 
+    if (!username.trim()) {
+      // if not search term, return empty customer array.
+      return false;
+    }
+    userlist = this.http.get<Customer[]>(`${this.customersUrl}/?text=${term}`).
+  }
   }
 
   logout(): void {

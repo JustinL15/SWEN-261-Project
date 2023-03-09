@@ -99,7 +99,7 @@ public class CustomerControllerTest {
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
         assertEquals(customer,response.getBody());
     }
-
+    
     @Test
     public void testCreateCustomerFailed() throws IOException {  // createCustomer may throw IOException
         // Setup
@@ -202,6 +202,17 @@ public class CustomerControllerTest {
     }
 
     @Test
+    public void testGetCustomersNotFound() throws IOException { // getCustomers may throw IOException
+        when(mockCustomerDAO.getCustomers()).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Customer[]> response = customerController.getCustomers();
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
     public void testGetCustomersHandleException() throws IOException { // getCustomers may throw IOException
         // Setup
         // When getCustomers is called on the Mock Customer DAO, throw an IOException
@@ -284,6 +295,68 @@ public class CustomerControllerTest {
 
         // Invoke
         ResponseEntity<Customer> response = customerController.deleteCustomer(customerId);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testAuthCustomer() throws IOException {  // createCustomer may throw IOException
+        // Setup
+        Customer customer = new Customer(99,"Wi-Fire","Wi-Fire", 153, false, "astyhhas");
+        // when createCustomer is called, return true simulating successful
+        // creation and save
+        String searchString = customer.getUsername();
+        Customer[] customers = new Customer[4];
+        customers[0] = new Customer(99,"Wi-Firei","Wi-Firei", 153, false, "astyhhasi");
+        customers[1] = new Customer(100,"Wi-Firer","Wi-Firer", 154, false, "astyhhasr");
+        customers[2] = new Customer(101,"Wi-Fire","Wi-Fire", 155, false, "astyhhasa");
+        customers[3] = new Customer(102,"Wi-Fire","Wi-Fire", 156, false, "astyhhas");
+        // When findCustomers is called with the search string, return the two
+        /// customers above
+        when(mockCustomerDAO.findCustomers(searchString)).thenReturn(customers);
+
+        // Invoke
+        ResponseEntity<Customer> response = customerController.authCustomer(customer);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    public void testAuthCustomerFailed() throws IOException {  // createCustomer may throw IOException
+        // Setup
+        Customer customer = new Customer(99,"Bolt","Bolt", 153, false, "astyhhas");
+        // when createCustomer is called, return false simulating failed
+        // creation and save
+        String searchString = customer.getName();
+        Customer[] customers = new Customer[0];
+        // When findCustomers is called with the search string, return empty array
+        when(mockCustomerDAO.findCustomers(searchString)).thenReturn(customers);
+        // Invoke
+        ResponseEntity<Customer> response = customerController.authCustomer(customer);
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+
+        // When findCustomers is called with the search string, return null
+        when(mockCustomerDAO.findCustomers(searchString)).thenReturn(null);
+        // Invoke
+        ResponseEntity<Customer> responseNull = customerController.authCustomer(customer);
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,responseNull.getStatusCode());
+
+    }
+
+    @Test
+    public void testAuthCustomerHandleException() throws IOException {  // createCustomer may throw IOException
+        // Setup
+        Customer customer = new Customer(99,"Ice Gladiator", "Ice Gladiator", 384, true, "ayths");
+
+        // When createCustomer is called on the Mock Customer DAO, throw an IOException
+        doThrow(new IOException()).when(mockCustomerDAO).findCustomers(customer.getUsername());
+
+        // Invoke
+        ResponseEntity<Customer> response = customerController.authCustomer(customer);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
