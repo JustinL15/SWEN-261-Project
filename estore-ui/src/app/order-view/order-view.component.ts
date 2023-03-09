@@ -10,6 +10,8 @@ import { OrderService } from '../order-service';
 })
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
+  comp: boolean = false;
+  toggle: boolean = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -27,8 +29,17 @@ export class OrderViewComponent implements OnInit {
     this.orderService.deleteOrder(order.id).subscribe();
   }
 
-  complete(order: Order): void{
-    this.orders
+  completeOrder(order: Order): void{
+    order.complete = true;
+    if(order){
+      this.orderService.updateOrder(order).subscribe(order => this.orders[order.id-1] = order);
+    }
   }
 
+  isComplete(order: Order): boolean{
+    if(order.complete){
+      return true;
+    }
+    return false;
+  }
 }

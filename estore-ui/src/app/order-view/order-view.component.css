@@ -1,3 +1,19 @@
 .complete:disabled{
     background-color: #3bff5f;
 }
+
+.complete{
+    /* background-color: red; */
+}
+
+.button{
+    background-color: blue;
+}
+
+.green{
+    background-color: #3bff5f;
+}
+
+.gray{
+    background-color: aliceblue;
+}
