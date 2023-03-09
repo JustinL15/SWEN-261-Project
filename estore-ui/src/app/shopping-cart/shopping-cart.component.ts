@@ -62,20 +62,25 @@ export class ShoppingCartComponent {
     for (const prodId in this.cart.inventory){
       // get the current number of products in the cart
       var inStock = 0;
+      var orderQuantity = 0;
       var productPrice = 0;
       var productId: number =+prodId;
       this.productService.getProduct(productId).subscribe(prod => inStock = prod.quantity);
       this.productService.getProduct(productId).subscribe(prod => productPrice = prod.price);
 
-      // check items are in inventory
-      var orderQuantity = 0; // get product quantity 
+      // check if any items are in inventory
       if(inStock < 1){
         break;
-      } else if (inStock < 0/*this.cart.inventory*/){
+      }
+
+      // check if limited items are in inventory
+      var num: number;
+      Object.keys(this.cart.inventory).find(key => orderQuantity = this.cart.inventory[(num=+key)].quantity);
+      if (inStock < orderQuantity){
         orderQuantity = inStock;
-        // set inventory quantity to '0'
+        Object.keys(this.cart.inventory).find(key => this.cart.inventory[(num=+key)].quantity = 0);
       } else{
-        // set inventory quantity to 'inventoryQuantity - orderQuantity'
+        Object.keys(this.cart.inventory).find(key => this.cart.inventory[(num=+key)].quantity -= orderQuantity);
       }
       totalPrice += orderQuantity * productPrice;
 
@@ -84,8 +89,11 @@ export class ShoppingCartComponent {
       this.productService.getProduct(productId).subscribe(prod => product = prod);
       products.push(product);
     }
-    // clear shopping cart
 
+    // clear shopping cart
+    this.cart.inventory = {};
+
+    // create an order
     if(products.length >= 1){
       this.cartService.createOrder(totalPrice, products);
     }
