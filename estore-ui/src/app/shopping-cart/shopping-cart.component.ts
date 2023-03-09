@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Cart } from '../cart';
 import { CartService } from '../cart.service';
+import { Product } from '../product';
 import { ProductReference } from '../product-reference';
 import { ProductService } from '../product.service';
 
@@ -61,28 +62,32 @@ export class ShoppingCartComponent {
     for (const prodId in this.cart.inventory){
       // get the current number of products in the cart
       var inStock = 0;
+      var productPrice = 0;
       var productId: number =+prodId;
       this.productService.getProduct(productId).subscribe(prod => inStock = prod.quantity);
+      this.productService.getProduct(productId).subscribe(prod => productPrice = prod.price);
 
       // check items are in inventory
-      var orderQuantity = 0; // get product quantity
-      var inStock = 0; // get inventory quantity
+      var orderQuantity = 0; // get product quantity 
       if(inStock < 1){
         break;
       } else if (inStock < 0/*this.cart.inventory*/){
         orderQuantity = inStock;
-        // set inventory quantity to 0
+        // set inventory quantity to '0'
       } else{
         // set inventory quantity to 'inventoryQuantity - orderQuantity'
       }
-      totalPrice += orderQuantity * 0; // * get product price
+      totalPrice += orderQuantity * productPrice;
+
       // create snapshop of each product and quantity in cart
-      // add to products array
+      var product: Product = {id: -1, name: "", price: -1, quantity: -1, description: ""};
+      this.productService.getProduct(productId).subscribe(prod => product = prod);
+      products.push(product);
     }
     // clear shopping cart
 
     if(products.length >= 1){
-      // create an order
+      this.cartService.createOrder(totalPrice, products);
     }
   }
 

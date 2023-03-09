@@ -3,17 +3,17 @@
 <button type="button" class="checkout" title="checkout"
     (click)="checkout()">checkout</button>
 
-<ul class="products">
-    <div *ngFor="let item of items | keyvalue">
+<ul class="cart">
+    <div *ngFor="let item of cart.inventory | keyvalue">
         <a routerLink="/cart">
             <span class="badge">{{item.key}}</span>
         </a>
         <button type="button" class="decrease" title="decrease product"
-            (click)="decrease(product)">-</button>
+            (click)="decrease(item.value)">-</button>
         {{item.value}}
         <button type="button" class="increase" title="increase product"
-            (click)="increase(product)">+</button>
+            (click)="increase(item.value)">+</button>
         <button type="button" class="remove" title="remove product"
-            (click)="remove(product)">remove</button>
+            (click)="remove(item.value)">remove</button>
     </div>
 </ul>

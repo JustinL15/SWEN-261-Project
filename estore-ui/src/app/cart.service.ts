@@ -6,18 +6,19 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Cart } from "./cart";
 import { MessageService } from "./message.service";
+import { Product } from "./product";
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
     private productsUrl = 'http://localhost:8080/carts';  // URL to web api
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+    constructor(
+        private http: HttpClient,
+        private messageService: MessageService) { }
     
     /** GET cart from the server */
     getCart(id: number): Observable<Cart> {
@@ -39,32 +40,36 @@ export class CartService {
         return this.http.delete<Cart>(url, this.httpOptions).pipe(
             tap(_ => this.log(`removed product id=${prodId}`)),
             catchError(this.handleError<Cart>('removeProduct'))
-    );
-  }
+        );
+    }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    createOrder(totalPrice: number, products: Product[]) {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+    }
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+    /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     *
+     * @param operation - name of the operation that failed
+     * @param result - optional value to return as the observable result
+     */
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
+        // TODO: send the error to remote logging infrastructure
+        console.error(error); // log to console instead
 
-  /** Log a ProductService message with the ProductService */
-  private log(message: string) {
-    this.messageService.add(`ProductService: ${message}`);
-  }
+        // TODO: better job of transforming error for user consumption
+        this.log(`${operation} failed: ${error.message}`);
+
+        // Let the app keep running by returning an empty result.
+        return of(result as T);
+        };
+    }
+
+    /** Log a ProductService message with the ProductService */
+    private log(message: string) {
+        this.messageService.add(`ProductService: ${message}`);
+    }
 }
