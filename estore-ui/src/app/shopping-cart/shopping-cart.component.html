@@ -1,5 +1,7 @@
 <h2>Shopping Cart</h2>
 
+{{cart.id}}
+
 <button type="button" class="checkout" title="checkout"
     (click)="checkout()">checkout</button>
 
@@ -10,7 +12,7 @@
         </a>
         <button type="button" class="decrease" title="decrease product"
             (click)="decrease(item.value)">-</button>
-        {{item.value}}
+        {{item.value.quantity}}
         <button type="button" class="increase" title="increase product"
             (click)="increase(item.value)">+</button>
         <button type="button" class="remove" title="remove product"

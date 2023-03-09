@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Cart } from '../cart';
 import { CartService } from '../cart.service';
+import { Order } from '../order';
 import { Product } from '../product';
 import { ProductReference } from '../product-reference';
 import { ProductService } from '../product.service';
@@ -52,7 +53,7 @@ export class ShoppingCartComponent {
   remove(product: ProductReference): void {
     // this.inventory = this.inventory.filter(i => i !== inventory);
     this.cartService.removeProduct(this.cart.id, product.id).subscribe();
-  }
+  } 
 
   checkout(): void {
     // loop through the current number of products in the cart
@@ -95,7 +96,9 @@ export class ShoppingCartComponent {
 
     // create an order
     if(products.length >= 1){
-      this.cartService.createOrder(totalPrice, products);
+      this.cartService.createOrder(
+        { id: this.cart.id, totalPrice: totalPrice, products: products, dateTime: null } as Order
+        );
     }
   }
 

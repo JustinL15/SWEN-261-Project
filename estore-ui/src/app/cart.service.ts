@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Cart } from "./cart";
 import { MessageService } from "./message.service";
-import { Product } from "./product";
+import { Order } from "./order";
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -43,8 +43,11 @@ export class CartService {
         );
     }
 
-    createOrder(totalPrice: number, products: Product[]) {
-
+    createOrder(order: Order) {
+        return this.http.post<Order>(this.productsUrl, order, this.httpOptions).pipe(
+            tap((newProduct: Order) => this.log(`added product w/ id=${newProduct.id}`)),
+            catchError(this.handleError<Order>('addProduct'))
+          );
     }
 
     /**
