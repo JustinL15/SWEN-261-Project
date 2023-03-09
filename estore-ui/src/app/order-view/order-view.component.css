@@ -1,9 +1,14 @@
 .complete:disabled{
-    background-color: #3bff5f;
+    background-color: #016304;
 }
 
-.complete{
-    /* background-color: red; */
+.delete:disabled{
+    background-color: #016304;
+}
+
+.orderButtons{
+    float: right;
+    font-size:x-large;
 }
 
 .button{
@@ -15,5 +20,5 @@
 }
 
 .gray{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
 }

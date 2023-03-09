@@ -12,17 +12,22 @@
 
 <div class="centered">
     <ul class="orders">
-        <li [ngClass]="{'green' : toggle, 'gray': !toggle}" *ngFor="let order of orders">
+        <li [ngClass]="{'green' : isComplete(order), 'gray': !isComplete(order)}" *ngFor="let order of orders">
             <!-- add buttons for complete and to delete -->
-            <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.dateTime}}<span style="color: rebeccapurple;">{{order.complete}}</span>
+            <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.dateTime}}<span
+                style="color: rebeccapurple;">complete:{{order.complete}}</span>
+                <span class="orderButtons">
+                    <button type="button" [disabled]="isComplete(order)" class="delete" title="delete-order"
+                        (click)="delete(order)">x</button>
+                    <button type="button" [disabled]="isComplete(order)" class="complete" title="complete-order"
+                        (click)="completeOrder(order)">Complete</button>
+                </span>
             <ul class="orderProducts">
                 <li *ngFor="let product of order.products">
                     {{product.name}}
                 </li>
             </ul>
-            <button type="button" [disabled]="isComplete(order)" class="delete" title="delete-order" (click)="delete(order)">x</button>
-            <button type="button" [disabled]="isComplete(order)" class="complete" title="complete-order" (click)="completeOrder(order)">Complete</button>
-            {{toggle}}
+
         </li>
     </ul>
 </div>

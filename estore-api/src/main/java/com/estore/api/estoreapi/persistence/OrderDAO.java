@@ -48,5 +48,7 @@ public interface OrderDAO {
      */
 
     boolean deleteOrder(int id) throws IOException;
+
+    Order updateOrder(Order order) throws IOException;
     
 }
