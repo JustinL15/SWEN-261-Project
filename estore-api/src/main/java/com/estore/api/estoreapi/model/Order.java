@@ -17,6 +17,7 @@ public class Order {
     @JsonProperty("id") private int id;
     @JsonProperty("totalPrice") private double totalPrice;
     @JsonProperty("products") private Product[] products;
+    @JsonProperty("complete") private boolean complete;
     @JsonProperty("time") private LocalDateTime dateTime;
 
     /**
@@ -28,16 +29,37 @@ public class Order {
      * @param dateTime the date and time of the order
      */
     public Order(@JsonProperty("id") int id, @JsonProperty("totalPrice") double totalPrice,
-                    @JsonProperty("products") Product[] products, @JsonProperty("time") LocalDateTime dateTime) {
+                @JsonProperty("products") Product[] products, @JsonProperty("complete") boolean complete,
+                @JsonProperty("time") LocalDateTime dateTime) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.products = products;
+        this.complete = complete;
+
         if (dateTime == null) {
             this.dateTime = LocalDateTime.now();
        }
        else {
             this.dateTime = dateTime;
        }
+    }
+
+    /**
+     * Get the status of the order
+     * 
+     * @return status of the order
+     */
+    public boolean isComplete() {
+        return complete;
+    }
+
+    /**
+     * Set the status of the order
+     * 
+     * @param complete status of the order
+     */
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     /**
@@ -112,7 +134,8 @@ public class Order {
             Order other = (Order) obj;
 
             // Compare trivial fields first
-            boolean trivial = id == other.id && totalPrice == other.totalPrice && dateTime == other.dateTime;
+            boolean trivial = id == other.id && totalPrice == other.totalPrice
+                            && dateTime == other.dateTime && other.complete == complete;
 
             // Compare products
             if (products.length == other.products.length) {

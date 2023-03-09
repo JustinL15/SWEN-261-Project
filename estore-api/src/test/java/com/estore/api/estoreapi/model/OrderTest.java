@@ -25,15 +25,17 @@ public class OrderTest {
         products[0] = new Product(2, "test", 4.99, 1, "");
         double totalPrice = products[0].getPrice();
         LocalDateTime datetime = LocalDateTime.now();
+        boolean complete = false;
 
         // Call constructor
-        Order order = new Order(id, totalPrice, products, datetime);
+        Order order = new Order(id, totalPrice, products, complete, datetime);
 
         // Check equivalence
         assertEquals(id, order.getId());
         assertEquals(totalPrice, order.getTotalPrice());
         assertEquals(products, order.getProducts());
         assertEquals(datetime, order.getDateTime());
+        assertEquals(complete, order.isComplete());
     }
 
     /**
@@ -42,7 +44,7 @@ public class OrderTest {
     @Test
     public void testSetters() {
         // Build a blank object
-        Order order = new Order(0, 0, new Product[0], null);
+        Order order = new Order(0, 0, new Product[0], false, null);
 
         // Test the setters
         int id = 2;
@@ -59,6 +61,10 @@ public class OrderTest {
         order.setTotalPrice(totalPrice);
         assertEquals(totalPrice, order.getTotalPrice());
 
+        boolean complete = true;
+        order.setComplete(complete);
+        assertEquals(complete, order.isComplete());
+
     }
 
     /**
@@ -68,21 +74,21 @@ public class OrderTest {
     public void testEqualsFalse() {
         Product[] subjectProducts = new Product[1];
         subjectProducts[0] = new Product(2, "test", 4.99, 1, "");
-        Order subject = new Order(1, 4.99, subjectProducts, null);
+        Order subject = new Order(1, 4.99, subjectProducts, false, null);
 
         // Test against a different object
         String string = "test";
         assertFalse(subject.equals(string));
 
         // Test against a different product size
-        Order noProducts = new Order(1, 0, new Product[0], null);
+        Order noProducts = new Order(1, 0, new Product[0], true, null);
         assertFalse(subject.equals(noProducts));
 
         // Test against a different product
         Product[] differentProducts = new Product[1];
         differentProducts[0] = new Product(3, "test", 4.99, 1, "");
 
-        Order differentProduct = new Order(1, 4.99, differentProducts, null);
+        Order differentProduct = new Order(1, 4.99, differentProducts, true, null);
         assertFalse(subject.equals(differentProduct));
 
     }
