@@ -15,14 +15,17 @@ export class InventoryComponent implements OnInit{
 
   constructor(private productService: ProductService) { }
 
+  /* list of products on initalization */
   ngOnInit(): void {
     this.getProducts();
   }
 
+  /* returns the products */
   getProducts(): void {
     this.productService.getProducts().subscribe(products => this.products = products);
   }
 
+  /* Adds product to inventory. MUST have all filled or will just return */
   add(name: string, prc: string, qty: string, description: string): void {
     name = name.trim();
     var price: number = +prc;
@@ -35,6 +38,7 @@ export class InventoryComponent implements OnInit{
     this.productService.addProduct({ name, price, quantity, description } as Product).subscribe(product => { this.products.push(product) });
   }
 
+  /* Delets a product from the inventory */
   delete(product: Product): void {
     this.products = this.products.filter(p => p !== product);
     this.productService.deleteProduct(product.id).subscribe();

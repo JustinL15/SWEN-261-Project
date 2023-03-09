@@ -3,7 +3,6 @@
         <th style="width: 70%;" align="left">
             <h2>Orders</h2>
         </th>
-        <!-- button needs to link to inventory -->
         <a routerLink="/manage">
             <th align="right"><button type="button" class="redir">Inventory</button></th>
         </a>
@@ -13,15 +12,13 @@
 <div class="centered">
     <ul class="orders">
         <li [ngClass]="{'green' : isComplete(order), 'gray': !isComplete(order)}" *ngFor="let order of orders">
-            <!-- add buttons for complete and to delete -->
-            <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.dateTime}}<span
-                style="color: rebeccapurple;">complete:{{order.complete}}</span>
-                <span class="orderButtons">
-                    <button type="button" [disabled]="isComplete(order)" class="delete" title="delete-order"
-                        (click)="delete(order)">x</button>
-                    <button type="button" [disabled]="isComplete(order)" class="complete" title="complete-order"
-                        (click)="completeOrder(order)">Complete</button>
-                </span>
+            <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.dateTime}}
+            <span class="orderButtons">
+                <button type="button" [disabled]="isComplete(order)" class="delete" title="delete-order"
+                    (click)="delete(order)">x</button>
+                <button type="button" [disabled]="isComplete(order)" class="complete" title="complete-order"
+                    (click)="completeOrder(order)">Complete</button>
+            </span>
             <ul class="orderProducts">
                 <li *ngFor="let product of order.products">
                     {{product.name}}

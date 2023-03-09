@@ -18,25 +18,30 @@ export class EditProductDetailComponent {
     private location: Location
   ) { }
 
+  /* displays the product on init */
   ngOnInit(): void {
     this.getProduct();
   }
 
+  /* gets the product with the id */
   getProduct(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.productService.getProduct(id).subscribe(product => this.product = product);
   }
 
+  /* returns to previous paige (should be the inventory paige) */
   goBack(): void {
     this.location.back();
   }
 
+  /* saves the product changes */
   save(): void {
     if (this.product) {
       this.productService.updateProduct(this.product).subscribe(() => this.goBack());
     }
   }
 
+  /* removes the product from inventory */
   delete(product: Product): void {
     this.productService.deleteProduct(product.id).subscribe();
     this.goBack();

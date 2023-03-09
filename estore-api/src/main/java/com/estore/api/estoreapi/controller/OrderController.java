@@ -144,6 +144,15 @@ public class OrderController {
         }
     }
 
+    /**
+     * Updates the {@linkplain Order order} with the provided {@linkplain Order order} object, if it exists
+     *
+     * @param order The {@link Order order} to update
+     *
+     * @return ResponseEntity with updated {@link Order order} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PutMapping("")
     public ResponseEntity<Order> updateOrder(@RequestBody Order order) {
         LOG.info("PUT /orders " + order);

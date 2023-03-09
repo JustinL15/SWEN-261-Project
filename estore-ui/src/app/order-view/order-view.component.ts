@@ -14,20 +14,24 @@ export class OrderViewComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
 
+  /* Displays the orders on initalization */
   ngOnInit(): void {
     this.getOrders();
   }
 
+  /* Gets an order */
   getOrders(): void {
     this.orderService.getOrders()
     .subscribe(orders => this.orders = orders);
   }
 
+  /* Removes an order, can not undo */
   delete(order: Order): void {
     this.orders = this.orders.filter(h => h !== order);
     this.orderService.deleteOrder(order.id).subscribe();
   }
 
+  /* Will mark the order as complete */
   completeOrder(order: Order): void{
     order.complete = true;
     if(order){
@@ -35,6 +39,7 @@ export class OrderViewComponent implements OnInit {
     }
   }
 
+  /* Checks the completion status of an order */
   isComplete(order: Order): boolean{
     if(order.complete){
       return true;
