@@ -1,3 +1,4 @@
+/* InventoryComponont's private CSS styles */
 .products {
     margin: 0 0 2em 0;
     list-style-type: none;
@@ -56,9 +57,38 @@ input {
     top: -4px;
     height: 1.8em;
     min-width: 16px;
-    text-align: right;
+    text-align: center;
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
+}
+
+.products .qbadge {
+    display: inline-block;
+    font-size: small;
+    color: wheat;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #033061;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    min-width: 16px;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+    float: right;
+}
+
+.id-label{
+    padding-left: 15px;
+}
+
+.product-label{
+    padding-left: 50px;
+}
+
+.quantity-label{
+    float: right;
 }
 
 .add-button {

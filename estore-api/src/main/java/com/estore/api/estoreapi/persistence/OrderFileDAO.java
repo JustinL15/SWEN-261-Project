@@ -156,4 +156,22 @@ public class OrderFileDAO implements OrderDAO {
             }
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order updateOrder(Order order) throws IOException {
+        // TODO Auto-generated method stub
+        synchronized(orderMap){
+            if(!orderMap.containsKey(order.getId())){
+                return null;
+            }
+
+            orderMap.put(order.getId(), order);
+            save();
+
+            return order;
+        }
+    }
 }

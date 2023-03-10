@@ -73,6 +73,14 @@ export class OrderService {
     );
   }
 
+    /** PUT: update the Order on the server */
+    updateOrder(order: Order): Observable<any> {
+      return this.http.put(this.ordersUrl, order, this.httpOptions).pipe(
+        tap(_ => this.log(`updated product id=${order.id}`)),
+        catchError(this.handleError<any>('updateProduct'))
+      );
+    }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
