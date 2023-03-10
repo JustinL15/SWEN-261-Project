@@ -6,15 +6,18 @@ import { ProductsComponent } from './products/products.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
+import { UserLoginComponent } from './userlogin/userlogin.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
   { path: 'products', component: ProductsComponent},
   { path: 'detail/:id', component: ProductDetailComponent},
-  { path: 'manage', component: InventoryComponent},
-  { path: 'manage/:id', component: EditProductDetailComponent},
+  { path: 'manage', component: InventoryComponent, canActivate: [AuthGuard]},
+  { path: 'manage/:id', component: EditProductDetailComponent, canActivate: [AuthGuard]},
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'orders', component: OrderViewComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: 'login', component: UserLoginComponent},
 ];
 
 @NgModule({

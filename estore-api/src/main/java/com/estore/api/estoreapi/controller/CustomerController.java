@@ -131,14 +131,8 @@ public class CustomerController {
                 }
             }
             Customer result = customerDAO.createCustomer(customer);
+            return new ResponseEntity<Customer>(result, HttpStatus.CREATED);
 
-            if (result != null) {
-                return new ResponseEntity<Customer>(result, HttpStatus.CREATED);
-            }
-            else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-            }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -184,6 +178,34 @@ public class CustomerController {
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Authenticates a {@link Customer customer} using the data stored.
+     * 
+     * @param customer object containing username and password from frontend
+     * @return ResponseEntity HTTP status of OK and the matching 
+     * customer object if username, password pair is in database, NOT_FOUND if not found
+     */
+    @PostMapping("/auth")
+    public ResponseEntity<Customer> authCustomer(@RequestBody Customer customer) {
+        LOG.info("POST /customers/auth " + customer.toString());
+        try {
+            Customer[] matchingCustomers = customerDAO.findCustomers(customer.getUsername());
+            if(matchingCustomers != null) {
+                for (Customer currentCustomer : matchingCustomers) {
+                    if (currentCustomer.getUsername().equals(customer.getUsername())) {
+                        if (currentCustomer.getPassword().equals(customer.getPassword())) {
+                            return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);
+                        }
+                    }
+                }
+            }
+            return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -42,7 +42,7 @@ public class Customer {
         this.id = id;
         this.username = username;
         this.name = name;
-        this.cartId = cartId;
+        this.cartId = id;
         this.isAdmin = isAdmin;
         this.password = password;
         this.orders = new ArrayList<>();
