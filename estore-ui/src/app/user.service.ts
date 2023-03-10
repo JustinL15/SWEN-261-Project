@@ -98,17 +98,23 @@ export class UserService {
     );
   }
 
-  /** log in the user */
-  login(username: string, password: string): boolean {
-    var userlist: Customer[]; 
-    if (!username.trim()) {
-      // if not search term, return empty customer array.
-      return false;
-    }
-    userlist = this.http.get<Customer[]>(`${this.customersUrl}/?text=${term}`).
-  }
-  }
+  //////// login methods //////////
 
+  /** POST: Login with credentials specified by customer object you pass in*/
+  login(username: string, password: string): Observable<Customer> {
+    const customer = { username, password } as Customer;
+    return this.http.post<Customer>(`${this.customersUrl}/auth`, customer, this.httpOptions)
+      .pipe(
+        tap((customer: Customer) => {
+          if (customer) {
+            this.currentUser = customer;
+            this.loggedIn = true;
+          }
+        }),
+        catchError(this.handleError<any>('login'))
+      );
+  }
+  
   logout(): void {
     this.currentUser = null;
     this.loggedIn = false;

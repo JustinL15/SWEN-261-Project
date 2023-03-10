@@ -1,19 +1,30 @@
-<ul class="products" *ngIf="!(isLoggedIn)">
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" name="username" #username>
-
-    <label for="password">Password:</label>
-    <input type="password" name="password" #password>
-
-    <button (click)="login(username.value, password.value)">Login</button>
+<div *ngIf="!userService.isLoggedIn()">
+<div *ngIf="!isRegistering">
+  <h2>User Login</h2>
+  <div *ngIf="loginError">
+    Username or Password is incorrect.
   </div>
-</ul>
-
-<button (click)="logout()">Logout</button>
-
-<li *ngFor="let customer of customers">
-  <a>
-    {{customer.username}}
-  </a>
-</li>
+  <br>
+  Username: <input type="text" [(ngModel)]="username">
+  <br>
+  Password: <input type="text" [(ngModel)]="password">
+  <br> <br>
+  <button (click)="login()">Login</button>
+  <button (click)="register()">Register</button>
+</div>
+<div *ngIf="isRegistering">
+  <h2>Register</h2>
+  <br>
+  Name: <input type="text" [(ngModel)]="name">
+  <br>
+  Username: <input type="text" [(ngModel)]="username">
+  <br>
+  Password: <input type="text" [(ngModel)]="password">
+  <br> <br>
+  <button (click)="register()">Create</button>
+  <button (click)="reset()">Back</button>
+</div>
+</div>
+<div *ngIf="userService.isLoggedIn()">
+  <button (click)="logout()">Logout</button>
+</div>

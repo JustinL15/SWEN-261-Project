@@ -321,6 +321,7 @@ public class CustomerControllerTest {
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(customers[3], response.getBody());
     }
 
     @Test

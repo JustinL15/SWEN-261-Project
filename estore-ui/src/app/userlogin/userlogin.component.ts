@@ -9,9 +9,14 @@ import { UserService } from '../user.service';
 })
 export class UserLoginComponent implements OnInit{
   customers: Customer[] = [];
+  isRegistering: boolean = false;
+  loginError: boolean = false;
+  username: string = ""
+  password: string = ""
+  name: string = ""
 
-  isLoggedIn = this.userService.isLoggedIn();
-  constructor(private userService: UserService) {}
+
+  constructor(public userService: UserService) {}
 
   ngOnInit(): void {
     this.getCustomers();
@@ -22,13 +27,33 @@ export class UserLoginComponent implements OnInit{
     .subscribe(customers => this.customers = customers);
   }
 
-  login(username: string, password: string) {
-    username = username.trim();
-    password = password.trim();
-    this.userService.login(username, password);
+  login(): void {
+    this.loginError = false;
+    this.userService.login(this.username, this.password).subscribe();
+    if(!this.userService.isLoggedIn()) {
+      this.loginError = true;
+    }
   }
 
   logout() {
+    this.reset();
     this.userService.logout();
+  }
+  reset() {
+    this.loginError = false;
+    this.isRegistering = false;
+  }
+  register() {
+    if(this.isRegistering) {
+      this.userService.addCustomer(
+        {name: this.name, username: this.username, password: this.password} as Customer).subscribe();
+
+      this.reset();
+    } else {
+      this.isRegistering = true;
+      this.username = "";
+      this.password = "";
+    }
+
   }
 }
