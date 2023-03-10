@@ -12,7 +12,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { UserLoginComponent } from './userlogin/userlogin.component';
-import { MessagesComponent } from './messages/messages.component';
+
 
 @NgModule({
   declarations: [
@@ -23,8 +23,7 @@ import { MessagesComponent } from './messages/messages.component';
     InventoryComponent,
     EditProductDetailComponent,
     OrderViewComponent,
-    UserLoginComponent,
-    MessagesComponent
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

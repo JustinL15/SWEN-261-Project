@@ -11,6 +11,7 @@ export class UserLoginComponent implements OnInit{
   customers: Customer[] = [];
   isRegistering: boolean = false;
   loginError: boolean = false;
+  registerError: boolean = false;
   username: string = ""
   password: string = ""
   name: string = ""
@@ -42,13 +43,15 @@ export class UserLoginComponent implements OnInit{
   reset() {
     this.loginError = false;
     this.isRegistering = false;
+    this.registerError = false;
   }
   register() {
     if(this.isRegistering) {
-      this.userService.addCustomer(
+      this.userService.register(
         {name: this.name, username: this.username, password: this.password} as Customer).subscribe();
-
-      this.reset();
+      if(!this.userService.isLoggedIn()) {
+      this.registerError = true;
+      }
     } else {
       this.isRegistering = true;
       this.username = "";

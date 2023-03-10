@@ -114,7 +114,19 @@ export class UserService {
         catchError(this.handleError<any>('login'))
       );
   }
-  
+
+/** POST: register a new customer to the server and login*/
+register(customer: Customer): Observable<Customer> {
+  return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
+    tap((newCustomer: Customer) => {
+      this.log(`added customer w/ id=${newCustomer.id}`);
+      this.currentUser = newCustomer;
+      this.loggedIn = true;
+    }),
+    catchError(this.handleError<Customer>('addCustomer'))
+  );
+}
+
   logout(): void {
     this.currentUser = null;
     this.loggedIn = false;
@@ -136,6 +148,7 @@ export class UserService {
    * @param result - optional value to return as the observable result
    */
   private handleError<T>(operation = 'operation', result?: T) {
+
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

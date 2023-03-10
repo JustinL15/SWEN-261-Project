@@ -1,15 +1,17 @@
 <h1>{{title}}</h1>
 <nav>
-  <span> <a routerLink="/home">Home</a>
-  \\
-  <a routerLink="/products">Products</a>
-  \\
-  <a routerLink="/cart">Cart</a>
-  \\
-  <a routerLink="/manage">Manage</a>
-  \\
-  <a routerLink="/login">Log In</a>
-</span>
+  <span>
+    <a routerLink="/home">Home</a>
+    \\
+    <a routerLink="/products">Products</a>
+    \\
+    <a routerLink="/cart">Cart</a>
+    <ng-container *ngIf="userService.getCurrentUser()?.isAdmin">
+      \\
+      <a routerLink="/manage">Manage</a>
+    </ng-container>
+    \\
+    <a routerLink="/login">Log In</a>
+  </span>
 </nav>
 <router-outlet></router-outlet>
-<app-messages></app-messages>

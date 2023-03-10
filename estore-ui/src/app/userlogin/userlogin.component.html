@@ -14,6 +14,9 @@
 </div>
 <div *ngIf="isRegistering">
   <h2>Register</h2>
+  <div *ngIf="registerError">
+    One or more fields are empty or username is already taken.
+  </div>
   <br>
   Name: <input type="text" [(ngModel)]="name">
   <br>
