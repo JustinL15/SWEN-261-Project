@@ -51,8 +51,7 @@ export class ShoppingCartComponent {
   }
 
   remove(product: ProductReference): void {
-    // this.inventory = this.inventory.filter(i => i !== inventory);
-    this.cartService.removeProduct(this.cart.id, product.id).subscribe();
+    delete this.cart.inventory[product.id];
   } 
 
   checkout(): void {

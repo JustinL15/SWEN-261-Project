@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from "rxjs";
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { Cart } from "./cart";
 import { MessageService } from "./message.service";
@@ -10,7 +10,7 @@ import { Order } from "./order";
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-    private productsUrl = 'http://localhost:8080/carts';  // URL to web api
+    private productsUrl = 'http://localhost:8080/cart';  // URL to web api
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,18 +28,6 @@ export class CartService {
             .pipe(
             tap(_ => this.log('fetched cart')),
             catchError(this.handleError<Cart>('getCart'))
-        );
-    }
-
-    /** DELETE: remove the product from the cart */
-    removeProduct(id: number, prodId: number): Observable<Cart> {
-        const url = `${this.productsUrl}/${id} ${prodId}`;
-
-        // don't want to delete the cart, want to delete the product reference
-        // likely need to add more before this and use delete on product reference
-        return this.http.delete<Cart>(url, this.httpOptions).pipe(
-            tap(_ => this.log(`removed product id=${prodId}`)),
-            catchError(this.handleError<Cart>('removeProduct'))
         );
     }
 
