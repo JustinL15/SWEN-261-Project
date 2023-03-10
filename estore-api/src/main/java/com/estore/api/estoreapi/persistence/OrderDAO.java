@@ -48,5 +48,14 @@ public interface OrderDAO {
      */
 
     boolean deleteOrder(int id) throws IOException;
+
+    /**
+     * Updates a {@link Order order} in the data store
+     * 
+     * @param order Updated {@link Order order} to save
+     * @return {@link Order order} (null if not able to be updated)
+     * @throws IOException If the data store cannot be accessed
+     */
+    Order updateOrder(Order order) throws IOException;
     
 }
