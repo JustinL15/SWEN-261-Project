@@ -12,7 +12,7 @@ import { ProductService } from '../product.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  cart: Cart = {id: -1, inventory: {}};
+  cart: Cart = {id: -1, inventory: {}}; // | undefined, but unsure how to change rest
 
   constructor(
     private cartService:CartService, 

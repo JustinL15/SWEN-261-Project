@@ -34,7 +34,7 @@ export class CartService {
     createOrder(order: Order) {
         return this.http.post<Order>(this.productsUrl, order, this.httpOptions).pipe(
             tap((newProduct: Order) => this.log(`added product w/ id=${newProduct.id}`)),
-            catchError(this.handleError<Order>('addProduct'))
+            catchError(this.handleError<Order>('createOrder'))
           );
     }
 
@@ -59,8 +59,8 @@ export class CartService {
         };
     }
 
-    /** Log a ProductService message with the ProductService */
+    /** Log a CartService message with the CartService */
     private log(message: string) {
-        this.messageService.add(`ProductService: ${message}`);
+        this.messageService.add(`CartService: ${message}`);
     }
 }
