@@ -138,9 +138,11 @@ public class ProductController {
         LOG.info("POST /products " + product);
         try {
             Product[] products = productDAO.findProducts(product.getName());
-            for (Product currenProduct : products) {
-                if (product.getName().equals(currenProduct.getName())) {
-                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+            if(products != null){
+                for (Product currenProduct : products) {
+                    if (product.getName().equals(currenProduct.getName())) {
+                        return new ResponseEntity<>(HttpStatus.CONFLICT);
+                    }
                 }
             }
 
@@ -198,9 +200,7 @@ public class ProductController {
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("Delete /products/" + id);
         try {
-            Product product = productDAO.getProduct(id);
-            if (product != null) {
-                productDAO.deleteProduct(id);
+            if (productDAO.deleteProduct(id)) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

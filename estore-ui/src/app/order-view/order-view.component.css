@@ -1,0 +1,25 @@
+/* order-viewComponent's private CSS styles */
+.complete:disabled{
+    background-color: #016304;
+}
+
+.delete:disabled{
+    background-color: #016304;
+}
+
+.orderButtons{
+    float: right;
+    font-size:x-large;
+}
+
+.button{
+    background-color: blue;
+}
+
+.green{
+    background-color: #3bff5f;
+}
+
+.gray{
+    /* background-color: aliceblue; */
+}

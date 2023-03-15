@@ -9,6 +9,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
+import { OrderViewComponent } from './order-view/order-view.component';
+import { UserLoginComponent } from './userlogin/userlogin.component';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +22,10 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ProductsComponent,
     ShoppingCartComponent,
     ProductDetailComponent,
+    InventoryComponent,
+    EditProductDetailComponent,
+    OrderViewComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

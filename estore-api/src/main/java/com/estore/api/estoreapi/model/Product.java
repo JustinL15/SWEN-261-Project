@@ -140,4 +140,18 @@ public class Product {
                 + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Product) {
+            Product other = (Product) obj;
+            return this.id == other.id && this.name.equals(other.name) && this.description.equals(other.description)
+                    && this.price == other.price && this.quantity == other.quantity;
+        }
+
+        return false;
+    }
+
 }

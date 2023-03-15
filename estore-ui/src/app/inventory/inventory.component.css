@@ -1,0 +1,139 @@
+/* InventoryComponont's private CSS styles */
+.products {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+}
+
+input {
+    display: block;
+    width: 25%;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+}
+
+.products li {
+    position: relative;
+    cursor: pointer;
+}
+
+.products li:hover {
+    left: .1em;
+}
+
+.products a {
+    color: #333;
+    text-decoration: none;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+}
+
+.products a:hover {
+    color: #2c3a41;
+    background-color: #e6e6e6;
+}
+
+.products a:active {
+    background-color: #525252;
+    color: #fafafa;
+}
+
+.products .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #405061;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    min-width: 16px;
+    text-align: center;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+}
+
+.products .qbadge {
+    display: inline-block;
+    font-size: small;
+    color: wheat;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #033061;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    min-width: 16px;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+    float: right;
+}
+
+.id-label{
+    padding-left: 15px;
+}
+
+.product-label{
+    padding-left: 50px;
+}
+
+.quantity-label{
+    float: right;
+}
+
+.add-button {
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.add-button:hover {
+    color: white;
+    background-color: #42545C;
+}
+
+button.redir {
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Split the screen in half */
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    /* top: 0; */
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+    left: 10;
+    width: 80%;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    width: 20%;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* text-align: center; */
+}

@@ -113,7 +113,7 @@ public class OrderController {
                 return new ResponseEntity<Order>(result, HttpStatus.CREATED);
             }
             else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
@@ -133,14 +133,36 @@ public class OrderController {
     public ResponseEntity<Order> deleteOrder(@PathVariable int id) {
         LOG.info("Delete /orders/" + id);
         try {
-            Order order = orderDAO.getOrder(id);
-            if (order != null) {
-                orderDAO.deleteOrder(id);
+            if (orderDAO.deleteOrder(id)) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Updates the {@linkplain Order order} with the provided {@linkplain Order order} object, if it exists
+     *
+     * @param order The {@link Order order} to update
+     *
+     * @return ResponseEntity with updated {@link Order order} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("")
+    public ResponseEntity<Order> updateOrder(@RequestBody Order order) {
+        LOG.info("PUT /orders " + order);
+        try {
+            if(orderDAO.updateOrder(order) != null)
+                return new ResponseEntity<Order>(order,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

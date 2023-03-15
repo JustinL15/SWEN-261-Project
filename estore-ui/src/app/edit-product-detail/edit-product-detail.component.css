@@ -1,0 +1,40 @@
+/* EditProductComponent's private CSS styles */
+label {
+    color: #435960;
+    font-weight: bold;
+}
+
+input {
+    font-size: 1em;
+    padding: .5rem;
+}
+
+button {
+    margin-top: 20px;
+    margin-right: .5rem;
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: gray;
+}
+
+button:disabled {
+    background-color: #eee;
+    color: blue;
+    cursor: auto;
+}
+
+button.delete {
+    border-width: medium;
+    background-color: red;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: darkred;
+    color: white;
+}
