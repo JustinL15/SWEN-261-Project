@@ -3,7 +3,7 @@ import { Product } from './product';
 export interface Order {
     id: number;
     totalPrice: number;
-    products: Array<Product>;
+    products: Product[];
     complete: boolean;
-    dateTime: Date;
-}
+    dateTime: Date | null;
+  }
