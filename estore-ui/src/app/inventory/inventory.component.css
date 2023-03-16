@@ -1,17 +1,17 @@
 /* InventoryComponont's private CSS styles */
 .products {
-    margin: 0 0 2em 0;
+    margin: 0;
     list-style-type: none;
     padding: 0;
     width: 15em;
 }
 
 input {
-    display: block;
+    display: inline-block;
     width: 25%;
     padding: .5rem;
-    margin: 1rem 0;
-    box-sizing: border-box;
+    margin: 1rem;
+    justify-content: space-evenly;
 }
 
 .products li {
@@ -29,7 +29,7 @@ input {
     background-color: #EEE;
     margin: .5em;
     padding: .3em 0;
-    height: 1.6em;
+    height: 1em;
     border-radius: 4px;
     display: block;
     width: 100%;
@@ -50,12 +50,12 @@ input {
     font-size: small;
     color: white;
     padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
+    background-color: #733927;
     line-height: 1em;
     position: relative;
     left: -1px;
-    top: -4px;
-    height: 1.8em;
+    top: -8px;
+    height: 2em;
     min-width: 16px;
     text-align: center;
     margin-right: .8em;
@@ -65,14 +65,13 @@ input {
 .products .qbadge {
     display: inline-block;
     font-size: small;
-    color: wheat;
+    color: white;
     padding: 0.8em 0.7em 0 0.7em;
-    background-color: #033061;
+    background-color: #733927;
     line-height: 1em;
     position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
+    top: -6px;
+    height: 2em;
     min-width: 16px;
     text-align: center;
     border-radius: 4px 0 0 4px;
@@ -103,9 +102,13 @@ input {
 }
 
 button.redir {
+    position: absolute;
     padding: .5rem 1.5rem;
     font-size: 1rem;
     margin-bottom: 2rem;
+    background-color: #a18e6d;
+    color: black;
+    float: right;
 }
 
 /* Split the screen in half */
@@ -116,11 +119,12 @@ button.redir {
     /* top: 0; */
     overflow-x: hidden;
     padding-top: 20px;
+    padding-bottom: 50px;
 }
 
 /* Control the left side */
 .left {
-    left: 10;
+    left: 0;
     width: 80%;
 }
 
@@ -136,4 +140,13 @@ button.redir {
     left: 50%;
     transform: translate(-50%, -50%);
     /* text-align: center; */
+}
+
+table{
+    margin: 0;
+    padding: 0;
+}
+
+.number{
+    width: 70px;
 }

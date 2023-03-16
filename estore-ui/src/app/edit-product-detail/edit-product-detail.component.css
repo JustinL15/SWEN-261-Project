@@ -1,4 +1,8 @@
 /* EditProductComponent's private CSS styles */
+body{
+    text-align: center;
+}
+
 label {
     color: #435960;
     font-weight: bold;

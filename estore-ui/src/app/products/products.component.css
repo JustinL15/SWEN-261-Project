@@ -1,0 +1,22 @@
+body{
+    text-align: center;
+}
+
+li{
+    list-style-type: none;
+    width: 20%;
+    margin: 0 auto;
+    background-color: #A18E6D;
+    padding: 3px;
+}
+
+li:nth-child(odd){
+    background-color: #827358;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}

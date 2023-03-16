@@ -10,7 +10,7 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class UserService {
-  
+
   private customersUrl = 'http://localhost:8080/customers';  // URL to web api
   private currentUser: Customer | null = null;
   private loggedIn = false;
@@ -138,7 +138,7 @@ register(customer: Customer): Observable<Customer> {
   getCurrentUser(): Customer | null {
     return this.currentUser;
   }
-  
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
