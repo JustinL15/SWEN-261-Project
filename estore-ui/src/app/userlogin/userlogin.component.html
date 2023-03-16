@@ -1,33 +1,35 @@
-<div *ngIf="!userService.isLoggedIn()">
-<div *ngIf="!isRegistering">
-  <h2>User Login</h2>
-  <div *ngIf="loginError">
-    Username or Password is incorrect.
+<body>
+  <div *ngIf="!userService.isLoggedIn()">
+    <div *ngIf="!isRegistering">
+      <h2>User Login</h2>
+      <div *ngIf="loginError">
+        Username or Password is incorrect.
+      </div>
+      <br>
+      Username: <input type="text" [(ngModel)]="username">
+      <br>
+      Password: <input type="text" [(ngModel)]="password">
+      <br> <br>
+      <button (click)="login()">Login</button>
+      <button (click)="register()">Register</button>
+    </div>
+    <div *ngIf="isRegistering">
+      <h2>Register</h2>
+      <div *ngIf="registerError">
+        One or more fields are empty or username is already taken.
+      </div>
+      <br>
+      Name: <input type="text" [(ngModel)]="name">
+      <br>
+      Username: <input type="text" [(ngModel)]="username">
+      <br>
+      Password: <input type="text" [(ngModel)]="password">
+      <br> <br>
+      <button (click)="register()" class="register">Create</button>
+      <button (click)="reset()">Back</button>
+    </div>
   </div>
-  <br>
-  Username: <input type="text" [(ngModel)]="username">
-  <br>
-  Password: <input type="text" [(ngModel)]="password">
-  <br> <br>
-  <button (click)="login()">Login</button>
-  <button (click)="register()">Register</button>
-</div>
-<div *ngIf="isRegistering">
-  <h2>Register</h2>
-  <div *ngIf="registerError">
-    One or more fields are empty or username is already taken.
+  <div *ngIf="userService.isLoggedIn()">
+    <button (click)="logout()">Logout</button>
   </div>
-  <br>
-  Name: <input type="text" [(ngModel)]="name">
-  <br>
-  Username: <input type="text" [(ngModel)]="username">
-  <br>
-  Password: <input type="text" [(ngModel)]="password">
-  <br> <br>
-  <button (click)="register()">Create</button>
-  <button (click)="reset()">Back</button>
-</div>
-</div>
-<div *ngIf="userService.isLoggedIn()">
-  <button (click)="logout()">Logout</button>
-</div>
+</body>

@@ -1,25 +1,50 @@
 /* order-viewComponent's private CSS styles */
 .complete:disabled{
-    background-color: #016304;
+    background-color: #497040;
 }
 
 .delete:disabled{
-    background-color: #016304;
+    background-color: #497040;
+}
+
+.delete{
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    color: white;
+    margin-right: 5px;
+}
+
+.complete{
+    background-color: #733927;
+    height: 30px;
+    color: white;
+    margin-right: 5px;
 }
 
 .orderButtons{
     float: right;
-    font-size:x-large;
-}
-
-.button{
-    background-color: blue;
+    /* font-size:x-large; */
 }
 
 .green{
-    background-color: #3bff5f;
+    background-color: #497040;
 }
 
 .gray{
-    /* background-color: aliceblue; */
+    background-color: #d89d83;
+}
+
+button.redir {
+    position: absolute;
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    background-color: #a18e6d;
+    color: black;
+    float: right;
+}
+
+li{
+    list-style-type: none;
 }
