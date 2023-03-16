@@ -96,7 +96,7 @@ export class ShoppingCartComponent {
     // create an order
     if(products.length >= 1){
       this.cartService.createOrder(
-        { id: this.cart.id, totalPrice: totalPrice, products: products, dateTime: null } as Order
+        { id: this.cart.id, totalPrice: totalPrice, products: products} as Order
         );
     }
   }
