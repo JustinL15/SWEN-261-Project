@@ -5,6 +5,7 @@ import { Order } from '../order';
 import { Product } from '../product';
 import { ProductReference } from '../product-reference';
 import { ProductService } from '../product.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,20 +14,25 @@ import { ProductService } from '../product.service';
 })
 export class ShoppingCartComponent {
   cart: Cart = {id: -1, inventory: {}}; // | undefined, but unsure how to change rest
+  cartId : number | undefined;
 
   constructor(
     private cartService:CartService, 
-    private productService: ProductService
+    private productService: ProductService,
+    private userService: UserService
     ) { }
 
 
   ngOnInit(): void {
+    this.cartId = this.userService.getCurrentUser()?.cartId;
     this.getCart();
   }
 
 
   getCart(): void {
-    this.cartService.getCart(this.cart.id).subscribe((cart: Cart) => this.cart = cart);
+    if (this.cartId !== undefined ) {
+    this.cartService.getCart(this.cartId).subscribe((cart: Cart) => this.cart = cart);
+    }
   }
 
   increase(product: ProductReference): void {

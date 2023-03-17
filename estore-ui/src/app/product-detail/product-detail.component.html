@@ -5,6 +5,9 @@
     <div>{{product.description}}</div>
     <div><span>Price: </span>{{product.price}}
     </div>
+    Quantity: <input type="text" [(ngModel)]="quantity">
+    <button type="button" (click)="addToCart()" class="back">Buy</button>
+    <br>
     <button type="button" (click)="goBack()" class="back">go back</button>
   </div>
 </body>

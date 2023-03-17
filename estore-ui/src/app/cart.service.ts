@@ -7,10 +7,11 @@ import { catchError, tap } from 'rxjs/operators';
 import { Cart } from "./cart";
 import { MessageService } from "./message.service";
 import { Order } from "./order";
+import { ProductReference } from "./product-reference";
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-    private productsUrl = 'http://localhost:8080/cart';  // URL to web api
+    private productsUrl = 'http://localhost:8080/carts';  // URL to web api
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,9 +32,24 @@ export class CartService {
         );
     }
 
+      /** POST: add a new product to the server */
+    createCart(cart: Cart): Observable<Cart> {
+        return this.http.post<Cart>(this.productsUrl, cart, this.httpOptions).pipe(
+        tap((newCart: Cart) => this.log(`created cart w/ id=${newCart.id}`)),
+        catchError(this.handleError<Cart>('createdCart'))
+        );
+    }
+
+    addToCart(id: number, product: ProductReference) {
+        const url = `${this.productsUrl}/addItem/${id}`;
+        return this.http.post<any>(url, product, this.httpOptions)
+            .pipe(
+                catchError(this.handleError<any>('addToCart'))
+            )
+    }
     createOrder(order: Order) {
         return this.http.post<Order>(this.productsUrl, order, this.httpOptions).pipe(
-            tap((newProduct: Order) => this.log(`added product w/ id=${newProduct.id}`)),
+            tap((newOrder: Order) => this.log(`created order w/ id=${newOrder.id}`)),
             catchError(this.handleError<Order>('createOrder'))
           );
     }
