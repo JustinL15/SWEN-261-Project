@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { sha256 } from 'js-sha256';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Customer } from './customer';
 import { MessageService } from './message.service';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +113,15 @@ export class UserService {
         }),
         catchError(this.handleError<any>('login'))
       );
+  }
+
+  /** update the cart id*/
+  updateCartId(id: number) {
+    if(this.currentUser !== null) {
+      this.currentUser = {id: this.currentUser.id, username: this.currentUser.username,
+        name: this.currentUser.name, cartId: id, orders: this.currentUser.orders,
+        isAdmin: this.currentUser.isAdmin, password: this.currentUser.password}
+    }
   }
 
 /** POST: register a new customer to the server and login*/

@@ -1,4 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
+import { Cart } from '../cart';
+import { CartService } from '../cart.service';
 import { Customer } from '../customer';
 import { UserService } from '../user.service';
 
@@ -7,8 +9,7 @@ import { UserService } from '../user.service';
   templateUrl: './userlogin.component.html',
   styleUrls: ['./userlogin.component.css']
 })
-export class UserLoginComponent implements OnInit{
-  customers: Customer[] = [];
+export class UserLoginComponent {
   isRegistering: boolean = false;
   loginError: boolean = false;
   registerError: boolean = false;
@@ -17,16 +18,11 @@ export class UserLoginComponent implements OnInit{
   name: string = ""
 
 
-  constructor(public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    private cartService: CartService
+    ) {}
 
-  ngOnInit(): void {
-    this.getCustomers();
-  }
-
-  getCustomers(): void {
-    this.userService.getCustomers()
-    .subscribe(customers => this.customers = customers);
-  }
 
   login(): void {
     this.loginError = false;
