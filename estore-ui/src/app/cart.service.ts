@@ -47,12 +47,6 @@ export class CartService {
                 catchError(this.handleError<any>('addToCart'))
             )
     }
-    createOrder(order: Order) {
-        return this.http.post<Order>(this.cartUrl, order, this.httpOptions).pipe(
-            tap((newOrder: Order) => this.log(`created order w/ id=${newOrder.id}`)),
-            catchError(this.handleError<Order>('createOrder'))
-          );
-    }
 
     /** PUT: update the Order on the server */
     updateCart(cart: Cart): Observable<any> {

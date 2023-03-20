@@ -80,52 +80,38 @@ export class ShoppingCartComponent {
         var inStock = 0;
         var orderQuantity = 0;
         var productPrice = 0;
-        var isInStock = 0;
         var productId: number =+prodId;
         this.productService.getProduct(productId).subscribe(prod => {
           inStock = prod.quantity
           productPrice = prod.price
 
-          // check if any items are in inventory
-          if(inStock < 1){
-            isInStock = 0;
-          } else{
-            isInStock = 1;
-          }
-
           // check if limited items are in inventory
-          if(isInStock === 1){
-            var num: number;
-            var inventory = this.cart.inventory;
-            Object.keys(this.cart.inventory).find(key => orderQuantity = inventory[(num=+key)].quantity);
+          if(inStock >= 1){
+            orderQuantity = this.cart.inventory[prodId].quantity;
             if (inStock < orderQuantity){
               orderQuantity = inStock;
-              Object.keys(this.cart.inventory).find(key => inventory[(num=+key)].quantity = 0);
-              this.cart.inventory = inventory;
+              prod.quantity = 0;
             } else{
-              Object.keys(this.cart.inventory).find(key => inventory[(num=+key)].quantity -= orderQuantity);
-              this.cart.inventory = inventory;
+              prod.quantity -= orderQuantity;
             }
             totalPrice += orderQuantity * productPrice;
 
             // create snapshop of each product and quantity in cart
-            var product: Product = {id: -1, name: "", price: -1, quantity: -1, description: ""};
-            this.productService.getProduct(productId).subscribe(prod => product = prod);
-            products.push(product);
+            products.push(prod); 
           }
+          this.productService.updateProduct(prod).subscribe();
         });
       }
 
     // clear shopping cart
     this.cart.inventory = {};
-
     this.cartService.updateCart(this.cart).subscribe();
 
     // create an order
     if(products.length >= 1){
-      var order: Order;
-      this.cartService.createOrder(
-        { id: this.cart.id, totalPrice: totalPrice, products: products} as Order
+      var order: Order = { id: this.cart.id, totalPrice: totalPrice, products: products} as Order;
+      this.orderService.addOrder(order).subscribe( order =>
+        this.orderService.updateOrder(order).subscribe()
       );
     }
     }
