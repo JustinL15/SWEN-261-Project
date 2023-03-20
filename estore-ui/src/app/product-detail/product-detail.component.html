@@ -1,8 +1,13 @@
-<div *ngIf="product">
+<body>
+  <div *ngIf="product">
     <h2>{{product.name}}</h2>
     <div><span>About: </span></div>
     <div>{{product.description}}</div>
     <div><span>Price: </span>{{product.price}}
     </div>
-    <button type="button" (click)="goBack()">go back</button>
+    Quantity: <input type="text" [(ngModel)]="quantity">
+    <button type="button" (click)="addToCart()" class="back">Buy</button>
+    <br>
+    <button type="button" (click)="goBack()" class="back">go back</button>
   </div>
+</body>

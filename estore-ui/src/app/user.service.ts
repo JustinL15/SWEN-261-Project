@@ -5,12 +5,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Customer } from './customer';
 import { MessageService } from './message.service';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  
+
   private customersUrl = 'http://localhost:8080/customers';  // URL to web api
   private currentUser: Customer | null = null;
   private loggedIn = false;
@@ -114,6 +115,15 @@ export class UserService {
       );
   }
 
+  /** update the cart id*/
+  updateCartId(id: number) {
+    if(this.currentUser !== null) {
+      this.currentUser = {id: this.currentUser.id, username: this.currentUser.username,
+        name: this.currentUser.name, cartId: id, orders: this.currentUser.orders,
+        isAdmin: this.currentUser.isAdmin, password: this.currentUser.password}
+    }
+  }
+
 /** POST: register a new customer to the server and login*/
 register(customer: Customer): Observable<Customer> {
   return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
@@ -138,7 +148,7 @@ register(customer: Customer): Observable<Customer> {
   getCurrentUser(): Customer | null {
     return this.currentUser;
   }
-  
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
