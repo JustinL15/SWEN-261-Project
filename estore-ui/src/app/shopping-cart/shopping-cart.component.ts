@@ -8,6 +8,7 @@ import { Product } from '../product';
 import { ProductReference } from '../product-reference';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -70,7 +71,7 @@ export class ShoppingCartComponent {
     this.cartService.updateCart(this.cart).subscribe();
   } 
 
-  checkout(): void {
+  async checkout(): Promise<void> {
     // loop through the current number of products in the cart
     var totalPrice = 0;
     var products: Product[] = [];
@@ -81,26 +82,25 @@ export class ShoppingCartComponent {
         var orderQuantity = 0;
         var productPrice = 0;
         var productId: number =+prodId;
-        this.productService.getProduct(productId).subscribe(prod => {
-          inStock = prod.quantity
-          productPrice = prod.price
+        const prod = await firstValueFrom(this.productService.getProduct(productId));
+        inStock = prod.quantity
+        productPrice = prod.price
 
-          // check if limited items are in inventory
-          if(inStock >= 1){
-            orderQuantity = this.cart.inventory[prodId].quantity;
-            if (inStock < orderQuantity){
-              orderQuantity = inStock;
-              prod.quantity = 0;
-            } else{
-              prod.quantity -= orderQuantity;
-            }
-            totalPrice += orderQuantity * productPrice;
-
-            // create snapshop of each product and quantity in cart
-            products.push(prod); 
+        // check if limited items are in inventory
+        if(inStock >= 1){
+          orderQuantity = this.cart.inventory[prodId].quantity;
+          if (inStock < orderQuantity){
+            orderQuantity = inStock;
+            prod.quantity = 0;
+          } else{
+            prod.quantity -= orderQuantity;
           }
-          this.productService.updateProduct(prod).subscribe();
-        });
+          totalPrice += orderQuantity * productPrice;
+
+          // create snapshop of each product and quantity in cart
+          products.push(prod); 
+        }
+        this.productService.updateProduct(prod).subscribe();
       }
 
     // clear shopping cart
