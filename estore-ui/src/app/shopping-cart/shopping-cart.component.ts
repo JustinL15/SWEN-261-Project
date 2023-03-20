@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Cart } from '../cart';
 import { CartService } from '../cart.service';
 import { Order } from '../order';
+import { OrderService } from '../order-service';
 import { Product } from '../product';
 import { ProductReference } from '../product-reference';
 import { ProductService } from '../product.service';
@@ -14,11 +15,11 @@ import { UserService } from '../user.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  cart: Cart = {id: -1, inventory: {}}; // | undefined, but unsure how to change rest
+  cart: Cart = {id: -1, inventory: {}}; 
   cartId : number | undefined;
 
   constructor(
-    private route: ActivatedRoute,
+    private orderService:OrderService,
     private cartService:CartService, 
     private productService: ProductService,
     private userService: UserService
@@ -46,6 +47,7 @@ export class ShoppingCartComponent {
       if(product.quantity + 1 <= inStock){
         product.quantity += 1;
       }
+      this.cartService.updateCart(this.cart).subscribe();
     });
   }
 
@@ -57,12 +59,15 @@ export class ShoppingCartComponent {
     if(product.quantity <= 0){
       this.remove(product);
     }
+
+    this.cartService.updateCart(this.cart).subscribe();
   }
 
   remove(product: ProductReference): void {
     if(this.cart){
       delete this.cart.inventory[product.id];
     }
+    this.cartService.updateCart(this.cart).subscribe();
   } 
 
   checkout(): void {
@@ -114,11 +119,14 @@ export class ShoppingCartComponent {
     // clear shopping cart
     this.cart.inventory = {};
 
+    this.cartService.updateCart(this.cart).subscribe();
+
     // create an order
     if(products.length >= 1){
+      var order: Order;
       this.cartService.createOrder(
         { id: this.cart.id, totalPrice: totalPrice, products: products} as Order
-        );
+      );
     }
     }
   }
