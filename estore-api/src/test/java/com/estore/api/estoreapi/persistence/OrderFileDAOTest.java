@@ -203,6 +203,7 @@ public class OrderFileDAOTest {
     public void testUpdateOrder() throws IOException {
        // Setup
        Order order = new Order(3, 10, new Product[0], false, null);
+       orderFileDAO.createOrder(order);
 
        // Invoke
         Order result = assertDoesNotThrow(() -> orderFileDAO.updateOrder(order), "Unexpected exception thrown");
