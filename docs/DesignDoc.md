@@ -151,6 +151,8 @@ with the e-store application.
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
+
+
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
@@ -159,3 +161,9 @@ with the e-store application.
 
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
+
+![Persistence](Screenshot 2023-03-20 194931)
+![Controller](Screenshot 2023-03-20 194907)
+![Model](Screenshot 2023-03-20 194850)
+
+Coverage is above 95% for all tests. Most anomolies occur in the branches
