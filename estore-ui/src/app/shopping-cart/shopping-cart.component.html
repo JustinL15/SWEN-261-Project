@@ -1,0 +1,23 @@
+<h2>Shopping Cart</h2>
+
+<!-- {{cart.id}} -->
+
+<button type="button" class="checkout" title="checkout"
+    (click)="checkout()">checkout</button>
+
+<ul class="cart">
+    <div *ngIf="cart">
+        <div *ngFor="let item of cart.inventory | keyvalue">
+            <a routerLink="/cart">
+                <span class="badge">{{item.key}}</span>
+            </a>
+            <button type="button" class="decrease" title="decrease product"
+                (click)="decrease(item.value)">-</button>
+            {{item.value.quantity}}
+            <button type="button" class="increase" title="increase product"
+                (click)="increase(item.value)">+</button>
+            <button type="button" class="remove" title="remove product"
+                (click)="remove(item.value)">remove</button>
+        </div>
+    </div>
+</ul>

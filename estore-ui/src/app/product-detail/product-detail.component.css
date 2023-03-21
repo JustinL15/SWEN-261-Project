@@ -1,0 +1,13 @@
+body{
+    text-align: center;
+}
+
+button.back {
+    /* position: absolute; */
+    /* padding: .5rem 1.5rem; */
+    padding: 5px;
+    font-size: 1rem;
+    margin-top: 2rem;
+    background-color: #a18e6d;
+    color: black;
+}

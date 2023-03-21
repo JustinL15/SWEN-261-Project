@@ -1,0 +1,9 @@
+<body>
+    <div *ngIf="userService.isLoggedIn()">
+        <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
+    </div>
+    <div *ngIf="!userService.isLoggedIn()">
+        <p>Welcome to the Java 19 Coffee Shop, you have not logged in yet.</p>
+        <p>Proceed to the login page to login or register an account.</p>
+    </div>
+</body>

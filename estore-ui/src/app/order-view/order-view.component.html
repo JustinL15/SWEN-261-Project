@@ -1,0 +1,31 @@
+<table style="width: 100%;">
+    <tr>
+        <th style="width: 70%;" align="left">
+            <h2>Orders</h2>
+        </th>
+        <a routerLink="/manage">
+            <th align="right"><button type="button" class="redir">Inventory</button></th>
+        </a>
+    </tr>
+</table>
+
+<div class="centered">
+    <ul class="orders">
+        <li [ngClass]="{'green' : isComplete(order), 'gray': !isComplete(order)}" *ngFor="let order of orders" 
+        style="border: 2px solid black;">
+            <span class="badge">{{order.id}}</span> {{order.totalPrice}}, {{order.dateTime}}
+            <span class="orderButtons">
+                <button type="button" [disabled]="isComplete(order)" class="complete" title="complete-order"
+                    (click)="completeOrder(order)">Complete</button>
+                <button type="button" [disabled]="isComplete(order)" class="delete" title="delete-order"
+                    (click)="delete(order)">x</button>
+            </span>
+            <ul class="orderProducts">
+                <li *ngFor="let product of order.products">
+                    {{product.name}}
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</div>
