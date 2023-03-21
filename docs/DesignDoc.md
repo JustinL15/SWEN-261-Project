@@ -138,15 +138,23 @@ with the e-store application.
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
+The Model Tier consists of classes that represent our objects within the code. They are leveraged in the DAOs in order to save their data and keep persistence. They are also used by the controllers to process API requests.
 
-> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
+#### Product
+The product model represents an item that exists within the inventory. It tracks quantity and other information specific to the item.
+![Product model](productModel.png)
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
+#### Customer
+The customer model allows representing a user and tying them to their cart and all existing orders. It also holds a password to allow login information.
+![Customer model](customerModel.png)
 
-![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
+#### Cart
+The cart model saves a customer's cart so that it appears on consecutive logins. It stores a collection of products and their quantities. It is cleared once the checkout phase is completed.
+![Cart model](cartModel.png)
+
+#### Order
+The order model saves a snapshot of products at the time of purchase as well as computes a total. This allows price changes in the future that will not impact past orders. A customer is tied to an order using the order ID.
+![Order model](orderModel.png)
 
 ## OO Design Principles
 
