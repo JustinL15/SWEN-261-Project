@@ -10,7 +10,7 @@ geometry: margin=1in
 
 ## Team Information
 
-* Team name: TEAMNAME
+* Team name: Java 19
 * Team members
   * Jessica Eisler
   * Matt London
@@ -23,20 +23,9 @@ geometry: margin=1in
 This is a summary of the project.
 
 ### Purpose
-
-> _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
-> important user group and user goals._
->
-> Creating a e-store that sells coffee related products. The customers are the 
->
-> important users and they should be able to effectivley use the store. That is
->
-> viewing, adding and purchasing products
->
+Creating a e-store that sells coffee related products. The customers are the important users and they should be able to effectivley use the store. That is viewing, adding and purchasing products.
 
 ### Glossary and Acronyms
-
-> _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition                |
 | ---- | ------------------------- |
@@ -59,8 +48,6 @@ This server will allow users to login with a simple username.
 When the username entered is "admin" then the user should be able to edit items within the inventory
 Any user that is not an admin should be able to see a list of products, search for a specific product, edit a shopping cart, and checkout.
 The data stored within the shopping carts and the inventory should be saved and accessible after logging out and back into an account. 
-
-> _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
 
 ### MVP Features
 
@@ -105,10 +92,10 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 ### Overview of User Interface
 
 This section describes the web interface flow; this is how the user views and interacts
-with the e-store application.
+with the e-store application. <br>
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+When a user first enters the website, they will be prompted with a screen asking them to login or create an account.
+Once the user navigates to the log in page, they have the option to log in or create an account. If they choose to login, but use an invalid user or pass, the website will inform them and deny the login. After logging in or creating, if the user goes back to the home page, it will show a welcome "user" screen. If the user logs in as a customer, they can click on the products page to view and search through all the products. If they see one they like, they can click on that product, specify how much they want, and click "buy" to add it to the cart. Once they've added all they want, they then can navigate over to the cart page to view their shopping cart. This page displayes the products in the cart and the amount of each. The user can then press checkout, which will clear their cart. If they navigate back to the login page, they can log out. If the user logs in as an admin, the view will be relatively the same, with the addition of the manage page. On the manage page, the user can view the inventory, and can click on products to make adjustments, such as price, quantity, name, or description. They can also click on the button that leads them to orders, in which they can see all orders in progress or that are completed.
 
 ### View Tier
 
@@ -146,39 +133,45 @@ The Model Tier consists of classes that represent our objects within the code. T
 
 #### Product
 The product model represents an item that exists within the inventory. It tracks quantity and other information specific to the item.
+
 ![Product model](productModel.png)
 
 #### Customer
 The customer model allows representing a user and tying them to their cart and all existing orders. It also holds a password to allow login information.
+
 ![Customer model](customerModel.png)
 
 #### Cart
 The cart model saves a customer's cart so that it appears on consecutive logins. It stores a collection of products and their quantities. It is cleared once the checkout phase is completed.
+
 ![Cart model](cartModel.png)
 
 #### Order
 The order model saves a snapshot of products at the time of purchase as well as computes a total. This allows price changes in the future that will not impact past orders. A customer is tied to an order using the order ID.
+
 ![Order model](orderModel.png)
 
 ## OO Design Principles
 
 **Information Expert** states the behavior of a class or object should have functions to interpret its own data and not have to pass around its own data to different objects in order to parse the final meaning. Adhering to the principle results in programs that have low coupling and are less complex.
 The current ProductFileDAO class has the methods to create, delete, get, update, and search for products because it has the name of the file we are storing the product data in and thus has an easier time accessing the data.
+
 ![Information Expert Implementation Example](information-expert-example.png)
 
 **Controller** represents the user functions. It is a non-user interface that handles the system events. It breaks up the work done by other modules and it controls object activity. It provides a basis to then be performed by other objects within the project.
 A controller can be used in our implementations of owner product control, customer shopping cart, custom reviews, customer recommendations, and the controller responsible for logging on to the website itself.
+
 ![Controller Implementation Example](controller-example.png)
 
 **Low coupling**
 
-> Modles only call on others when needed. Information is only passed when neccisary to accomplish other tasks. This prevents too much dependency among the modules. A good example is the AuthGuard hooking to the Owner View. This allows it to ensure that only owners can view specific parts of the site and easily allows that access.
+Models only call on others when needed. Information is only passed when neccisary to accomplish other tasks. This prevents too much dependency among the modules. A good example is the AuthGuard hooking to the Owner View. This allows it to ensure that only owners can view specific parts of the site and easily allows that access.
 
 ![1679358202811](image/DesignDoc/1679358202811.png)
 
 **Single responsibility**
 
-> Each class has one purpose. To achieve other purposes it calls on other classes. The ts calls upon the DAOs in order to create, update, delete etc. this ensures that the code is not only reusable but also not hard coded and can change with each need. Products is a good example because they are all connected but do not do multiple things. These then get called in the ts files to use the functions. 
+Each class has one purpose. To achieve other purposes it calls on other classes. The ts calls upon the DAOs in order to create, update, delete etc. this ensures that the code is not only reusable but also not hard coded and can change with each need. Products is a good example because they are all connected but do not do multiple things. These then get called in the ts files to use the functions. 
 
 ![1679358538861](image/DesignDoc/1679358538861.png)
 
@@ -200,19 +193,17 @@ A controller can be used in our implementations of owner product control, custom
 > and the results of the testing._
 
 ### Acceptance Testing
-
-> _**[Sprint 2 & 4]** Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+Every user story within sprint 2 pasts its acceptance criteria. Each team member was given 2-4 user stories to complete and acceptance criteria for each was determined as a team. During pull requests, team members reviewed the code and the user stories defined and determined whether that user story was implemented successfully before a merge was accepted. The main issues that occurred with acceptance criteria was that for some user stories, the implementation was more difficult, making the criteria harder to reach. However, whenever a teammate had an issue or a question, there was never hesitation to ask for help and all user stories were able to fully meet their acceptance criteria by the end of the sprint.
 
 ### Unit Testing and Code Coverage
-
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
->_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
-> those._
+![Persistence](persistenceTest.png)
+![Controller](controllerTest.png)
+![Model](modelTest.png)
+
+Coverage is above 95% for all tests. Most anomolies occur with missed branches, especially within product controller
+and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products fucntion is missed in testing in a few branches. In CartDAO, the tests states of if the cart is null is not reached, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories. 

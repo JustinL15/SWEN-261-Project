@@ -193,4 +193,24 @@ public class OrderFileDAOTest {
                         () -> new OrderFileDAO("foo.txt", mockObjectMapper),
                         "IOException not thrown");
     }
+
+    /**
+     * Check what happens if we throw an IOException when attempting to read the file
+     * 
+     * @throws IOException When the mapper cannot read the file
+     */
+     @Test
+    public void testUpdateOrder() throws IOException {
+       // Setup
+       Order order = new Order(3, 10, new Product[0], false, null);
+       orderFileDAO.createOrder(order);
+
+       // Invoke
+        Order result = assertDoesNotThrow(() -> orderFileDAO.updateOrder(order), "Unexpected exception thrown");
+
+       // Analyze
+       assertNotNull(result);
+       Order actual = orderFileDAO.getOrder(order.getId());
+       assertEquals(actual,order);
+    }
 }

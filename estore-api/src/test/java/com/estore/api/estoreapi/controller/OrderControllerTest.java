@@ -268,4 +268,42 @@ public class OrderControllerTest {
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    /**
+     * Test updating an order
+     * 
+     * @throws IOException If the DAO cannot be accessed
+     */
+
+    @Test
+    public void testUpdateOrder() throws IOException {
+        // Create an order to be returned by the DAO
+        Order order = new Order(1, 0, new Product[0], false, null);;
+
+        // Call the update order function
+        when(orderDAO.updateOrder(order)).thenReturn(order);
+        ResponseEntity<Order> response = orderController.updateOrder(order);
+        order.setId(2);
+
+        // Invoke
+        response = orderController.updateOrder(order);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(order,response.getBody());
+
+        // Try when the item doesn't exist
+        when(orderDAO.updateOrder(order)).thenReturn(null);
+        response = orderController.updateOrder(order);
+        assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+
+
+        // Make sure we throw when IO fails
+        doThrow(new IOException()).when(orderDAO).updateOrder(order);
+
+        response = orderController.updateOrder(order);
+        assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
 }
