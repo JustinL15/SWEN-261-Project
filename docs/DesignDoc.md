@@ -122,14 +122,23 @@ with the e-store application.
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
-> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
+The Model Tier consists of classes that represent our objects within the code. They are leveraged in the DAOs in order to save their data and keep persistence. They are also used by the controllers to process API requests.
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-> 
-![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
+#### Product
+The product model represents an item that exists within the inventory. It tracks quantity and other information specific to the item.
+![Product model](productModel.png)
+
+#### Customer
+The customer model allows representing a user and tying them to their cart and all existing orders. It also holds a password to allow login information.
+![Customer model](customerModel.png)
+
+#### Cart
+The cart model saves a customer's cart so that it appears on consecutive logins. It stores a collection of products and their quantities. It is cleared once the checkout phase is completed.
+![Cart model](cartModel.png)
+
+#### Order
+The order model saves a snapshot of products at the time of purchase as well as computes a total. This allows price changes in the future that will not impact past orders. A customer is tied to an order using the order ID.
+![Order model](orderModel.png)
 
 ## OO Design Principles
 > _**[Sprint 2, 3 & 4]** Discuss at least **4 key OO Principles** in your current design. This should be taken from your work in "Adherence to Architecture and Design Principles" that you have completed in a previous Sprint. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
