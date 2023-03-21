@@ -41,6 +41,11 @@ This section describes the features of the application.
 > maybe Epics and critical Stories._
 
 ### Definition of MVP
+This server will allow users to login with a simple username. 
+When the username entered is "admin" then the user should be able to edit items within the inventory
+Any user that is not an admin should be able to see a list of products, search for a specific product, edit a shopping cart, and checkout.
+The data stored within the shopping carts and the inventory should be saved and accessible after logging out and back into an account. 
+
 > _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
 
 ### MVP Features
