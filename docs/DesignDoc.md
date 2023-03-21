@@ -70,11 +70,15 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](DomainAnalysis.png)
 
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+The main interactions within our domain model take place through a customer's interactions with the store. <br>
+A **customer** will create an account and then browse the store's **inventory** which will display a collection of **product**. <br>
+The user can view existing **review** for each **product**, view **product** sorted by **category** as well as receive a **recommendation** for other products, this assists the user in making purchases. <br>
+Once the **customer** has decided to purchase a **product** they can add the item to their **cart** and continue to add more items until they are ready to purchase. <br>
+When purchasing, their **cart** will be moved to the **checkout** phase and all items will be marked as purchased and saved in an **order**. <br>
+The **customer** can then view the status of their **order**. <br>
+The **owner** can mark an **order** as complete, which will notify the **customer** that their order has been processed.
 
 ## Architecture and Design
 
@@ -192,5 +196,5 @@ with the e-store application.
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
-> _**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
+>_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
