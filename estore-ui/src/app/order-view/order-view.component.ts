@@ -10,6 +10,7 @@ import { OrderService } from '../order-service';
 })
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
+  displayedColumns: string[] = ['id', 'name', 'products', 'complete', 'delete'];
   comp: boolean = false;
 
   constructor(private orderService: OrderService) { }

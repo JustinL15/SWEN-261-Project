@@ -1,22 +1,50 @@
-body{
+body {
     text-align: center;
+    background-color: #f7d292;
 }
 
-li{
-    list-style-type: none;
-    width: 20%;
-    margin: 0 auto;
-    background-color: #A18E6D;
-    padding: 3px;
-}
-
-li:nth-child(odd){
-    background-color: #827358;
-    color: white;
-}
-
-a{
+a {
     text-decoration: none;
     color: black;
     padding: 5px;
+}
+
+.productBoxes {
+    /* display: grid; */
+    /* grid-gap: 20px; */
+    /* padding: 3em; */
+    /* grid-template-columns: repeat(auto-fill); */
+}
+
+.productBoxes .card {
+    background-color: #A18E6D;
+    padding: 1em;
+    border-radius: 15px;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0px 10px 5px #733927;
+    width: 60%;
+    height: 90%;
+}
+
+.productName {
+    float: left;
+    font-weight: 500;
+}
+
+.productPrice{
+    padding-left: 10px;
+    float: right;
+}
+
+.image{
+    padding-top: 50px;
+    max-width: 100%;
+    border-radius: 2em;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* height: 200px; */
 }

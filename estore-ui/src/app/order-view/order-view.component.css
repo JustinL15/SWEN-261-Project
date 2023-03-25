@@ -24,7 +24,6 @@
 
 .orderButtons{
     float: right;
-    /* font-size:x-large; */
 }
 
 .green{
@@ -48,3 +47,38 @@ button.redir {
 li{
     list-style-type: none;
 }
+
+.orderRow {
+    background-color: #a18e6d;
+}
+
+.orderHeader {
+    height: 35px;
+    background-color: #544732;
+}
+
+.matTab {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    color: white;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background-color: #733927;
+}
+
+.mat-tab-label{
+    color: #497040;
+    background-color: red;
+}
+
+.mat-tab-label:hover{
+    background-color: aquamarine;
+}
+
