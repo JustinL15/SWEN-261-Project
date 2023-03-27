@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Cart } from '../cart';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 import { Customer } from '../customer';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-userlogin',

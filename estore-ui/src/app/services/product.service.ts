@@ -4,8 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Product } from './product';
+import { Product } from '../product';
 import { MessageService } from './message.service';
+import { handleError } from './handle.error';
 
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +27,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.productsUrl)
       .pipe(
         tap(_ => this.log('fetched products')),
-        catchError(this.handleError<Product[]>('getProducts', []))
+        catchError(handleError<Product[]>('getProducts', []))
       );
   }
 
@@ -40,7 +41,7 @@ export class ProductService {
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} product id=${id}`);
         }),
-        catchError(this.handleError<Product>(`getProduct id=${id}`))
+        catchError(handleError<Product>(`getProduct id=${id}`))
       );
   }
 
@@ -49,7 +50,7 @@ export class ProductService {
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url).pipe(
       tap(_ => this.log(`fetched product id=${id}`)),
-      catchError(this.handleError<Product>(`getProduct id=${id}`))
+      catchError(handleError<Product>(`getProduct id=${id}`))
     );
   }
 
@@ -63,7 +64,7 @@ export class ProductService {
       tap(x => x.length ?
          this.log(`found products matching "${term}"`) :
          this.log(`no products matching "${term}"`)),
-      catchError(this.handleError<Product[]>('searchProducts', []))
+      catchError(handleError<Product[]>('searchProducts', []))
     );
   }
 
@@ -73,7 +74,7 @@ export class ProductService {
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
       tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
-      catchError(this.handleError<Product>('addProduct'))
+      catchError(handleError<Product>('addProduct'))
     );
   }
 
@@ -83,7 +84,7 @@ export class ProductService {
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted product id=${id}`)),
-      catchError(this.handleError<Product>('deleteProduct'))
+      catchError(handleError<Product>('deleteProduct'))
     );
   }
 
@@ -91,29 +92,8 @@ export class ProductService {
   updateProduct(product: Product): Observable<any> {
     return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
       tap(_ => this.log(`updated product id=${product.id}`)),
-      catchError(this.handleError<any>('updateProduct'))
+      catchError(handleError<any>('updateProduct'))
     );
-  }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 
   /** Log a ProductService message with the ProductService */

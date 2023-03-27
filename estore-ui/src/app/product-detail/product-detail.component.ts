@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Product } from '../product';
-import { ProductService } from '../product.service';
-import { UserService } from '../user.service';
+import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 import { Cart } from '../cart';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 import { Customer } from '../customer';
 
 @Component({

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Customer } from './customer';
+import { Customer } from '../customer';
 import { MessageService } from './message.service';
 import { CartService } from './cart.service';
+import { handleError } from './handle.error';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class UserService {
     return this.http.get<Customer[]>(this.customersUrl)
       .pipe(
         tap(_ => this.log('fetched customers')),
-        catchError(this.handleError<Customer[]>('getCustomers', []))
+        catchError(handleError<Customer[]>('getCustomers', []))
       );
   }
 
@@ -43,7 +44,7 @@ export class UserService {
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} customer id=${id}`);
         }),
-        catchError(this.handleError<Customer>(`getCustomer id=${id}`))
+        catchError(handleError<Customer>(`getCustomer id=${id}`))
       );
   }
 
@@ -52,7 +53,7 @@ export class UserService {
     const url = `${this.customersUrl}/${id}`;
     return this.http.get<Customer>(url).pipe(
       tap(_ => this.log(`fetched customer id=${id}`)),
-      catchError(this.handleError<Customer>(`getCustomer id=${id}`))
+      catchError(handleError<Customer>(`getCustomer id=${id}`))
     );
   }
 
@@ -66,7 +67,7 @@ export class UserService {
       tap(x => x.length ?
          this.log(`found customers matching "${term}"`) :
          this.log(`no customers matching "${term}"`)),
-      catchError(this.handleError<Customer[]>('searchCustomers', []))
+      catchError(handleError<Customer[]>('searchCustomers', []))
     );
   }
 
@@ -76,7 +77,7 @@ export class UserService {
   addCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
       tap((newCustomer: Customer) => this.log(`added customer w/ id=${newCustomer.id}`)),
-      catchError(this.handleError<Customer>('addCustomer'))
+      catchError(handleError<Customer>('addCustomer'))
     );
   }
 
@@ -86,7 +87,7 @@ export class UserService {
 
     return this.http.delete<Customer>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted customer id=${id}`)),
-      catchError(this.handleError<Customer>('deleteCustomer'))
+      catchError(handleError<Customer>('deleteCustomer'))
     );
   }
 
@@ -94,7 +95,7 @@ export class UserService {
   updateCustomer(customer: Customer): Observable<any> {
     return this.http.put(this.customersUrl, customer, this.httpOptions).pipe(
       tap(_ => this.log(`updated customer id=${customer.id}`)),
-      catchError(this.handleError<any>('updateCustomer'))
+      catchError(handleError<any>('updateCustomer'))
     );
   }
 
@@ -111,7 +112,7 @@ export class UserService {
             this.loggedIn = true;
           }
         }),
-        catchError(this.handleError<any>('login'))
+        catchError(handleError<any>('login'))
       );
   }
 
@@ -132,7 +133,7 @@ register(customer: Customer): Observable<Customer> {
       this.currentUser = newCustomer;
       this.loggedIn = true;
     }),
-    catchError(this.handleError<Customer>('addCustomer'))
+    catchError(handleError<Customer>('Register'))
   );
 }
 
@@ -147,28 +148,6 @@ register(customer: Customer): Observable<Customer> {
 
   getCurrentUser(): Customer | null {
     return this.currentUser;
-  }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 
   /** Log a CustomerService message with the CustomerService */
