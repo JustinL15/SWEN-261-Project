@@ -9,7 +9,12 @@
     <ng-container *ngIf="userService.getCurrentUser()?.isAdmin">
       <a routerLink="/manage">Manage</a>
     </ng-container>
-    <a routerLink="/login">Log In</a>
+    <ng-container *ngIf="!userService.getCurrentUser()">
+      <a routerLink="/login">Log In</a>
+    </ng-container>
+    <ng-container *ngIf="userService.getCurrentUser()">
+      <a routerLink="/login">Account</a>
+    </ng-container>
   </nav>
   <router-outlet></router-outlet>
 </body>
