@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Product } from '../product';
 import { MessageService } from './message.service';
-import { handleError } from './handle.error';
+import { ErrorService } from './error.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,19 +20,22 @@ export class ProductService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private errorService: ErrorService) { }
 
   /** GET products from the server */
   getProducts(): Observable<Product[]> {
+    this.errorService.clearErrorCode();
     return this.http.get<Product[]>(this.productsUrl)
       .pipe(
         tap(_ => this.log('fetched products')),
-        catchError(handleError<Product[]>('getProducts', []))
+        catchError(this.errorService.handleError<Product[]>('getProducts', []))
       );
   }
 
   /** GET product by id. Return `undefined` when id not found */
   getProductNo404<Data>(id: number): Observable<Product> {
+    this.errorService.clearErrorCode();
     const url = `${this.productsUrl}/?id=${id}`;
     return this.http.get<Product[]>(url)
       .pipe(
@@ -41,21 +44,23 @@ export class ProductService {
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} product id=${id}`);
         }),
-        catchError(handleError<Product>(`getProduct id=${id}`))
+        catchError(this.errorService.handleError<Product>(`getProduct id=${id}`))
       );
   }
 
   /** GET products by id. Will 404 if id not found */
   getProduct(id: number): Observable<Product> {
+    this.errorService.clearErrorCode();
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url).pipe(
       tap(_ => this.log(`fetched product id=${id}`)),
-      catchError(handleError<Product>(`getProduct id=${id}`))
+      catchError(this.errorService.handleError<Product>(`getProduct id=${id}`))
     );
   }
 
   /* GET products whose name contains search term */
   searchProducts(term: string): Observable<Product[]> {
+    this.errorService.clearErrorCode();
     if (!term.trim()) {
       // if not search term, return empty product array.
       return of([]);
@@ -64,7 +69,7 @@ export class ProductService {
       tap(x => x.length ?
          this.log(`found products matching "${term}"`) :
          this.log(`no products matching "${term}"`)),
-      catchError(handleError<Product[]>('searchProducts', []))
+      catchError(this.errorService.handleError<Product[]>('searchProducts', []))
     );
   }
 
@@ -72,27 +77,30 @@ export class ProductService {
 
   /** POST: add a new product to the server */
   addProduct(product: Product): Observable<Product> {
+    this.errorService.clearErrorCode();
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
       tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
-      catchError(handleError<Product>('addProduct'))
+      catchError(this.errorService.handleError<Product>('addProduct'))
     );
   }
 
   /** DELETE: delete the Product from the server */
   deleteProduct(id: number): Observable<Product> {
+    this.errorService.clearErrorCode();
     const url = `${this.productsUrl}/${id}`;
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted product id=${id}`)),
-      catchError(handleError<Product>('deleteProduct'))
+      catchError(this.errorService.handleError<Product>('deleteProduct'))
     );
   }
 
   /** PUT: update the Product on the server */
   updateProduct(product: Product): Observable<any> {
+    this.errorService.clearErrorCode();
     return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
       tap(_ => this.log(`updated product id=${product.id}`)),
-      catchError(handleError<any>('updateProduct'))
+      catchError(this.errorService.handleError<any>('updateProduct'))
     );
   }
 

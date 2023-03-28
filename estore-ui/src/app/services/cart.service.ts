@@ -8,7 +8,7 @@ import { Cart } from "../cart";
 import { MessageService } from "./message.service";
 import { Order } from "../order";
 import { ProductReference } from "../product-reference";
-import { handleError } from "./handle.error";
+import { ErrorService } from "./error.service";
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -20,40 +20,45 @@ export class CartService {
 
     constructor(
         private http: HttpClient,
-        private messageService: MessageService) { }
+        private messageService: MessageService,
+        private errorService: ErrorService) { }
     
     /** GET cart from the server */
     getCart(id: number): Observable<Cart> {
+        this.errorService.clearErrorCode();
         const url = `${this.cartUrl}/${id}`;
 
         return this.http.get<Cart>(url)
             .pipe(
             tap(_ => this.log('fetched cart')),
-            catchError(handleError<Cart>('getCart'))
+            catchError(this.errorService.handleError<Cart>('getCart'))
         );
     }
 
       /** POST: add a new product to the server */
     createCart(cart: Cart): Observable<Cart> {
+        this.errorService.clearErrorCode();
         return this.http.post<Cart>(this.cartUrl, cart, this.httpOptions).pipe(
         tap((newCart: Cart) => this.log(`created cart w/ id=${newCart.id}`)),
-        catchError(handleError<Cart>('createdCart'))
+        catchError(this.errorService.handleError<Cart>('createdCart'))
         );
     }
 
     addToCart(id: number, product: ProductReference) {
+        this.errorService.clearErrorCode();
         const url = `${this.cartUrl}/addItem/${id}`;
         return this.http.post<any>(url, product, this.httpOptions)
             .pipe(
-                catchError(handleError<any>('addToCart'))
+                catchError(this.errorService.handleError<any>('addToCart'))
             )
     }
 
     /** PUT: update the Order on the server */
     updateCart(cart: Cart): Observable<any> {
+        this.errorService.clearErrorCode();
         return this.http.put(this.cartUrl, cart, this.httpOptions).pipe(
           tap(_ => this.log(`updated product id=${cart.id}`)),
-          catchError(handleError<any>('updateProduct'))
+          catchError(this.errorService.handleError<any>('updateProduct'))
         );
       }
 

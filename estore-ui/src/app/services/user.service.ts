@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Customer } from '../customer';
 import { MessageService } from './message.service';
 import { CartService } from './cart.service';
-import { handleError } from './handle.error';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +23,16 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private errorService: ErrorService) { }
 
   /** GET customers from the server */
   getCustomers(): Observable<Customer[]> {
+    this.errorService.clearErrorCode();
     return this.http.get<Customer[]>(this.customersUrl)
       .pipe(
         tap(_ => this.log('fetched customers')),
-        catchError(handleError<Customer[]>('getCustomers', []))
+        catchError(this.errorService.handleError<Customer[]>('getCustomers', []))
       );
   }
 
@@ -44,7 +46,7 @@ export class UserService {
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} customer id=${id}`);
         }),
-        catchError(handleError<Customer>(`getCustomer id=${id}`))
+        catchError(this.errorService.handleError<Customer>(`getCustomer id=${id}`))
       );
   }
 
@@ -53,7 +55,7 @@ export class UserService {
     const url = `${this.customersUrl}/${id}`;
     return this.http.get<Customer>(url).pipe(
       tap(_ => this.log(`fetched customer id=${id}`)),
-      catchError(handleError<Customer>(`getCustomer id=${id}`))
+      catchError(this.errorService.handleError<Customer>(`getCustomer id=${id}`))
     );
   }
 
@@ -67,7 +69,7 @@ export class UserService {
       tap(x => x.length ?
          this.log(`found customers matching "${term}"`) :
          this.log(`no customers matching "${term}"`)),
-      catchError(handleError<Customer[]>('searchCustomers', []))
+      catchError(this.errorService.handleError<Customer[]>('searchCustomers', []))
     );
   }
 
@@ -77,7 +79,7 @@ export class UserService {
   addCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
       tap((newCustomer: Customer) => this.log(`added customer w/ id=${newCustomer.id}`)),
-      catchError(handleError<Customer>('addCustomer'))
+      catchError(this.errorService.handleError<Customer>('addCustomer'))
     );
   }
 
@@ -87,7 +89,7 @@ export class UserService {
 
     return this.http.delete<Customer>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted customer id=${id}`)),
-      catchError(handleError<Customer>('deleteCustomer'))
+      catchError(this.errorService.handleError<Customer>('deleteCustomer'))
     );
   }
 
@@ -95,7 +97,7 @@ export class UserService {
   updateCustomer(customer: Customer): Observable<any> {
     return this.http.put(this.customersUrl, customer, this.httpOptions).pipe(
       tap(_ => this.log(`updated customer id=${customer.id}`)),
-      catchError(handleError<any>('updateCustomer'))
+      catchError(this.errorService.handleError<any>('updateCustomer'))
     );
   }
 
@@ -112,7 +114,7 @@ export class UserService {
             this.loggedIn = true;
           }
         }),
-        catchError(handleError<any>('login'))
+        catchError(this.errorService.handleError<any>('login'))
       );
   }
 
@@ -133,7 +135,7 @@ register(customer: Customer): Observable<Customer> {
       this.currentUser = newCustomer;
       this.loggedIn = true;
     }),
-    catchError(handleError<Customer>('Register'))
+    catchError(this.errorService.handleError<Customer>('Register'))
   );
 }
 
