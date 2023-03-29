@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location, NgStyle } from '@angular/common';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { ProductService } from '../services/product.service';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   selector: 'app-inventory',
@@ -12,8 +13,10 @@ import { ProductService } from '../product.service';
 export class InventoryComponent implements OnInit{
 
   products: Product[] = [];
+  errorMessage = "";
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, 
+    private errorService: ErrorService) { }
 
   /* list of products on initalization */
   ngOnInit(): void {
@@ -27,6 +30,7 @@ export class InventoryComponent implements OnInit{
 
   /* Adds product to inventory. MUST have all filled or will just return */
   add(name: string, prc: string, qty: string, description: string): void {
+    this.errorMessage = "";
     name = name.trim();
     var price: number = +prc;
     var quantity: number = +qty;
@@ -35,11 +39,18 @@ export class InventoryComponent implements OnInit{
       return;
     }
     
-    this.productService.addProduct({ name, price, quantity, description } as Product).subscribe(product => { this.products.push(product) });
+    this.productService.addProduct({ name, price, quantity, description } as Product).subscribe(product => { 
+      if(this.errorService.errorCode === 409) {
+        this.errorMessage = "A product with that name already exists.";
+      } else {
+        this.products.push(product);
+      } 
+    });
   }
 
   /* Delets a product from the inventory */
   delete(product: Product): void {
+    this.errorMessage = "";
     this.products = this.products.filter(p => p !== product);
     this.productService.deleteProduct(product.id).subscribe();
   }
