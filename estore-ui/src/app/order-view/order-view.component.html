@@ -9,8 +9,17 @@
     </tr>
 </table>
 
-<mat-tab-group>
-    <mat-tab label="Incomplete Orders">
+<!-- {% for keyword in keywords %}
+
+    {{ forloop.counter }} # 1 based
+    {{ forloop.counter0 }} # 0 based
+
+{% endfor %} -->
+
+<mat-progress-bar mode="determinate" [value]="(isCompletes(orders)/orders.length)" *ngIf="total > -1" style="width: 80%; margin-left: auto; margin-right: auto;"></mat-progress-bar>
+
+<mat-tab-group class="custom">
+    <mat-tab label="Incomplete Orders" class="textTest">
         <div class="matTab">
             <table mat-table [dataSource]="orders" class="myT">
                 <ng-container matColumnDef="id">
@@ -71,22 +80,12 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="complete">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let order"><button type="button" [disabled]="isComplete(order)"
-                            class="complete" title="complete-order" (click)="completeOrder(order)">Complete</button>
-                    </td>
-                </ng-container>
+                <!-- TODO:
+                delete buttons. Just not needed. And fix hover -->
 
-                <ng-container matColumnDef="delete">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let order"> <button type="button" [disabled]="isComplete(order)"
-                            class="delete" title="delete-order" (click)="delete(order)">x</button> </td>
-                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsComp" class="orderHeader"></tr>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="orderHeader"></tr>
-
-                <tr mat-row *matRowDef="let row; columns: displayedColumns; let order" class="orderRow"
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsComp; let order" class="orderRow"
                     [hidden]="order.complete == false"></tr>
 
             </table>

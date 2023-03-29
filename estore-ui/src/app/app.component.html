@@ -1,7 +1,8 @@
 <body>
   <nav>
     <h1>{{title}}</h1>
-    <a routerLink="/home">Home</a>
+    <a routerLink="/home"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon></a>
+    <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> -->
     <a routerLink="/products">Products</a>
     <ng-container *ngIf="!userService.getCurrentUser()?.isAdmin && userService.getCurrentUser()">
       <a routerLink="/cart">Cart</a>

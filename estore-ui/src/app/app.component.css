@@ -15,6 +15,7 @@ html, body{
 
 h1{
     text-align: center;
+    display: block;
     padding: 10px;
     font-size: larger;
 }
@@ -32,5 +33,11 @@ a{
     text-decoration: none;
     text-align: center;
     
+}
+
+.mat-icon-rtl-mirror{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 

@@ -1,13 +1,13 @@
 /* order-viewComponent's private CSS styles */
-.complete:disabled{
+.complete:disabled {
     background-color: #497040;
 }
 
-.delete:disabled{
+.delete:disabled {
     background-color: #497040;
 }
 
-.delete{
+.delete {
     background-color: red;
     width: 30px;
     height: 30px;
@@ -15,22 +15,22 @@
     margin-right: 5px;
 }
 
-.complete{
+.complete {
     background-color: #733927;
     height: 30px;
     color: white;
     margin-right: 5px;
 }
 
-.orderButtons{
+.orderButtons {
     float: right;
 }
 
-.green{
+.green {
     background-color: #497040;
 }
 
-.gray{
+.gray {
     background-color: #d89d83;
 }
 
@@ -44,7 +44,7 @@ button.redir {
     float: right;
 }
 
-li{
+li {
     list-style-type: none;
 }
 
@@ -73,12 +73,26 @@ li{
     background-color: #733927;
 }
 
-.mat-tab-label{
-    color: #497040;
-    background-color: red;
+::ng-deep .mdc-tab:hover {
+    background: #cca460;
 }
 
-.mat-tab-label:hover{
-    background-color: aquamarine;
+::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+    color: black;
 }
 
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+    color: #733927;
+}
+
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+    border-color: var(--mdc-tab-indicator-active-indicator-color, #733927);
+}
+
+::ng-deep .mdc-tab__ripple::before{
+    background-color: white;
+}
+
+::ng-deep .mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-color: #497040;
+}
