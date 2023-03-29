@@ -1,9 +1,10 @@
+
 <body>
   <div *ngIf="!userService.isLoggedIn()">
     <div *ngIf="!isRegistering">
       <h2>User Login</h2>
-      <div *ngIf="loginError">
-        Username or Password is incorrect.
+      <div>
+        {{errorMessage}}
       </div>
       <br>
       Username: <input type="text" [(ngModel)]="username">
@@ -15,8 +16,8 @@
     </div>
     <div *ngIf="isRegistering">
       <h2>Register</h2>
-      <div *ngIf="registerError">
-        One or more fields are empty or username is already taken.
+      <div>
+        {{errorMessage}}
       </div>
       <br>
       Name: <input type="text" [(ngModel)]="name">
