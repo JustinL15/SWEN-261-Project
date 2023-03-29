@@ -2,23 +2,58 @@
   <h2>Items</h2>
 
   <div id="search-component">
-    <label for="search-box">Search </label>
-    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+    <div class="searchBar">
+      <label for="search-box">Search </label>
+      <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+    </div>
 
-    <ul class="search-result">
+    <!-- <ul class="search-result">
       <li *ngFor="let product of products$ | async">
         <a routerLink="/detail/{{product.id}}">
           {{product.name}}
         </a>
       </li>
-    </ul>
+    </ul> -->
+
+    <div class="search-result">
+      <div class="productBoxes" *ngIf="(searchBox.value)">
+        <mat-grid-list cols="3" rowHeight="2:1">
+          <div class="products">
+            <span *ngFor="let product of products$ | async">
+              <mat-grid-tile style="width: 80%;">
+                <div class="card" routerLink="/detail/{{product.id}}">
+                  <span class="productName">{{product.name}}</span>
+                  <div class="productPrice">${{product.price}}</div>
+                  <div class="image">
+                    <!-- replace image with product image -->
+                    <img
+                      src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                  </div>
+                </div>
+              </mat-grid-tile>
+            </span>
+          </div>
+        </mat-grid-list>
+      </div>
+    </div>
   </div>
 
-  <ul class="products" *ngIf="!(searchBox.value)">
-    <li *ngFor="let product of products">
-      <a routerLink="/detail/{{product.id}}">
-        {{product.name}}
-      </a>
-    </li>
-  </ul>
+  <div class="productBoxes" *ngIf="!(searchBox.value)">
+    <mat-grid-list cols="3" rowHeight="2:1">
+      <div class="products">
+        <span *ngFor="let product of products">
+          <mat-grid-tile style="width: 80%;">
+            <div class="card" routerLink="/detail/{{product.id}}">
+              <span class="productName">{{product.name}}</span>
+              <div class="productPrice">${{product.price}}</div>
+              <div class="image">
+                <!-- replace image with product image -->
+                <img src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+              </div>
+            </div>
+          </mat-grid-tile>
+        </span>
+      </div>
+    </mat-grid-list>
+  </div>
 </body>

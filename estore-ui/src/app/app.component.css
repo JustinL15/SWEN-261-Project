@@ -6,32 +6,38 @@
     width: 100%;
 }
 
-body{
-    padding: 0;
-    margin: 0;
-    min-height: 100vh;
-    min-width: 100vh;
+html, body{
+    height: 100%;
     width: 100%;
     background-color: #f7d292;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: x-large;
 }
 
 h1{
     text-align: center;
+    display: block;
     padding: 10px;
+    font-size: larger;
 }
 
-span{
+nav{
     background-color: #cca460;
-    margin-top: 10px;
-    padding: 5px;
     text-align: center;
     display: flex;
     font-size: 20px;
 }
+
 a{
     color: black;
+    padding: 10px;
     text-decoration: none;
+    text-align: center;
+    
+}
+
+.mat-icon-rtl-mirror{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 

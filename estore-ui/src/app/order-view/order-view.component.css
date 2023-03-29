@@ -1,13 +1,13 @@
 /* order-viewComponent's private CSS styles */
-.complete:disabled{
+.complete:disabled {
     background-color: #497040;
 }
 
-.delete:disabled{
+.delete:disabled {
     background-color: #497040;
 }
 
-.delete{
+.delete {
     background-color: red;
     width: 30px;
     height: 30px;
@@ -15,23 +15,22 @@
     margin-right: 5px;
 }
 
-.complete{
+.complete {
     background-color: #733927;
     height: 30px;
     color: white;
     margin-right: 5px;
 }
 
-.orderButtons{
+.orderButtons {
     float: right;
-    /* font-size:x-large; */
 }
 
-.green{
+.green {
     background-color: #497040;
 }
 
-.gray{
+.gray {
     background-color: #d89d83;
 }
 
@@ -45,6 +44,55 @@ button.redir {
     float: right;
 }
 
-li{
+li {
     list-style-type: none;
+}
+
+.orderRow {
+    background-color: #a18e6d;
+}
+
+.orderHeader {
+    height: 35px;
+    background-color: #544732;
+}
+
+.matTab {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    color: white;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background-color: #733927;
+}
+
+::ng-deep .mdc-tab:hover {
+    background: #cca460;
+}
+
+::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+    color: black;
+}
+
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+    color: #733927;
+}
+
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+    border-color: var(--mdc-tab-indicator-active-indicator-color, #733927);
+}
+
+::ng-deep .mdc-tab__ripple::before{
+    background-color: white;
+}
+
+::ng-deep .mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-color: #497040;
 }

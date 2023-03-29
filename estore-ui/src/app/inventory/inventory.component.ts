@@ -13,7 +13,7 @@ import { ErrorService } from '../services/error.service';
 export class InventoryComponent implements OnInit{
 
   products: Product[] = [];
-  errorMessage = "";
+  displayedColumns: string[] = ['id', 'name', 'price', 'quantity'];
 
   constructor(private productService: ProductService, 
     private errorService: ErrorService) { }
