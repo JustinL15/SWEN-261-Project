@@ -159,15 +159,6 @@ public class Customer {
         orders.add(orderId);
     }
 
-     /**
-     * Get the starred products of the customer
-     * 
-     * @return Products
-     */
-    public List<Integer> getStarred() {
-        return starred;
-    }
-
     /**
      * Check if the customer is an admin
      * 
