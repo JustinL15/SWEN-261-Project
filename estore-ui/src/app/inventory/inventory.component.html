@@ -55,4 +55,5 @@
         <tr mat-row routerLink="/manage/{{product.id}}" *matRowDef="let row; columns: displayedColumns; let product"
             class="productRow"></tr>
     </table>
+    {{errorMessage}}
 </div>
