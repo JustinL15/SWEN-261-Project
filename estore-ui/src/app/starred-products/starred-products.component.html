@@ -1,9 +1,9 @@
-<p>starred-products works!</p>
+<p>Starred Products</p>
 
 <ul class="starred">
     <div *ngIf="starred">
         <div *ngFor="let product of starred">
-            
+            {{product.name}}
         </div>
     </div>
 </ul>

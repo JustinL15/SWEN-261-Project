@@ -1,1 +1,1 @@
-[{"id":1,"username":"admin","name":"admin","cartId":0,"isAdmin":true,"password":"admin","admin":true,"orders":[],"starred":[]},{"id":2,"username":"pass","name":"user","cartId":1,"isAdmin":false,"password":"pass","admin":false,"orders":[],"starred":[]}]
+[{"id":1,"username":"admin","name":"admin","cartId":0,"isAdmin":true,"password":"admin","admin":true,"orders":[],"starred":[]}]

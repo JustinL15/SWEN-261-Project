@@ -169,15 +169,6 @@ public class Customer {
     }
 
     /**
-     * Add orders to the customer
-     * 
-     * @param orderId OrderID to add
-     */
-    public void addStarred(int productId) {
-        starred.add(productId);
-    }
-
-    /**
      * Check if the customer is an admin
      * 
      * @return True if admin, false otherwise
