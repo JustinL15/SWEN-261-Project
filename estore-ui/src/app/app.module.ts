@@ -13,6 +13,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { UserLoginComponent } from './userlogin/userlogin.component';
+import { StarredProductsComponent } from './starred-products/starred-products.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { UserLoginComponent } from './userlogin/userlogin.component';
     InventoryComponent,
     EditProductDetailComponent,
     OrderViewComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    StarredProductsComponent
   ],
   imports: [
     BrowserModule,

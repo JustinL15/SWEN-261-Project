@@ -25,6 +25,7 @@ public class Customer {
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
     @JsonProperty("password") private String password;
+    @JsonProperty("starred") private List<Integer> starred;
 
     /**
      * Construct a new customer
@@ -46,6 +47,7 @@ public class Customer {
         this.isAdmin = isAdmin;
         this.password = password;
         this.orders = new ArrayList<>();
+        this.starred = new ArrayList<>();
     }
 
     /**
@@ -155,6 +157,24 @@ public class Customer {
      */
     public void addOrder(int orderId) {
         orders.add(orderId);
+    }
+
+     /**
+     * Get the starred products of the customer
+     * 
+     * @return Products
+     */
+    public List<Integer> getStarred() {
+        return starred;
+    }
+
+    /**
+     * Add orders to the customer
+     * 
+     * @param orderId OrderID to add
+     */
+    public void addStarred(int productId) {
+        starred.add(productId);
     }
 
     /**
