@@ -14,6 +14,7 @@ export class InventoryComponent implements OnInit{
 
   products: Product[] = [];
   displayedColumns: string[] = ['id', 'name', 'price', 'quantity'];
+  errorMessage = "";
 
   constructor(private productService: ProductService, 
     private errorService: ErrorService) { }
