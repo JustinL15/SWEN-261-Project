@@ -1,4 +1,5 @@
 import { Order } from "./order";
+import { Product } from "./product";
 
 export interface Customer {
     id: number;
@@ -6,6 +7,7 @@ export interface Customer {
     name: string;
     cartId: number;
     orders: Array<Order>;
+    starred: Array<Product>;
     isAdmin: boolean;
     password: string;
 }

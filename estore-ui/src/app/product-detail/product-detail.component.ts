@@ -46,7 +46,7 @@ export class ProductDetailComponent implements OnInit {
         this.cartService.createCart({} as Cart).subscribe(cart => {
           if(this.user !== null && id !== undefined && this.user !== undefined) {
           this.userService.updateCustomer({id: this.user.id, username: this.user.username,
-          name: this.user.name, cartId: cart.id, orders: this.user.orders,
+          name: this.user.name, cartId: cart.id, orders: this.user.orders, starred: this.user.starred,
           isAdmin: this.user.isAdmin, password: this.user.password}).subscribe(user => {
             if(id !== undefined) {
               this.cartService.addToCart(user.cartId, {id: id, quantity: this.quantity}).subscribe();
