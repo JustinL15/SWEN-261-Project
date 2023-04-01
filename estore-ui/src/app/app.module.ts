@@ -20,7 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatIconModule} from '@angular/material/icon';;
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {MatIconModule} from '@angular/material/icon';;
     MatCardModule,
     MatGridListModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

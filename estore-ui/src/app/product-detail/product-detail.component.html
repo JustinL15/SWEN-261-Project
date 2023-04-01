@@ -1,16 +1,27 @@
 <body>
   <div *ngIf="product">
+    <!-- do a grid instead maybe. Just a 1x2 -->
     <h2>{{product.name}}</h2>
-    <div><span>About: </span></div>
-    <div>{{product.description}}</div>
-    <div><span>Price: </span>{{product.price}}
+
+    <img src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png" id="proImage">
+    <div class="productAbout">
+      <div class="front"><span>About: </span></div>
+      <div>{{product.description}}</div>
+      <br>
+      <div><span class="front">Price: </span>${{product.price}}
+      </div>
+      <br>
+      <div class="front">Quantity: </div> <input type="text" [(ngModel)]="quantity">
+      <button type="button" (click)="addToCart(); goBack()" class="buy">Buy</button>
+      <br>
+      <br>
+      {{errorMessage}}
+      <br>
     </div>
-    Quantity: <input type="text" [(ngModel)]="quantity">
-    <button type="button" (click)="addToCart()" class="back">Buy</button>
-    <br>
-    <br>
-    {{errorMessage}}
-    <br>
-    <button type="button" (click)="goBack()" class="back">go back</button>
   </div>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile><button type="button" (click)="goBack()" class="back">go back</button></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+  </mat-grid-list>
 </body>
