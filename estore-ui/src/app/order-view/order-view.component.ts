@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { Order } from '../order';
@@ -10,9 +11,12 @@ import { OrderService } from '../services/order-service';
 })
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
+  displayedColumns: string[] = ['id', 'total', 'products', 'time', 'complete', 'delete'];
+  displayedColumnsComp: string[] = ['id', 'name', 'products'];
   comp: boolean = false;
+  total: number;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService) { this.total = 0; }
 
   /* Displays the orders on initalization */
   ngOnInit(): void {
@@ -45,5 +49,12 @@ export class OrderViewComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  getDate(order: Order): string{
+    // this.date = order.dateTime;
+    let date = new Date(order.dateTime);
+    // date.getDay;
+    return date.toString();
   }
 }

@@ -5,5 +5,5 @@ export interface Order {
     totalPrice: number;
     products: Product[];
     complete: boolean;
-    dateTime: Date | null;
+    dateTime: Date;
   }

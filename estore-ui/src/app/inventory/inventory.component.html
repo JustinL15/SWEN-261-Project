@@ -1,45 +1,55 @@
-<table style="width: 100%;">
-    <tr>
-        <th style="width: 70%;" align="left">
-            <h2>Inventory</h2>
-        </th>
-        <!-- button needs to link to the order-view -->
-        <a routerLink="/orders">
-            <th align="right"><button type="button" class="redir">Orders</button></th>
-        </a>
-    </tr>
-</table>
+<mat-grid-list cols="5" rowHeight="80px">
+    <mat-grid-tile colspan="2"></mat-grid-tile>
+    <mat-grid-tile style="width: 90%; float: left;"><h2>Inventory</h2></mat-grid-tile>
+    <mat-grid-tile colspan="1"></mat-grid-tile>
+    <mat-grid-tile style="width: 100%;"><a routerLink="/orders">
+        <button type="button" class="redir">Orders</button>
+    </a></mat-grid-tile>
+</mat-grid-list>
 
-<div>
+<div class="addProducts">
     <label for="new-product">Product name: </label>
     <input id="new-product" #productName />
-    <label  for="new-price">Price: </label>
-    <input id="new-price" #productPrice />
-    <label class="number" for="new-quantity">Quantity: </label>
+    <label for="new-price">Price: </label>
+    <input class="number" id="new-price" #productPrice />
+    <label for="new-quantity">Quantity: </label>
     <input class="number" id="new-quantity" #productQuantity />
     <label for="new-description">Description: </label>
     <input inputmode="numeric" id="new-description" #productDescription />
 
     <!-- (click) passes input value to add() and then clears the input -->
-    <button type="button" class="add-button"
-        (click)="add(productName.value, productPrice.value, productQuantity.value, productDescription.value); productName.value=''; productQuantity.value=''; productPrice.value=''; productDescription.value=''">
-        Add product
+    <button type="button" class="add-button" (click)="add(productName.value, productPrice.value, productQuantity.value, 
+        productDescription.value); productName.value=''; productQuantity.value=''; 
+        productPrice.value=''; productDescription.value=''">
+        Add Product
     </button>
 </div>
 
-<div class="centered">
-    <ul class="products">
-        <div>
-            <label class="id-label">ID</label>
-            <label class="product-label">Product Name</label>
-            <label class="quantity-label">Qty.</label>
-            <li *ngFor="let product of products">
-                <a routerLink="/manage/{{product.id}}">
-                    <span class="badge">{{product.id}}</span> {{product.name}} <span
-                        class="qbadge">{{product.quantity}}</span>
-                </a>
-            </li>
-        </div>
-    </ul>
+<div class="matTab">
+    <table mat-table [dataSource]="products" class="myT">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let product"> ${{product.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef>Qty.</th>
+            <td mat-cell *matCellDef="let product"> {{product.quantity}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="productHeader"></tr>
+        <tr mat-row routerLink="/manage/{{product.id}}" *matRowDef="let row; columns: displayedColumns; let product"
+            class="productRow"></tr>
+    </table>
     {{errorMessage}}
 </div>
