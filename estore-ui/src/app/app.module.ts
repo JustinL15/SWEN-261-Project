@@ -20,7 +20,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatIconModule} from '@angular/material/icon';;
+import {MatIconModule} from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
 
 
 @NgModule({
@@ -33,7 +37,8 @@ import {MatIconModule} from '@angular/material/icon';;
     InventoryComponent,
     EditProductDetailComponent,
     OrderViewComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,10 @@ import {MatIconModule} from '@angular/material/icon';;
     MatCardModule,
     MatGridListModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

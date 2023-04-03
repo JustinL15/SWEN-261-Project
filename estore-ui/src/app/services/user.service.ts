@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Customer } from '../customer';
 import { MessageService } from './message.service';
-import { CartService } from './cart.service';
 import { ErrorService } from './error.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +22,8 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-    private errorService: ErrorService) { }
+    private errorService: ErrorService
+    ) { }
 
   /** GET customers from the server */
   getCustomers(): Observable<Customer[]> {
@@ -52,6 +51,7 @@ export class UserService {
 
   /** GET customers by id. Will 404 if id not found */
   getCustomer(id: number): Observable<Customer> {
+    this.errorService.clearErrorCode();
     const url = `${this.customersUrl}/${id}`;
     return this.http.get<Customer>(url).pipe(
       tap(_ => this.log(`fetched customer id=${id}`)),
@@ -77,6 +77,7 @@ export class UserService {
 
   /** POST: add a new customer to the server */
   addCustomer(customer: Customer): Observable<Customer> {
+    this.errorService.clearErrorCode();
     return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
       tap((newCustomer: Customer) => this.log(`added customer w/ id=${newCustomer.id}`)),
       catchError(this.errorService.handleError<Customer>('addCustomer'))
@@ -85,6 +86,7 @@ export class UserService {
 
   /** DELETE: delete the Customer from the server */
   deleteCustomer(id: number): Observable<Customer> {
+    this.errorService.clearErrorCode();
     const url = `${this.customersUrl}/${id}`;
 
     return this.http.delete<Customer>(url, this.httpOptions).pipe(
@@ -95,8 +97,12 @@ export class UserService {
 
   /** PUT: update the Customer on the server */
   updateCustomer(customer: Customer): Observable<any> {
+    this.errorService.clearErrorCode();
     return this.http.put(this.customersUrl, customer, this.httpOptions).pipe(
-      tap(_ => this.log(`updated customer id=${customer.id}`)),
+      tap(_ => {
+        this.log(`updated customer id=${customer.id}`)
+        this.currentUser = customer;
+      }),
       catchError(this.errorService.handleError<any>('updateCustomer'))
     );
   }
@@ -105,6 +111,7 @@ export class UserService {
 
   /** POST: Login with credentials specified by customer object you pass in*/
   login(username: string, password: string): Observable<Customer> {
+    this.errorService.clearErrorCode();
     const customer = { username, password } as Customer;
     return this.http.post<Customer>(`${this.customersUrl}/auth`, customer, this.httpOptions)
       .pipe(
@@ -127,8 +134,10 @@ export class UserService {
     }
   }
 
+
 /** POST: register a new customer to the server and login*/
 register(customer: Customer): Observable<Customer> {
+  this.errorService.clearErrorCode();
   return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
     tap((newCustomer: Customer) => {
       this.log(`added customer w/ id=${newCustomer.id}`);
@@ -156,4 +165,5 @@ register(customer: Customer): Observable<Customer> {
   private log(message: string) {
     this.messageService.add(`CustomerService: ${message}`);
   }
+  
 }

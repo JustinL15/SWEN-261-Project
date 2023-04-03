@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'manage/:id', component: EditProductDetailComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'orders', component: OrderViewComponent},
-  { path: 'login', component: UserLoginComponent},
+  { path: 'login', component: UserLoginComponent, canActivate: [LoginGuard]},
 ];
 
 @NgModule({

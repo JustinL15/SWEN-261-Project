@@ -1,80 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cart } from '../cart';
 import { CartService } from '../services/cart.service';
 import { Customer } from '../customer';
 import { UserService } from '../services/user.service';
 import { ErrorService } from '../services/error.service';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-userlogin',
   templateUrl: './userlogin.component.html',
   styleUrls: ['./userlogin.component.css']
 })
-export class UserLoginComponent {
-  isRegistering: boolean = false;
-  username: string = ""
-  password: string = ""
-  name: string = ""
-  errorMessage: string = ""
+export class UserLoginComponent implements OnInit{
+  user: Customer | null = null;
 
   constructor(
-    public userService: UserService,
-    private errorService: ErrorService
-    ) {}
+    private userService: UserService,
+  ) { }
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+  
+  getUser(): void {
+    this.user = this.userService.getCurrentUser();
+  }
 
 
-  login(): void {
-    if(this.username === "") {
-      this.errorMessage = "Username cannot be blank.";
-      return;
+  /* saves the product changes */
+  save(): void {
+    if (this.user !== null) {
+      this.userService.updateCustomer(this.user).subscribe();
     }
-    if(this.password === "") {
-      this.errorMessage = "Password cannot be blank.";
-      return;
-    }
-    this.userService.login(this.username, this.password).subscribe(_ => {
-      if(this.errorService.errorCode === 404) {
-        this.errorMessage = "Username or Password is incorrect."
-      }
-    });
   }
 
-  logout() {
-    this.reset();
-    this.userService.logout();
-  }
-  reset() {
-    this.isRegistering = false;
-    this.errorMessage = "";
-    this.username = "";
-    this.password = "";
-  }
-  register() {
-    if(this.isRegistering) {
-      if(this.username === "") {
-        this.errorMessage = "Username cannot be blank.";
-        return;
-      }
-      if(this.password === "") {
-        this.errorMessage = "Password cannot be blank.";
-        return;
-      }
-      if(this.name === "") {
-        this.errorMessage = "Name cannot be blank.";
-        return;
-      }
-      this.userService.register(
-        {name: this.name, username: this.username, password: this.password} as Customer).subscribe(_ => {
-          if(this.errorService.errorCode === 409) {
-            this.errorMessage = "Username is already taken."
-          }
-        });
-    } else {
-      this.isRegistering = true;
-      this.username = "";
-      this.password = "";
-      this.errorMessage = "";
-    }
 
-  }
+  
 }

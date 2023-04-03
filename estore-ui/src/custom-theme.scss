@@ -20,7 +20,7 @@ $estore-ui-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$estore-ui-theme: mat.define-dark-theme((
+$estore-ui-theme: mat.define-light-theme((
   color: (
     primary: $estore-ui-primary,
     accent: $estore-ui-accent,
