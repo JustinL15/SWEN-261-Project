@@ -68,6 +68,9 @@ export class ShoppingCartComponent {
       if(product.quantity + 1 <= inStock){
         product.quantity += 1;
       }
+      else {
+        window.alert("Only " + inStock + " item(s) are available");
+      }
 
       // Set the quantity in the cart array for the matching ID
       this.cart.inventory[product.id].quantity = product.quantity;
@@ -125,6 +128,8 @@ export class ShoppingCartComponent {
           orderQuantity = this.cart.inventory[prodId].quantity;
           if (inStock < orderQuantity){
             orderQuantity = inStock;
+            window.alert("Only " + inStock + " " + prod.name + "(s) are available");
+            return;
             prod.quantity = 0;
           } else{
             prod.quantity -= orderQuantity;
