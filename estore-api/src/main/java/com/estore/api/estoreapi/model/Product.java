@@ -1,8 +1,6 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.logging.Logger;
-import java.util.List;
-import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -19,7 +17,7 @@ public class Product {
     @JsonProperty("price") private double price;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("description") private String description;
-    @JsonProperty("categories") private List<String> categories;
+    @JsonProperty("category") private String category;
     @JsonProperty("ownerRecommended") private boolean ownerRecommended;
 
     /**
@@ -33,7 +31,7 @@ public class Product {
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price,
                     @JsonProperty("quantity") int quantity, @JsonProperty("description") String description,
-                    @JsonProperty("categories") List<String> categories,
+                    @JsonProperty("category") String category,
                     @JsonProperty("ownerRecommended") boolean ownerRecommended) {
         this.id = id;
         this.name = name;
@@ -45,11 +43,11 @@ public class Product {
         else {
             this.description = description;
         }
-        if (categories == null) {
-            this.categories = new ArrayList<String>();
+        if (category == null) {
+            this.category = "";
         }
         else {
-            this.categories = categories;
+            this.category = category;
         }
         this.ownerRecommended = ownerRecommended;
     }
@@ -149,8 +147,8 @@ public class Product {
      * 
      * @return Categories
      */
-    public List<String> getCategories() {
-        return categories;
+    public String getCategory() {
+        return category;
     }
 
     /**
