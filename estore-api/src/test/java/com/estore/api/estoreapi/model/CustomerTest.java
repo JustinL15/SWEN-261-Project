@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import com.estore.api.estoreapi.model.Order;
 
 /**
  * The unit test suite for the Customer class
