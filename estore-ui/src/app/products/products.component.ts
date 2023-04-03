@@ -3,10 +3,8 @@ import { Product } from '../product';
 import { ProductService } from '../services/product.service';
 import { Observable, Subject } from 'rxjs';
 import {
-  debounceTime, distinctUntilChanged, switchMap
+  distinctUntilChanged, switchMap
 } from 'rxjs/operators';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryService } from '../services/category.service';
 
 @Component({
