@@ -18,13 +18,11 @@
       {{errorMessage}}
       <br>
     </div>
-    Quantity: <input type="text" [(ngModel)]="quantity">
-    <button type="button" (click)="addToCart()" class="back">Buy</button>
-    <br>
-    <button type="button" (click)="goBack()" class="back">go back</button>
-    <a routerLink="/reviews">
-      <th align="right"><button type="button" class="redir">Add a Review</button></th>
-  </a>
+    <div *ngIf = "reviews">
+      <a routerLink="/reviews">
+        <th align="right"><button type="button" (click)="addReview(reviews)" class="addReview">Add a Review</button></th>
+      </a>
+    </div>
   </div>
   <mat-grid-list cols="3" rowHeight="2:1">
     <mat-grid-tile></mat-grid-tile>

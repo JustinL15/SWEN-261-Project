@@ -1,20 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product } from '../product';
 import { ProductService } from '../services/product.service';
+import { Review } from '../review'
+import { ReviewService } from '../services/review-service';
 
 @Component({
   selector: 'app-edit-product-detail',
   templateUrl: './edit-product-detail.component.html',
   styleUrls: ['./edit-product-detail.component.css']
 })
-export class EditProductDetailComponent {
+export class EditProductDetailComponent implements OnInit {
   product: Product | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private reviewService: ReviewService,
     private location: Location
   ) { }
 
@@ -29,7 +32,7 @@ export class EditProductDetailComponent {
     this.productService.getProduct(id).subscribe(product => this.product = product);
   }
 
-  /* returns to previous paige (should be the inventory paige) */
+  /* returns to previous page (should be the inventory page) */
   goBack(): void {
     this.location.back();
   }
@@ -44,6 +47,17 @@ export class EditProductDetailComponent {
   /* removes the product from inventory */
   delete(product: Product): void {
     this.productService.deleteProduct(product.id).subscribe();
+    this.goBack();
+  }
+
+  deleteReview(review: Review): void {
+    this.reviewService.deleteReview(review.id).subscribe();
+    this.goBack();
+  }
+
+  commentReview(review: Review): void {
+    review.reviewContent = review.reviewContent.trim();
+    this.reviewService.addReview(review).subscribe();
     this.goBack();
   }
 
