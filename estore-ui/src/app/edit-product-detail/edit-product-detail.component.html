@@ -45,6 +45,11 @@
                     <label for="category" class="front">Category: </label>
                     <input id="category" [(ngModel)]="product.category" placeholder="New Category" />
                 </div>
+                <br>
+                <div>
+                    <label for="owner-recommended" class="front">Owner Recommended: </label>
+                    <input type="checkbox" id="owner-recommended" [(ngModel)]="product.ownerRecommended"/>
+                </div>
             </div>
         </div>
         <!-- buttons for back save and delete -->
