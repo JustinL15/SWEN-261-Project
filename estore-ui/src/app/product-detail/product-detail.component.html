@@ -11,8 +11,11 @@
       <div><span class="front">Price: </span>${{product.price}}
       </div>
       <br>
-      <div class="front">Quantity: </div> <input type="text" [(ngModel)]="quantity">
-      <button type="button" (click)="addToCart(); goBack()" class="buy">Buy</button>
+      <div><span class="front">Quantity: </span>{{product.quantity}}
+      </div>
+      <br>
+      <input type="text" [(ngModel)]="quantity">
+      <button type="button" (click)="addToCart(); goBack()" class="buy">Add to cart</button>
       <br>
       <br>
       {{errorMessage}}
