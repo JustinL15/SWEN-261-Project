@@ -71,10 +71,12 @@ export class ProductDetailComponent implements OnInit {
         inCart = prod.quantity;
       }
       if(this.product !== undefined) {
+        this.quantity = + this.quantity;
         if(this.product?.quantity >= (this.quantity + + inCart)) {
           this.cartService.addToCart(cartId, {id: pid, quantity: this.quantity}).subscribe();
         } else {
-          this.errorMessage = "Quantity selected exceeds current amount in stock.";
+          this.errorMessage = "Only " + this.product?.quantity + " item(s) are in stock.";
+          window.alert(this.errorMessage);
         }
       }
     })

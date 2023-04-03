@@ -30,6 +30,11 @@ a {
     font-weight: 500;
 }
 
+.productQuantity {
+    float: left;
+    font-weight: 500;
+}
+
 .productPrice{
     padding-left: 10px;
     float: right;
