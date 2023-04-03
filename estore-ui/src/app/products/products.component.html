@@ -28,7 +28,7 @@
       <div class="productBoxes" *ngIf="(selectedCategory !== '')">
         <mat-grid-list cols="3" rowHeight="2:1">
           <div class="products">
-            <span *ngFor="let product of products$ | async">
+            <span *ngFor="let product of products">
               <span *ngIf="product.category === selectedCategory">
               <mat-grid-tile style="width: 80%;">
                 <div class="card" routerLink="/detail/{{product.id}}">
