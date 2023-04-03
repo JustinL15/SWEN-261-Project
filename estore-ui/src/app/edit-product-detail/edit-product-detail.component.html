@@ -9,7 +9,6 @@
         <div><span>Quantity: </span>{{product.quantity}}</div>
         <div><span>Description: </span>{{product.description}}</div>
 
-
         <br>
         <div class="row">
             <div class="column">
@@ -40,6 +39,11 @@
                 <div>
                     <label for="description" class="front">Description: </label>
                     <input id="description" [(ngModel)]="product.description" placeholder="New Description" />
+                </div>
+                <br>
+                <div>
+                    <label for="category" class="front">Category: </label>
+                    <input id="category" [(ngModel)]="product.category" placeholder="New Category" />
                 </div>
             </div>
         </div>
