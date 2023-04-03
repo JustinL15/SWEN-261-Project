@@ -24,6 +24,10 @@
       {{errorMessage}}
       <br>
     </div>
+    Quantity: <input type="text" [(ngModel)]="quantity">
+    <button type="button" (click)="addToCart()" class="back">Buy</button>
+    <br>
+    <button type="button" (click)="goBack()" class="back">go back</button>
   </div>
   <mat-grid-list cols="3" rowHeight="2:1">
     <mat-grid-tile></mat-grid-tile>

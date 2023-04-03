@@ -8,6 +8,7 @@ import { UserService } from '../services/user.service';
 import { Cart } from '../cart';
 import { CartService } from '../services/cart.service';
 import { Customer } from '../customer';
+import { Review } from '../review';
 
 @Component({
   selector: 'app-product-detail',
@@ -85,4 +86,20 @@ export class ProductDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  addReview(review: Review): boolean {
+    var id: number | undefined = this.product?.id;
+    while(review.purchased != null) {
+      for(let i = 0; review.purchased.length; i++) {
+        if(id == review.purchased[i]) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+  
 }
