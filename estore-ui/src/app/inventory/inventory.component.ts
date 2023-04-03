@@ -30,7 +30,7 @@ export class InventoryComponent implements OnInit{
   }
 
   /* Adds product to inventory. MUST have all filled or will just return */
-  add(name: string, prc: string, qty: string, description: string): void {
+  add(name: string, prc: string, qty: string, description: string, category: string): void {
     this.errorMessage = "";
     name = name.trim();
     var price: number = +prc;
@@ -40,7 +40,7 @@ export class InventoryComponent implements OnInit{
       return;
     }
     
-    this.productService.addProduct({ name, price, quantity, description } as Product).subscribe(product => { 
+    this.productService.addProduct({ name, price, quantity, description, category} as Product).subscribe(product => { 
       if(this.errorService.errorCode === 409) {
         this.errorMessage = "A product with that name already exists.";
       } else {
