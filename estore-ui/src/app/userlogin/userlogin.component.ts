@@ -4,7 +4,7 @@ import { CartService } from '../services/cart.service';
 import { Customer } from '../customer';
 import { UserService } from '../services/user.service';
 import { ErrorService } from '../services/error.service';
-import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userlogin',
@@ -16,6 +16,7 @@ export class UserLoginComponent implements OnInit{
 
   constructor(
     private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +34,9 @@ export class UserLoginComponent implements OnInit{
       this.userService.updateCustomer(this.user).subscribe();
     }
   }
-
-
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/home']);
+  }
   
 }

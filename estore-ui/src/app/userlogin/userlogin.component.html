@@ -1,26 +1,34 @@
-<body>
-  <div *ngIf="user !== null">
-      <h2>{{user.name | uppercase}}</h2>
-  <div class="row">
-      <div class="column"></div>
-      <div class="column">
-          <div>
-              <label for="product-name">Name: </label>
-              <input id="product-name" [(ngModel)]="user.name" placeholder="Change name" />
-          </div>
-          <br>
-          <div>
-              <label for="quantity">Username: </label>
-              <input id="quantity" [(ngModel)]="user.username" placeholder="Change Username" />
-          </div>
-          <br>
-          <div>
-              <label for="price">Password: </label>
-              <input type="password" id="price" [(ngModel)]="user.password" placeholder="Change Password" />
+<mat-tab-group class="custom">
+  <mat-tab label="Account Info">
+    <div class= "container">
+      <div *ngIf="user !== null">
+          <h2>{{user.name | uppercase}}</h2>
+      <div class="row">
+          <div class="column"></div>
+          <div class="column">
+              <div>
+                  <label for="product-name">Name: </label>
+                  <input id="product-name" [(ngModel)]="user.name" placeholder="Change name" />
+              </div>
+              <br>
+              <div>
+                  <label for="quantity">Username: </label>
+                  <input id="quantity" [(ngModel)]="user.username" placeholder="Change Username" />
+              </div>
+              <br>
+              <div>
+                  <label for="price">Password: </label>
+                  <input type="password" id="price" [(ngModel)]="user.password" placeholder="Change Password" />
+              </div>
           </div>
       </div>
-  </div>
-
-  <button type="button" (click)="save()">Save</button>
-  </div>
-</body>
+    
+      <button type="button" (click)="save()">Save</button>
+      <button type="button" (click)="logout()">Log Out</button>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Your Orders">
+    <div></div>
+  </mat-tab>
+</mat-tab-group>
