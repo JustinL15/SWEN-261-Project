@@ -1,7 +1,7 @@
 package com.estore.api.estoreapi.controller;
 
-import com.estore.api.estoreapi.model.Order;
-import com.estore.api.estoreapi.persistence.OrderDAO;
+import com.estore.api.estoreapi.model.Review;
+import com.estore.api.estoreapi.persistence.ReviewDAO;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,42 +19,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * Controls the REST requests and responses for an Order
+ * Controls the REST requests and responses for a Review
  * 
  *@author Alexandria Pross
  */
- 
+
 @RestController
-@RequestMapping("orders")
-public class OrderController {
-    private static final Logger LOG = Logger.getLogger(OrderController.class.getName());
-    private OrderDAO orderDAO;
+@RequestMapping("reviews")
+public class ReviewController {
+
+    private static final Logger LOG = Logger.getLogger(ReviewController.class.getName());
+    private ReviewDAO reviewDAO;
 
     /**
-     * Construct a REST API controller for a {@link Order}
+     * Construct a REST API controller for a {@link Review}
      * 
-     * @param orderDAO Data access object (Ex. FileDAO)
+     * @param reviewDAO Data access object (Ex. FileDAO)
      */
-    public OrderController(OrderDAO orderDAO) {
-        this.orderDAO = orderDAO;
+    public ReviewController(ReviewDAO reviewDAO) {
+        this.reviewDAO = reviewDAO;
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Order order} for the given id
+     * Responds to the GET request for a {@linkplain Review review} for the given id
      * 
-     * @param id The id used to locate the {@link Order order}
+     * @param id The id used to locate the {@link Review review}
      * 
-     * @return ResponseEntity with {@link Order order} object and the HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Review review} object and the HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrder(@PathVariable int id) {
-        LOG.info("GET /orders/" + id);
+    public ResponseEntity<Review> getReview(@PathVariable int id) {
+        LOG.info("GET /reviews/" + id);
         try {
-            Order order = orderDAO.getOrder(id);
-            if (order != null)
-                return new ResponseEntity<Order>(order, HttpStatus.OK);
+            Review review = reviewDAO.getReview(id);
+            if (review != null)
+                return new ResponseEntity<Review>(review, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -65,22 +66,22 @@ public class OrderController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Order order} for all ids in the array
+     * Responds to the GET request for a {@linkplain Review review} for all ids in the array
      * 
-     * @param id The id used to locate the {@link Order order}
+     * @param id The id used to locate the {@link Review review}
      * 
-     * @return ResponseEntity with {@link Order order} object and the HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Review review} object and the HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
      @GetMapping("")
-     public ResponseEntity<Order[]> getOrders() {
+     public ResponseEntity<Review[]> getReviews() {
  
-         LOG.info("GET /orders");
+         LOG.info("GET /reviews");
          try {
-             Order[] orders = orderDAO.getOrders();
-             if(orders != null)
-                 return new ResponseEntity<Order[]>(orders, HttpStatus.OK);
+             Review[] reviews = reviewDAO.getReviews();
+             if(reviews != null)
+                 return new ResponseEntity<Review[]>(reviews, HttpStatus.OK);
              else
                  return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
          }
@@ -92,24 +93,24 @@ public class OrderController {
      }
 
      /**
-     * Creates a {@linkplain Order order} with order object
+     * Creates a {@linkplain Review review} with review object
      * 
-     * @param order - the {@link Order order} to create
-     * @return ResponseEntity with created {@link Order order} object and HTTP
+     * @param review - the {@link Review review} to create
+     * @return ResponseEntity with created {@link Review review} object and HTTP
      *         status of CREATED
-     *         ResponseEntity with HTTP status of CONFLICT if {@link Order
-     *         order} object already exists
+     *         ResponseEntity with HTTP status of CONFLICT if {@link Review
+     *         review} object already exists
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        LOG.info("POST /orders " + order);
+    public ResponseEntity<Review> createReview(@RequestBody Review review) {
+        LOG.info("POST /reviews " + review);
         try {
 
-            Order result = orderDAO.createOrder(order);
+            Review result = reviewDAO.createReview(review);
 
             if (result != null) {
-                return new ResponseEntity<Order>(result, HttpStatus.CREATED);
+                return new ResponseEntity<Review>(result, HttpStatus.CREATED);
             }
             else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -121,18 +122,18 @@ public class OrderController {
     }
 
     /**
-     * Deletes a {@linkplain Order order} with the given id
+     * Deletes a {@linkplain Review review} with the given id
      * 
-     * @param id - the id of the {@link Order order} to delete
+     * @param id - the id of the {@link Review review} to delete
      * @return ResponseEntity HTTP status of OK if deleted
      *         ResponseEntity with HTTP status of NOT_FOUND if not found
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Order> deleteOrder(@PathVariable int id) {
-        LOG.info("Delete /orders/" + id);
+    public ResponseEntity<Review> deleteReview(@PathVariable int id) {
+        LOG.info("Delete /reviews/" + id);
         try {
-            if (orderDAO.deleteOrder(id)) {
+            if (reviewDAO.deleteReview(id)) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -144,20 +145,20 @@ public class OrderController {
     }
 
     /**
-     * Updates the {@linkplain Order order} with the provided {@linkplain Order order} object, if it exists
+     * Updates the {@linkplain Review review} with the provided {@linkplain Review review} object, if it exists
      *
-     * @param order The {@link Order order} to update
+     * @param review The {@link Review review} to update
      *
-     * @return ResponseEntity with updated {@link Order order} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated {@link Review review} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Order> updateOrder(@RequestBody Order order) {
-        LOG.info("PUT /orders " + order);
+    public ResponseEntity<Review> updateReview(@RequestBody Review review) {
+        LOG.info("PUT /reviews " + review);
         try {
-            if(orderDAO.updateOrder(order) != null)
-                return new ResponseEntity<Order>(order,HttpStatus.OK);
+            if(reviewDAO.updateReview(review) != null)
+                return new ResponseEntity<Review>(review,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

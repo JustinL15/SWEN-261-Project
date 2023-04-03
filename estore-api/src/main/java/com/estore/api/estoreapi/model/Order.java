@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Order {
     private static final Logger LOG = Logger.getLogger(Order.class.getName());
 
-    /// Setup all parameters that the product should have
+    /// Setup all parameters that the order should have
     @JsonProperty("id") private int id;
     @JsonProperty("totalPrice") private double totalPrice;
     @JsonProperty("products") private Product[] products;
@@ -110,7 +110,7 @@ public class Order {
     /**
      * Set the products in the order
      * 
-     * @param quantity Products in the order
+     * @param products Products in the order
      */
     public void setProducts(Product[] products) {
         this.products = products;

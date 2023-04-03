@@ -25,6 +25,7 @@ public class Customer {
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
     @JsonProperty("password") private String password;
+    @JsonProperty("products") private List<Integer> products;
 
     /**
      * Construct a new customer
@@ -46,6 +47,7 @@ public class Customer {
         this.isAdmin = isAdmin;
         this.password = password;
         this.orders = new ArrayList<>();
+        this.products = new ArrayList<>();
     }
 
     /**
@@ -122,6 +124,24 @@ public class Customer {
     }
 
     /**
+     * Get the purchased products
+     * 
+     * @return products
+     */
+    public List<Integer> getPurchasedProducts() {
+        return products;
+    }
+
+    /**
+     * Set the purchased products
+     * 
+     * @param productId customer productsIds
+     */
+    public void addPurchasedProduct(int productId) {
+        products.add(productId);
+    }
+
+    /**
      * Get the cart ID of the customer
      * 
      * @return Cart ID
@@ -157,6 +177,8 @@ public class Customer {
         orders.add(orderId);
     }
 
+    
+
     /**
      * Check if the customer is an admin
      * 
@@ -165,5 +187,7 @@ public class Customer {
     public boolean isAdmin() {
         return isAdmin;
     }
+
+
 
 }
