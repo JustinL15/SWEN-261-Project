@@ -17,7 +17,7 @@
 
     <div class="search-result">
       <div class="productBoxes" *ngIf="(searchBox.value)">
-        <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-list cols="3" rowHeight="1.6:1">
           <div class="products">
             <span *ngFor="let product of products$ | async">
               <mat-grid-tile style="width: 80%;">
@@ -40,7 +40,7 @@
   </div>
 
   <div class="productBoxes" *ngIf="!(searchBox.value)">
-    <mat-grid-list cols="3" rowHeight="2:1" gutterSize="20px">
+    <mat-grid-list cols="3" rowHeight="1.6:1" gutterSize="20px">
       <div class="products">
         <span *ngFor="let product of products">
           <mat-grid-tile style="width: 80%;">
