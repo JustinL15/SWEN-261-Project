@@ -1,4 +1,6 @@
 <body>
+    <div></div>
+    <img class="pic" src="https://cdn-icons-png.flaticon.com/512/152/152760.png">
     <div *ngIf="userService.isLoggedIn()">
         <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
     </div>

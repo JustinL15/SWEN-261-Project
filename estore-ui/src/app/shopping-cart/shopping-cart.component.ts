@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart } from '../cart';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 import { Order } from '../order';
-import { OrderService } from '../order-service';
+import { OrderService } from '../services/order-service';
 import { Product } from '../product';
 import { ProductReference } from '../product-reference';
-import { ProductService } from '../product.service';
-import { UserService } from '../user.service';
+import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
