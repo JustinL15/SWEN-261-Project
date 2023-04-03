@@ -1,6 +1,8 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.logging.Logger;
+import java.util.List;
+import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -17,6 +19,8 @@ public class Product {
     @JsonProperty("price") private double price;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("description") private String description;
+    @JsonProperty("categories") private List<String> categories;
+    @JsonProperty("ownerRecommended") private boolean ownerRecommended;
 
     /**
      * Constructor for the product
@@ -28,7 +32,9 @@ public class Product {
      * @param description Description for the product
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") double price,
-                    @JsonProperty("quantity") int quantity, @JsonProperty("description") String description) {
+                    @JsonProperty("quantity") int quantity, @JsonProperty("description") String description,
+                    @JsonProperty("categories") List<String> categories,
+                    @JsonProperty("ownerRecommended") boolean ownerRecommended) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -39,6 +45,13 @@ public class Product {
         else {
             this.description = description;
         }
+        if (categories == null) {
+            this.categories = new ArrayList<String>();
+        }
+        else {
+            this.categories = categories;
+        }
+        this.ownerRecommended = ownerRecommended;
     }
 
     /**
@@ -129,6 +142,33 @@ public class Product {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * Get the categories of the product
+     * 
+     * @return Categories
+     */
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    /**
+     * Get the owner recommended status of the product
+     * 
+     * @return Owner recommended status of the product
+     */
+    public boolean isOwnerRecommended() {
+        return ownerRecommended;
+    }
+
+    /**
+     * Set the owner recommended status of the product
+     * 
+     * @param ownerRecommended Owner recommended status of the product
+     */
+    public void setOwnerRecommended(boolean ownerRecommended) {
+        this.ownerRecommended = ownerRecommended;
     }
 
     /**
