@@ -1,6 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;
-background-color: #f7d292; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #f7d292;
+    text-align: center;
+}
 
+body {
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+button {
+    background-color: #BAA47F;
+    color: black;
+}
+
+input{
+    background-color: tan;
+    border-radius: 3px;
+}

@@ -21,10 +21,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input'
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'
 
 
 @NgModule({
@@ -54,6 +54,7 @@ import { MatInputModule } from '@angular/material/input'
     MatGridListModule,
     MatProgressBarModule,
     MatIconModule,
+    MatInputModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule

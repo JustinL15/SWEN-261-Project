@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { Order } from '../order';
@@ -10,7 +11,7 @@ import { OrderService } from '../services/order-service';
 })
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
-  displayedColumns: string[] = ['id', 'name', 'products', 'complete', 'delete'];
+  displayedColumns: string[] = ['id', 'total', 'products', 'time', 'complete', 'delete'];
   displayedColumnsComp: string[] = ['id', 'name', 'products'];
   comp: boolean = false;
   total: number;
@@ -50,24 +51,10 @@ export class OrderViewComponent implements OnInit {
     return false;
   }
 
-  isCompletes(orders: Order[]): number{
-    //orders for some reason is 0
-    let a = 0;
-    if(orders.length > 0){
-      return 100;
-    }else{
-     for(let i = 0; i < 20; i++){
-        if(this.isComplete(orders[i])){
-          a+=1;
-         }
-      }
-      a = this.total;
-    return a;
-    }
-    // this.total = this.orders.length;
-    // let t = this.total;
-    // this.total = this.total/this.orders.length;
-    // this.total;
-    
+  getDate(order: Order): string{
+    // this.date = order.dateTime;
+    let date = new Date(order.dateTime);
+    // date.getDay;
+    return date.toString();
   }
 }
