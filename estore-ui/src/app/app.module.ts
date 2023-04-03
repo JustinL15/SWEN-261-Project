@@ -22,6 +22,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import {MatInputModule} from '@angular/material/input';
     MatProgressBarModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
