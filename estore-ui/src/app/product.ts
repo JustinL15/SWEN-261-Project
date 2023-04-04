@@ -4,4 +4,6 @@ export interface Product {
     price: number;
     quantity: number;
     description: string;
+    category: string;
+    ownerRecommended: boolean;
   }
