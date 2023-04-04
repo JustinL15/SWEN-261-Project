@@ -23,7 +23,8 @@
               <mat-grid-tile style="width: 80%;">
                 <div class="card" routerLink="/detail/{{product.id}}">
                   <span class="productName">{{product.name}}</span>
-                  <div class="productPrice">${{product.price}}</div>
+                  <div class="productPrice">${{product.price}}</div><br>
+                  <div class="productQuantity">{{product.quantity}} available</div>
                   <div class="image">
                     <!-- replace image with product image -->
                     <img
@@ -46,6 +47,7 @@
             <div class="card" routerLink="/detail/{{product.id}}">
               <span class="productName">{{product.name}}</span>
               <div class="productPrice">${{product.price}}</div>
+              <div class="productQuantity">{{product.quantity}} available</div>
               <div class="image">
                 <!-- replace image with product image -->
                 <img src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
