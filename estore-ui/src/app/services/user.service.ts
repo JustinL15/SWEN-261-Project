@@ -14,6 +14,7 @@ export class UserService {
   private customersUrl = 'http://localhost:8080/customers';  // URL to web api
   private currentUser: Customer | null = null;
   private loggedIn = false;
+  private observableUser: Observable<Customer> | null = null;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -113,7 +114,7 @@ export class UserService {
   login(username: string, password: string): Observable<Customer> {
     this.errorService.clearErrorCode();
     const customer = { username, password } as Customer;
-    return this.http.post<Customer>(`${this.customersUrl}/auth`, customer, this.httpOptions)
+    return this.observableUser = this.http.post<Customer>(`${this.customersUrl}/auth`, customer, this.httpOptions)
       .pipe(
         tap((customer: Customer) => {
           if (customer) {
@@ -138,7 +139,7 @@ export class UserService {
 /** POST: register a new customer to the server and login*/
 register(customer: Customer): Observable<Customer> {
   this.errorService.clearErrorCode();
-  return this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
+  return this.observableUser = this.http.post<Customer>(this.customersUrl, customer, this.httpOptions).pipe(
     tap((newCustomer: Customer) => {
       this.log(`added customer w/ id=${newCustomer.id}`);
       this.currentUser = newCustomer;
@@ -150,6 +151,7 @@ register(customer: Customer): Observable<Customer> {
 
   logout(): void {
     this.currentUser = null;
+    this.observableUser = null;
     this.loggedIn = false;
   }
 
@@ -159,6 +161,10 @@ register(customer: Customer): Observable<Customer> {
 
   getCurrentUser(): Customer | null {
     return this.currentUser;
+  }
+
+  getObservableUser(): Observable<Customer> | null {
+    return this.observableUser;
   }
 
   /** Log a CustomerService message with the CustomerService */

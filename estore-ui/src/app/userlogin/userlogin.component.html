@@ -1,6 +1,6 @@
 <mat-tab-group class="custom">
   <mat-tab label="Account Info">
-    <div class= "container">
+    <div class= "cont">
       <div *ngIf="user !== null">
           <h2>{{user.name | uppercase}}</h2>
       <div class="row">
@@ -29,6 +29,35 @@
     </div>
   </mat-tab>
   <mat-tab label="Your Orders">
-    <div></div>
+    <div class="matTab">
+        <table mat-table [dataSource]="orders" class="myT">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let order"> {{order.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="products">
+                <th mat-header-cell *matHeaderCellDef>Products</th>
+                <td mat-cell *matCellDef="let order">
+                    <li *ngFor="let product of order.products">{{product.name}}</li>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef>Total Price</th>
+              <td mat-cell *matCellDef="let order"> ${{order.totalPrice}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="orderHeader"></tr>
+
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; let order" class="orderRow"
+                [hidden]="order.complete == false"></tr>
+        </table>
+    </div>
   </mat-tab>
 </mat-tab-group>

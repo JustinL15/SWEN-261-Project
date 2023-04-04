@@ -113,6 +113,12 @@ export class ShoppingCartComponent {
       this.orderService.addOrder(order).subscribe( order =>
         this.orderService.updateOrder(order).subscribe()
       );
+      var user = this.userService.getCurrentUser();
+      if(user !== null) {
+        user.orders.push(order.id);
+        console.log(user);
+        this.userService.updateCustomer(user).subscribe();
+      }
     }
     }
   }

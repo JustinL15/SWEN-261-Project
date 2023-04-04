@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart } from '../cart';
-import { CartService } from '../services/cart.service';
+import { OrderService } from '../services/order-service';
 import { Customer } from '../customer';
 import { UserService } from '../services/user.service';
 import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-userlogin',
@@ -13,9 +14,12 @@ import { Router } from '@angular/router';
 })
 export class UserLoginComponent implements OnInit{
   user: Customer | null = null;
+  orders: Order[] = [];
+  displayedColumns: string[] = ['id', 'name', 'products', 'total'];
 
   constructor(
     private userService: UserService,
+    private orderService: OrderService,
     private router: Router
   ) { }
 
@@ -25,6 +29,11 @@ export class UserLoginComponent implements OnInit{
   
   getUser(): void {
     this.user = this.userService.getCurrentUser();
+    if(this.user !== null) {
+      this.user.orders.forEach(id => {
+        this.orderService.getOrder(id).subscribe(order => this.orders.push(order));
+      })
+    }
   }
 
 
