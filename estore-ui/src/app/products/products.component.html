@@ -6,6 +6,15 @@
       <label for="search-box">Search </label>
       <input #searchBox id="search-box" (input)="search(searchBox.value)" />
     </div>
+    <div class="categorySelect">
+      <mat-label>Category </mat-label>
+      <mat-select [(ngModel)]="selectedCategory">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+
+    </div>
 
     <!-- <ul class="search-result">
       <li *ngFor="let product of products$ | async">
@@ -16,7 +25,36 @@
     </ul> -->
 
     <div class="search-result">
-      <div class="productBoxes" *ngIf="(searchBox.value)">
+      <div class="productBoxes" *ngIf="(selectedCategory !== '')">
+        <mat-grid-list cols="3" rowHeight="1.6:1">          <div class="products">
+            <span *ngFor="let product of products">
+              <span *ngIf="product.category === selectedCategory">
+              <mat-grid-tile style="width: 80%;">
+                <div class="card" routerLink="/detail/{{product.id}}">
+                  <span class="productName">{{product.name}}</span>
+                  <div class="productPrice">${{product.price}}</div><br>
+                  <span *ngIf="product.quantity === 0">
+                    <div class="productQuantity">OUT OF STOCK</div>
+                  </span>
+                  <span *ngIf="product.quantity !== 0">
+                    <div class="productQuantity">{{product.quantity}} available</div>
+                  </span>
+                  <div class="image">
+                    <!-- replace image with product image -->
+                    <img
+                      src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                  </div>
+                </div>
+              </mat-grid-tile>
+              </span>
+            </span>
+          </div>
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <div class="search-result">
+      <div class="productBoxes" *ngIf="(searchBox.value !== '' && selectedCategory === '')">
         <mat-grid-list cols="3" rowHeight="1.6:1">
           <div class="products">
             <span *ngFor="let product of products$ | async">
@@ -24,7 +62,12 @@
                 <div class="card" routerLink="/detail/{{product.id}}">
                   <span class="productName">{{product.name}}</span>
                   <div class="productPrice">${{product.price}}</div><br>
-                  <div class="productQuantity">{{product.quantity}} available</div>
+                  <span *ngIf="product.quantity === 0">
+                    <div class="productQuantity">OUT OF STOCK</div>
+                  </span>
+                  <span *ngIf="product.quantity !== 0">
+                    <div class="productQuantity">{{product.quantity}} available</div>
+                  </span>
                   <div class="image">
                     <!-- replace image with product image -->
                     <img
@@ -39,18 +82,24 @@
     </div>
   </div>
 
-  <div class="productBoxes" *ngIf="!(searchBox.value)">
+  <div class="productBoxes" *ngIf="(searchBox.value === '' && selectedCategory === '')">
     <mat-grid-list cols="3" rowHeight="1.6:1" gutterSize="20px">
       <div class="products">
         <span *ngFor="let product of products">
           <mat-grid-tile style="width: 80%;">
             <div class="card" routerLink="/detail/{{product.id}}">
               <span class="productName">{{product.name}}</span>
-              <div class="productPrice">${{product.price}}</div>
-              <div class="productQuantity">{{product.quantity}} available</div>
+              <div class="productPrice">${{product.price}}</div><br>
+              <span *ngIf="product.quantity === 0">
+                <div class="productQuantity">OUT OF STOCK</div>
+              </span>
+              <span *ngIf="product.quantity !== 0">
+                <div class="productQuantity">{{product.quantity}} available</div>
+              </span>
               <div class="image">
                 <!-- replace image with product image -->
-                <img src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                <img
+                  src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
               </div>
             </div>
           </mat-grid-tile>

@@ -46,8 +46,8 @@ public class OrderFileDAOTest {
 
         // Build a products list for the full example order
         Product[] exampleProducts0 = new Product[2];
-        exampleProducts0[0] = new Product(1, "Coffee filter", 4.99, 10, "Filters for coffee");
-        exampleProducts0[1] = new Product(2, "Coffee mug", 9.99, 10, "Mug for coffee");
+        exampleProducts0[0] = new Product(1, "Coffee filter", 4.99, 10, "Filters for coffee", null, false);
+        exampleProducts0[1] = new Product(2, "Coffee mug", 9.99, 10, "Mug for coffee", null, false);
         
         exampleOrders[0] = new Order(1, 10.99, exampleProducts0, false, null);
         exampleOrders[1] = new Order(2, 0, new Product[0], false, null);
@@ -124,7 +124,7 @@ public class OrderFileDAOTest {
     public void testCreateOrder() {
         // Create the order
         Product[] newProducts = new Product[1];
-        newProducts[0] = new Product(3, "Coffee maker", 10, 1, "Makes coffee");
+        newProducts[0] = new Product(3, "Coffee maker", 10, 1, "Makes coffee", null, false);
         Order order = new Order(4, 10, newProducts, true, null);
 
         // Add it to the DAO

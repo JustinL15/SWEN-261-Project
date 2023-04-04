@@ -1,10 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, NgModule, OnInit} from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../services/product.service';
 import { Observable, Subject } from 'rxjs';
 import {
-  debounceTime, distinctUntilChanged, switchMap
+  distinctUntilChanged, switchMap
 } from 'rxjs/operators';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-products',
@@ -13,10 +14,14 @@ import {
 })
 export class ProductsComponent implements OnInit{
   products: Product[] = [];
+  categories: string[] = [];
   products$!: Observable<Product[]>;
-  private searchTerms = new Subject<string>();
+  private searchTerms = new Subject<string>(); 
+  selectedCategory: string = "";
+  categoryProducts: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -28,11 +33,24 @@ export class ProductsComponent implements OnInit{
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.productService.searchProducts(term)),
     );
+
+    this.getCategories();
+    this.getSelectedCategories();
   }
 
   getProducts(): void {
     this.productService.getProducts()
     .subscribe(products => this.products = products);
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategories()
+    .subscribe(categories => this.categories = categories);
+  }
+
+  getSelectedCategories(): void {
+    this.categoryService.getProductsByCategory(this.selectedCategory)
+    .subscribe(categoryProducts => this.categoryProducts = categoryProducts);
   }
 
   // Push a search term into the observable stream.
