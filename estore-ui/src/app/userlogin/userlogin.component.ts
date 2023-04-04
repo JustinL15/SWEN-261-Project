@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
 import { Order } from '../order';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-userlogin',
@@ -15,7 +16,7 @@ import { Order } from '../order';
 export class UserLoginComponent implements OnInit{
   user: Customer | null = null;
   orders: Order[] = [];
-  displayedColumns: string[] = ['id', 'name', 'products', 'total'];
+  displayedColumns: string[] = ['id', 'name', 'products', 'total', 'time'];
 
   constructor(
     private userService: UserService,
@@ -29,10 +30,13 @@ export class UserLoginComponent implements OnInit{
   
   getUser(): void {
     this.user = this.userService.getCurrentUser();
-    this.orderService.getOrders()
-    .subscribe(orders => this.orders = orders.filter(order => !this.user?.orders.includes(order.id)));
+    const orderObservables = this.user?.orders.map(id => this.orderService.getOrder(id)) || [];
+    forkJoin(orderObservables).subscribe((orders: Order[]) => {this.orders = orders; console.log(this.orders)});
   }
 
+  getDate(order: Order): string {
+    return (`${order.time[1]}/${order.time[2]}/${order.time[0]} `)
+  }
 
   /* saves the product changes */
   save(): void {

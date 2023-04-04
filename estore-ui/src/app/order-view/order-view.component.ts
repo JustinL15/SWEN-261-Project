@@ -52,9 +52,6 @@ export class OrderViewComponent implements OnInit {
   }
 
   getDate(order: Order): string{
-    // this.date = order.dateTime;
-    let date = new Date(order.dateTime);
-    // date.getDay;
-    return date.toString();
+    return order.time.join('-');
   }
 }
