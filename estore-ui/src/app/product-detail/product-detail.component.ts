@@ -19,7 +19,7 @@ import { ReviewService } from '../services/review-service';
 
 export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
-  reviews: Review[] = [];
+  reviews: Review | undefined;
   user: Customer | null | undefined;
   quantity: number = 1;
   errorMessage = "";
@@ -97,14 +97,17 @@ export class ProductDetailComponent implements OnInit {
     while (review.purchased != null) {
       for (let i = 0; review.purchased.length; i++) {
         if (id == review.purchased[i]) {
-          review.reviewContent = review.reviewContent.trim();
-          this.reviewService.addReview(review).subscribe();
-          this.goBack();
           return true;
         }
       }
     }
     return false;
+  }
+
+  writeReview(prodId: number, stars: number, content: string) {
+    let uID = 1;
+    let usr = this.user;
+    this.reviewService.addReview({ prodId, uID, usr, stars, content } as unknown as Review).subscribe();
   }
 
 }
