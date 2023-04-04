@@ -4,8 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Order } from './order';
+import { Order } from '../order';
 import { MessageService } from './message.service';
+import { ErrorService } from './error.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -19,19 +20,22 @@ export class OrderService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private errorService: ErrorService) { }
 
   /** GET orders from the server */
   getOrders(): Observable<Order[]> {
+    this.errorService.clearErrorCode();
     return this.http.get<Order[]>(this.ordersUrl)
       .pipe(
         tap(_ => this.log('fetched orders')),
-        catchError(this.handleError<Order[]>('getOrders', []))
+        catchError(this.errorService.handleError<Order[]>('getOrders', []))
       );
   }
 
   /** GET product by id. Return `undefined` when id not found */
   getOrderNo404<Data>(id: number): Observable<Order> {
+    this.errorService.clearErrorCode();
     const url = `${this.ordersUrl}/?id=${id}`;
     return this.http.get<Order[]>(url)
       .pipe(
@@ -40,16 +44,17 @@ export class OrderService {
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} order id=${id}`);
         }),
-        catchError(this.handleError<Order>(`getOrder id=${id}`))
+        catchError(this.errorService.handleError<Order>(`getOrder id=${id}`))
       );
   }
 
   /** GET orders by id. Will 404 if id not found */
   getOrder(id: number): Observable<Order> {
+    this.errorService.clearErrorCode();
     const url = `${this.ordersUrl}/${id}`;
     return this.http.get<Order>(url).pipe(
       tap(_ => this.log(`fetched order id=${id}`)),
-      catchError(this.handleError<Order>(`getOrder id=${id}`))
+      catchError(this.errorService.handleError<Order>(`getOrder id=${id}`))
     );
   }
 
@@ -57,50 +62,32 @@ export class OrderService {
 
   /** POST: add a new order to the server */
   addOrder(order: Order): Observable<Order> {
+    this.errorService.clearErrorCode();
     return this.http.post<Order>(this.ordersUrl, order, this.httpOptions).pipe(
       tap((newOrder: Order) => this.log(`added order w/ id=${newOrder.id}`)),
-      catchError(this.handleError<Order>('addOrder'))
+      catchError(this.errorService.handleError<Order>('addOrder'))
     );
   }
 
   /** DELETE: delete the order from the server */
   deleteOrder(id: number): Observable<Order> {
+    this.errorService.clearErrorCode();
     const url = `${this.ordersUrl}/${id}`;
 
     return this.http.delete<Order>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted order id=${id}`)),
-      catchError(this.handleError<Order>('deleteOrder'))
+      catchError(this.errorService.handleError<Order>('deleteOrder'))
     );
   }
 
     /** PUT: update the Order on the server */
     updateOrder(order: Order): Observable<any> {
+      this.errorService.clearErrorCode();
       return this.http.put(this.ordersUrl, order, this.httpOptions).pipe(
         tap(_ => this.log(`updated product id=${order.id}`)),
-        catchError(this.handleError<any>('updateProduct'))
+        catchError(this.errorService.handleError<any>('updateProduct'))
       );
     }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
 
   /** Log a OrderService message with the ProductService */
   private log(message: string) {

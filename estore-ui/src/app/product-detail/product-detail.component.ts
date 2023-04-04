@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Product } from '../product';
-import { ProductService } from '../product.service';
-import { UserService } from '../user.service';
+import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 import { Cart } from '../cart';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 import { Customer } from '../customer';
 
 @Component({
@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
   user: Customer | null | undefined;
   quantity: number = 1;
+  errorMessage = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -49,16 +50,36 @@ export class ProductDetailComponent implements OnInit {
           name: this.user.name, cartId: cart.id, orders: this.user.orders,
           isAdmin: this.user.isAdmin, password: this.user.password}).subscribe(user => {
             if(id !== undefined) {
-              this.cartService.addToCart(user.cartId, {id: id, quantity: this.quantity}).subscribe();
+              this.addProduct(user.cartId, id);
             }
           });
           this.userService.updateCartId(cart.id);
         }
       });
       } else {
-        this.cartService.addToCart(this.user.cartId, {id: id, quantity: this.quantity}).subscribe();
+        this.addProduct(this.user.cartId, id);
       }
     }
+  }
+
+  addProduct(cartId: number, pid: number): void {
+    this.errorMessage = "";
+    let inCart = 0;
+    this.cartService.getCart(cartId).subscribe(cart => {
+      var prod = Object.values(cart.inventory).find(reference => reference.id === pid);
+      if(prod !== undefined) {
+        inCart = prod.quantity;
+      }
+      if(this.product !== undefined) {
+        this.quantity = + this.quantity;
+        if(this.product?.quantity >= (this.quantity + + inCart)) {
+          this.cartService.addToCart(cartId, {id: pid, quantity: this.quantity}).subscribe();
+        } else {
+          this.errorMessage = "Only " + this.product?.quantity + " item(s) are in stock.";
+          window.alert(this.errorMessage);
+        }
+      }
+    })
   }
 
   goBack(): void {

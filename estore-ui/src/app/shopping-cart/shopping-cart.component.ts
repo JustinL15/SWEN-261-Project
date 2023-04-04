@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart } from '../cart';
-import { CartService } from '../cart.service';
+import { CartService } from '../services/cart.service';
 import { Order } from '../order';
-import { OrderService } from '../order-service';
+import { OrderService } from '../services/order-service';
 import { Product } from '../product';
 import { ProductReference } from '../product-reference';
-import { ProductService } from '../product.service';
-import { UserService } from '../user.service';
+import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -18,28 +18,48 @@ import { firstValueFrom } from 'rxjs';
 export class ShoppingCartComponent {
   cart: Cart = {id: -1, inventory: {}}; 
   cartId : number | undefined;
+  cartContents: Product[];
 
   constructor(
     private orderService:OrderService,
     private cartService:CartService, 
     private productService: ProductService,
     private userService: UserService
-    ) { }
+    ) {
+      this.cartContents = [];
+    }
 
 
   ngOnInit(): void {
     this.cartId = this.userService.getCurrentUser()?.cartId;
     this.getCart();
+
   }
 
+  /**
+   * Loop through the cart and add all products within it to the product array
+   */
+  async processCart(): Promise<void> {
+    this.cartContents = [];
+    for (const productId in this.cart.inventory) {
+      let iName = await firstValueFrom(this.productService.getProduct(parseInt(productId)));
+      iName.quantity = this.cart.inventory[productId].quantity;
+      this.cartContents.push(iName);
+    }
 
-  getCart(): void {
+  }
+
+  async getCart(): Promise<void> {
     if (this.cartId !== undefined ) {
-    this.cartService.getCart(this.cartId).subscribe((cart: Cart) => this.cart = cart);
+      this.cart = await firstValueFrom(this.cartService.getCart(this.cartId));
+      
+      // Now get the names of all the products
+      this.processCart();
+      
     }
   }
 
-  increase(product: ProductReference): void {
+  increase(product: Product): void {
     // get the current number of products in the cart
     var inStock = 0;
     this.productService.getProduct(product.id).subscribe(prod => {
@@ -48,13 +68,29 @@ export class ShoppingCartComponent {
       if(product.quantity + 1 <= inStock){
         product.quantity += 1;
       }
+      else {
+        window.alert("Only " + inStock + " item(s) are available");
+      }
+
+      // Set the quantity in the cart array for the matching ID
+      this.cart.inventory[product.id].quantity = product.quantity;
+
+      // Now update the cartcontents array and increase the given products quantity
+      this.processCart();
+
       this.cartService.updateCart(this.cart).subscribe();
     });
   }
 
-  decrease(product: ProductReference): void {
+  decrease(product: Product): void {
     // remove one item of the product from shopping cart
     product.quantity -= 1;
+
+    // Set the quantity in cart array
+    this.cart.inventory[product.id].quantity = product.quantity;
+
+    // Update the product array
+    this.processCart();
 
     // if zero items of the product remove it from shopping cart
     if(product.quantity <= 0){
@@ -64,10 +100,11 @@ export class ShoppingCartComponent {
     this.cartService.updateCart(this.cart).subscribe();
   }
 
-  remove(product: ProductReference): void {
+  remove(product: Product): void {
     if(this.cart){
       delete this.cart.inventory[product.id];
     }
+    this.processCart();
     this.cartService.updateCart(this.cart).subscribe();
   } 
 
@@ -91,6 +128,8 @@ export class ShoppingCartComponent {
           orderQuantity = this.cart.inventory[prodId].quantity;
           if (inStock < orderQuantity){
             orderQuantity = inStock;
+            window.alert("Only " + inStock + " " + prod.name + "(s) are available");
+            return;
             prod.quantity = 0;
           } else{
             prod.quantity -= orderQuantity;
