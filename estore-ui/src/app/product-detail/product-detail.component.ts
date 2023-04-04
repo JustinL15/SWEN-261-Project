@@ -63,10 +63,18 @@ export class ProductDetailComponent implements OnInit {
 
   starProduct(): void {
     if(this.user !== null && this.product !== undefined && this.user !== undefined) {
-      if(!this.user.starred.includes(this.product)){
+      // if(!this.user.starred.includes(this.product)){
+      //   var pdt: Product[]  = [];
+      //   if(this.user.starred !== undefined){
+      //     if(this.user.starred.length > 0){
+      //       pdt = this.user.starred;
+      //     }
+      //   }
+      //   pdt.push(this.product);
+      //   this.user.starred = pdt;
         this.user.starred.push(this.product);
         this.userService.updateCustomer(this.user).subscribe();
-      }
+      // }
     }
   }
 
