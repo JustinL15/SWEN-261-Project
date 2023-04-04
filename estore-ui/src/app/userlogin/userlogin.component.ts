@@ -29,11 +29,8 @@ export class UserLoginComponent implements OnInit{
   
   getUser(): void {
     this.user = this.userService.getCurrentUser();
-    if(this.user !== null) {
-      this.user.orders.forEach(id => {
-        this.orderService.getOrder(id).subscribe(order => this.orders.push(order));
-      })
-    }
+    this.orderService.getOrders()
+    .subscribe(orders => this.orders = orders.filter(order => !this.user?.orders.includes(order.id)));
   }
 
 
