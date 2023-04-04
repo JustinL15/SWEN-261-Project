@@ -112,7 +112,7 @@ public class CartControllerTest {
     @Test
     public void testAddItemToCart() throws IOException{
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
@@ -129,7 +129,7 @@ public class CartControllerTest {
     public void testAddItemToCartFailed() throws IOException {
         // Setup
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
 
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
@@ -149,7 +149,7 @@ public class CartControllerTest {
     public void testAddItemToCartHandleException() throws IOException {
         // Setup
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
 
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
@@ -165,7 +165,7 @@ public class CartControllerTest {
     @Test
     public void testRemoveItemFromCart() throws IOException {
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         
         ProductReference productRef = new ProductReference(product.getId(), 2);
 
@@ -182,7 +182,7 @@ public class CartControllerTest {
     public void testRemoveItemFromCartFailed() throws IOException {
         // Setup
         Cart cart = new Cart(99);
-        Product product = new Product(1, "logger", 10, 20, "log spoon");
+        Product product = new Product(1, "logger", 10, 20, "log spoon", null, false);
         // creation and save
         when(mockCartDAO.removeItem(cart.getId(), product.getId())).thenReturn(false);
 
@@ -198,7 +198,7 @@ public class CartControllerTest {
         // Setup
         Cart cart = new Cart(99);
 
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         
         doThrow(new IOException()).when(mockCartDAO).removeItem(cart.getId(), product.getId());
 
@@ -212,7 +212,7 @@ public class CartControllerTest {
     @Test
     public void testEditItemInCart() throws IOException {
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
@@ -232,7 +232,7 @@ public class CartControllerTest {
     @Test
     public void testEditItemInCartNotFound() throws IOException {
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);
@@ -251,7 +251,7 @@ public class CartControllerTest {
     public void testEditItemInCartFailed() throws IOException {
         // Setup
         Cart cart = new Cart(99);
-        Product product = new Product(1, "logger", 10, 20, "log spoon");
+        Product product = new Product(1, "logger", 10, 20, "log spoon", null, false);
         // when editItemInCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.editQuantity(cart.getId(), product.getId(), 1)).thenReturn(false);
@@ -267,7 +267,7 @@ public class CartControllerTest {
     public void testEditItemInCartHandleException() throws IOException {
         // Setup
         Cart cart = new Cart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         
         ProductDAO mockProductDAO = mock(ProductDAO.class);
         mockProductDAO.createProduct(product);

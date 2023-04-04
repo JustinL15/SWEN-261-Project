@@ -22,7 +22,7 @@ public class OrderTest {
         // Setup the test parameters
         int id = 1;
         Product[] products = new Product[1];
-        products[0] = new Product(2, "test", 4.99, 1, "");
+        products[0] = new Product(2, "test", 4.99, 1, "", null, false);
         double totalPrice = products[0].getPrice();
         LocalDateTime datetime = LocalDateTime.now();
         boolean complete = false;
@@ -52,7 +52,7 @@ public class OrderTest {
         assertEquals(id, order.getId());
 
         Product[] products = new Product[1];
-        products[0] = new Product(2, "test", 4.99, 1, "");
+        products[0] = new Product(2, "test", 4.99, 1, "", null, false);
 
         order.setProducts(products);
         assertEquals(products, order.getProducts());
@@ -73,7 +73,7 @@ public class OrderTest {
     @Test
     public void testEqualsFalse() {
         Product[] subjectProducts = new Product[1];
-        subjectProducts[0] = new Product(2, "test", 4.99, 1, "");
+        subjectProducts[0] = new Product(2, "test", 4.99, 1, "", null, false);
         Order subject = new Order(1, 4.99, subjectProducts, false, null);
 
         // Test against a different object
@@ -86,7 +86,7 @@ public class OrderTest {
 
         // Test against a different product
         Product[] differentProducts = new Product[1];
-        differentProducts[0] = new Product(3, "test", 4.99, 1, "");
+        differentProducts[0] = new Product(3, "test", 4.99, 1, "", null, false);
 
         Order differentProduct = new Order(1, 4.99, differentProducts, true, null);
         assertFalse(subject.equals(differentProduct));

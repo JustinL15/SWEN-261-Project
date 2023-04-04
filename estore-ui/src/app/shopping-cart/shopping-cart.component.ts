@@ -137,7 +137,8 @@ export class ShoppingCartComponent {
           totalPrice += orderQuantity * productPrice;
 
           // create snapshop of each product and quantity in cart
-          products.push(prod); 
+          products.push({id: prod.id, name: prod.name, price: prod.price, quantity: orderQuantity, description: prod.description, category: prod.category, ownerRecommended: prod.ownerRecommended} as Product); 
+
         }
         this.productService.updateProduct(prod).subscribe();
       }

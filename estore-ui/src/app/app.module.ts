@@ -20,10 +20,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input'
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 
@@ -55,6 +57,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatProgressBarModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule

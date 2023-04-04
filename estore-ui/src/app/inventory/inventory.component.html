@@ -16,11 +16,13 @@
     <input class="number" id="new-quantity" #productQuantity />
     <label for="new-description">Description: </label>
     <input inputmode="numeric" id="new-description" #productDescription />
+    <label for="new-category">Category: </label>
+    <input inputmode="numeric" id="new-category" #productCategory />
 
     <!-- (click) passes input value to add() and then clears the input -->
     <button type="button" class="add-button" (click)="add(productName.value, productPrice.value, productQuantity.value, 
-        productDescription.value); productName.value=''; productQuantity.value=''; 
-        productPrice.value=''; productDescription.value=''">
+        productDescription.value, productCategory.value); productName.value=''; productQuantity.value=''; 
+        productPrice.value=''; productDescription.value=''; productCategory.value=''">
         Add Product
     </button>
 </div>

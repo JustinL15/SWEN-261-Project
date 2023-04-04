@@ -73,7 +73,7 @@ public class CartDAOFileTest {
     public void testRemoveItem() throws IOException {
         // Invoke
         Cart cart = cartFileDAO.getCart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         CartDAO mockCartDAO = mock(CartDAO.class);
         mockCartDAO.addItem(cart.getId(), product.getId(), 1);
         // When createCart is called on the Mock Cart DAO, throw an IOException
@@ -94,7 +94,7 @@ public class CartDAOFileTest {
     public void testAddItemToCart() throws IOException {
         // Invoke
         Cart cart = cartFileDAO.getCart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         CartDAO mockCartDAO = mock(CartDAO.class);
         mockCartDAO.addItem(cart.getId(), product.getId(), 1);
         // Analyze
@@ -112,7 +112,7 @@ public class CartDAOFileTest {
     public void testEditQuantity() throws IOException {
         // Invoke
         Cart cart = cartFileDAO.getCart(99);
-        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky");
+        Product product = new Product(80, "tree tea coffee", 3, 10, "a little barky", null, false);
         CartDAO mockCartDAO = mock(CartDAO.class);
         mockCartDAO.addItem(cart.getId(), product.getId(), 1);
         // Analyze
