@@ -122,8 +122,9 @@ export class UserService {
   updateCartId(id: number) {
     if(this.currentUser !== null) {
       this.currentUser = {id: this.currentUser.id, username: this.currentUser.username,
-        name: this.currentUser.name, cartId: id, orders: this.currentUser.orders,
-        isAdmin: this.currentUser.isAdmin, password: this.currentUser.password}
+        name: this.currentUser.name, cartId: id, orders: this.currentUser.orders, 
+        starred: this.currentUser.starred, isAdmin: this.currentUser.isAdmin, 
+        password: this.currentUser.password}
     }
   }
 
