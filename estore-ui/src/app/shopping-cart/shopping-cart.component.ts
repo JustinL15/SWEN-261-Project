@@ -144,6 +144,7 @@ export class ShoppingCartComponent {
 
     // clear shopping cart
     this.cart.inventory = {};
+    this.cartContents = [];
     this.cartService.updateCart(this.cart).subscribe();
 
     // create an order

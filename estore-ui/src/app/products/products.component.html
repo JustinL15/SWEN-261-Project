@@ -7,12 +7,14 @@
       <input #searchBox id="search-box" (input)="search(searchBox.value)" />
     </div>
     <div class="categorySelect">
+      <mat-form-field class="form" appearance="fill" color="primary">
       <mat-label>Category </mat-label>
-      <mat-select [(ngModel)]="selectedCategory">
+      <mat-select [(ngModel)]="selectedCategory" class="select">
         <mat-option *ngFor="let category of categories" [value]="category">
           {{category}}
         </mat-option>
       </mat-select>
+    </mat-form-field>
 
     </div>
 
