@@ -13,6 +13,7 @@ import { ReviewService } from '../services/review-service';
 })
 export class EditProductDetailComponent implements OnInit {
   product: Product | undefined;
+  reviews: Review | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,6 +60,11 @@ export class EditProductDetailComponent implements OnInit {
     review.reviewContent = review.reviewContent.trim();
     this.reviewService.addReview(review).subscribe();
     this.goBack();
+  }
+
+  getReviews(): void {
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.reviewService.getReview(id).subscribe(reviews => this.reviews = reviews);
   }
 
 }

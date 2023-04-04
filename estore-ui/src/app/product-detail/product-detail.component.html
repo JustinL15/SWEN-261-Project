@@ -19,9 +19,15 @@
       <br>
     </div>
     <div *ngIf = "reviews">
-      <a routerLink="/reviews">
-        <th align="right"><button type="button" (click)="addReview(reviews)" class="addReview">Add a Review</button></th>
-      </a>
+        <label for="see-reviews">Add a Review: </label>
+        <div class="form-group">
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+        <textarea class="form-control" id="review" #newReview rows="3"></textarea>
+        </div>
+        </div>
+        </div>
+        <button type="button" (click)="writeReview(product.id, 2, newReview.value); newReview.value = ''" class="addReview">Submit</button>
     </div>
   </div>
   <mat-grid-list cols="3" rowHeight="2:1">
