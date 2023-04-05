@@ -40,3 +40,38 @@ input{
     text-align: center;
     margin-right: 10px;
 }
+
+.front .rev{
+    font-weight: bold;
+    font-size: larger;
+    margin: auto;
+    /* padding-left: 10px; */
+}
+
+.review{
+    border: solid black;
+    background-color: #cca460;
+    width: 65%;
+    margin: auto;
+    border-radius: 30px;
+}
+
+.otherReview{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: solid black;
+    width: 65%;
+    margin: auto;
+    border-radius: 30px;
+}
+
+.owner{
+    background-color: white;
+    width: 100%;
+    margin: auto;
+    border-radius: 30px;
+}
+
+.reviewBox{
+    margin-top: 30px;
+}
