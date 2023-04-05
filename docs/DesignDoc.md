@@ -160,6 +160,12 @@ The order model saves a snapshot of products at the time of purchase as well as 
 
 ![Order model](orderModel.png)
 
+#### Reviews
+
+The reviews model saves the customer reviews of a specific product and their rating of the product. A review is tied to a customer using the customer ID. A review is tied to a product using the product ID. 
+
+![Reviews model](reviewsModel.png)
+
 ## OO Design Principles
 
 **Information Expert** states the behavior of a class or object should have functions to interpret its own data and not have to pass around its own data to different objects in order to parse the final meaning. Adhering to the principle results in programs that have low coupling and are less complex.
