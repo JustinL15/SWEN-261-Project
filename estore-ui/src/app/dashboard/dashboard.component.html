@@ -31,7 +31,7 @@
         </mat-grid-list>
 
 
-        <h3>Reccomended Products</h3>
+        <h3>Recomended Products</h3>
         <mat-grid-list cols="3" rowHeight="2:1">
             <span *ngFor="let product of productCopies">
                 <mat-grid-tile>
@@ -71,7 +71,7 @@
         <p>Welcome to the Java 19 Coffee Shop, you have not logged in yet.</p>
         <p>Proceed to the login page to login or register an account.</p>
     </div>
-    <h3>Owner Reccomended Products</h3>
+    <h3>Owner Recomended Products</h3>
     <mat-grid-list cols="3" rowHeight="2:1">
         <span *ngFor="let product of products">
             <span *ngIf="product.ownerRecommended == true">
