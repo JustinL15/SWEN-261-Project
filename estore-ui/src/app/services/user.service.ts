@@ -97,12 +97,14 @@ export class UserService {
   }
 
   /** PUT: update the Customer on the server */
-  updateCustomer(customer: Customer): Observable<any> {
+  updateCustomer(customer: Customer, switchUser: boolean = true): Observable<any> {
     this.errorService.clearErrorCode();
     return this.http.put(this.customersUrl, customer, this.httpOptions).pipe(
       tap(_ => {
         this.log(`updated customer id=${customer.id}`)
-        this.currentUser = customer;
+        if (switchUser) {
+          this.currentUser = customer;
+        }
       }),
       catchError(this.errorService.handleError<any>('updateCustomer'))
     );

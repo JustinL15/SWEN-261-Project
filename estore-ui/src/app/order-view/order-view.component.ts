@@ -34,7 +34,7 @@ export class OrderViewComponent implements OnInit {
 
   /* Removes an order, can not undo */
   async delete(order: Order): Promise<void> {
-    this.orders = this.orders.filter(h => h !== order);
+    this.orders = this.orders.filter(h => h.id !== order.id);
     let id = order.id;
     await firstValueFrom(this.orderService.deleteOrder(id));
 
@@ -44,7 +44,7 @@ export class OrderViewComponent implements OnInit {
       if(customers[i].orders.includes(id)){
         let ind = customers[i].orders.indexOf(id);
         customers[i].orders.splice(ind, 1);
-        await firstValueFrom(this.userService.updateCustomer(customers[i]));
+        await firstValueFrom(this.userService.updateCustomer(customers[i], false));
       }
     }
   }
