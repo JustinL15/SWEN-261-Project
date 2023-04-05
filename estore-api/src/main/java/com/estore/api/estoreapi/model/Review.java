@@ -18,30 +18,25 @@ public class Review {
     /// Setup all parameters that the review should have
     @JsonProperty("id") private int id;
     @JsonProperty("productId") private int productId;
-    @JsonProperty("customer") private Customer customerUser;
+    @JsonProperty("customerId") private int customerId;
     @JsonProperty("stars") private float stars;
     @JsonProperty("reviewContent") private String reviewContent;
-    @JsonProperty("time") private LocalDateTime dateTime;
-    @JsonProperty("username") private String username;
-    @JsonProperty("purchased") private List<Integer> purchased;
 
     /**
      * Constructor for the reviews
      * 
      * @param id ID of the review
-     * @param customer customer making the review
-     * @param stars stars given in the review
+     * @param productId ID of the product
+     * @param customerId customer making the review
+     * @param stars rate given in the review
      * @param reviewContent body of the review
-     * @param dateTime the date and time of the order
      */
     public Review(@JsonProperty("id") int id, @JsonProperty("productId") int productId, 
-                @JsonProperty("customer") Customer customerUser,
-                @JsonProperty("stars") float stars, @JsonProperty("reviewContent") String reviewContent,
-                @JsonProperty("time") LocalDateTime dateTime, @JsonProperty("username") String username,
-                @JsonProperty("purchased") List<Integer> purchased) {
+                @JsonProperty("customerId") int customerId,
+                @JsonProperty("stars") float stars, @JsonProperty("reviewContent") String reviewContent) {
         this.id = id;
         this.productId = productId;
-        this.customerUser = customerUser;
+        this.customerId = customerId;
         this.stars = stars;
         
         if (reviewContent == null) {
@@ -51,15 +46,6 @@ public class Review {
             this.reviewContent = reviewContent;
         }
 
-        if (dateTime == null) {
-            this.dateTime = LocalDateTime.now();
-       }
-       else {
-            this.dateTime = dateTime;
-       }
-
-       this.username = customerUser.getUsername();
-       this.purchased = customerUser.getPurchasedProducts();
     }
 
     /**
@@ -99,12 +85,12 @@ public class Review {
     }
 
     /**
-     * Get the customer username
+     * Get the customer id
      * 
-     * @return the customer username
+     * @return the customer id
      */
-    public String getCustomerUsername() {
-        return this.username;
+    public int getCustomerId() {
+        return this.customerId;
     }
 
     /**
@@ -200,10 +186,6 @@ public class Review {
                             customerUser == other.customerUser;
         }
         return false;
-    }
-
-    public boolean purchase(Order order) {
-        return true;
     }
     
 }
