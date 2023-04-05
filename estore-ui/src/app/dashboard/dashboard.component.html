@@ -1,17 +1,106 @@
 <body>
     <div></div>
     <img class="pic" src="https://cdn-icons-png.flaticon.com/512/152/152760.png">
-    <div *ngIf="userService.isLoggedIn()">
+    <div *ngIf="userService.isLoggedIn() && !userService.getCurrentUser()?.isAdmin">
         <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
-        <div *ngFor="let product of productCopies">
-            {{product.name}}
-            {{product.price}}
-            {{product.description}}
-            {{product.category}}
-        </div>
+
+        <p>Starred Products</p>
+
+        <mat-grid-list cols="3" rowHeight="2:1">
+            <span *ngFor="let product of starred">
+                <mat-grid-tile>
+                    <div class="card" routerLink="/detail/{{product.id}}">
+                        <span class="productName">{{product.name}}</span>
+                        <div class="productPrice">${{product.price}}</div><br>
+                        <span *ngIf="product.quantity === 0">
+                            <div class="productQuantity">OUT OF STOCK</div>
+                        </span>
+                        <span *ngIf="product.quantity !== 0">
+                            <div class="productQuantity">{{product.quantity}} available</div>
+                        </span>
+                        <button type="button" class="unstar" title="unstar product" (click)="unstar(product)"><mat-icon
+                                class="star">star</mat-icon></button>
+                        <div class="image">
+                            <!-- replace image with product image -->
+                            <img
+                                src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </span>
+        </mat-grid-list>
+
+
+        <h3>Recomended Products</h3>
+        <mat-grid-list cols="3" rowHeight="2:1">
+            <span *ngFor="let product of productCopies">
+                <mat-grid-tile>
+                    <div class="card" routerLink="/detail/{{product.id}}">
+                        <span class="productName">{{product.name}}</span>
+                        <div class="productPrice">${{product.price}}</div><br>
+                        <span *ngIf="product.quantity === 0">
+                            <div class="productQuantity">OUT OF STOCK</div>
+                        </span>
+                        <span *ngIf="product.quantity !== 0">
+                            <div class="productQuantity">{{product.quantity}} available</div>
+                        </span>
+                        <span *ngIf="isStarred(product) !== false">
+                            <button type="button" class="unstar" title="unstar product"
+                                (click)="unstar(product)"><mat-icon class="star">star</mat-icon></button>
+                        </span>
+                        <span *ngIf="isStarred(product) == false">
+                            <button class="star"><mat-icon>star_border</mat-icon></button>
+                        </span>
+                        <div class="image">
+                            <!-- replace image with product image -->
+                            <img
+                                src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </span>
+        </mat-grid-list>
     </div>
+
+    <div *ngIf="userService.isLoggedIn() && userService.getCurrentUser()?.isAdmin">
+    <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
+    </div>
+    
+
     <div *ngIf="!userService.isLoggedIn()">
         <p>Welcome to the Java 19 Coffee Shop, you have not logged in yet.</p>
         <p>Proceed to the login page to login or register an account.</p>
     </div>
+    <h3>Owner Recomended Products</h3>
+    <mat-grid-list cols="3" rowHeight="2:1">
+        <span *ngFor="let product of products">
+            <span *ngIf="product.ownerRecommended == true">
+                <mat-grid-tile>
+                    <div class="card" routerLink="/detail/{{product.id}}">
+                        <span class="productName">{{product.name}}</span>
+                        <div class="productPrice">${{product.price}}</div><br>
+                        <span *ngIf="product.quantity === 0">
+                            <div class="productQuantity">OUT OF STOCK</div>
+                        </span>
+                        <span *ngIf="product.quantity !== 0">
+                            <div class="productQuantity">{{product.quantity}} available</div>
+                        </span>
+                        <span *ngIf="isStarred(product) !== false">
+                            <button type="button" class="unstar" title="unstar product"
+                                (click)="unstar(product)"><mat-icon class="star">star</mat-icon></button>
+                        </span>
+                        <span *ngIf="isStarred(product) == false">
+                            <button class="star"><mat-icon>star_border</mat-icon></button>
+                        </span>
+                        <div class="image">
+                            <!-- replace image with product image -->
+                            <img
+                                src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </span>
+        </span>
+    </mat-grid-list>
+
 </body>

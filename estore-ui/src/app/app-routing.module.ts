@@ -8,7 +8,6 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { UserLoginComponent } from './userlogin/userlogin.component';
-import { StarredProductsComponent } from './starred-products/starred-products.component';
 import { ReviewManageComponent } from './review-manage/review-manage.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent},
   { path: 'order/:id', component: OrderDetailComponent, canActivate: [LoginGuard]},
   { path: 'cart', component: ShoppingCartComponent, canActivate: [LoginGuard]},
-  { path: 'starred', component: StarredProductsComponent, canActivate: [LoginGuard]},
   { path: 'detail/:id', component: ProductDetailComponent},
   { path: 'manage', component: InventoryComponent, canActivate: [AuthGuard]},
   { path: 'manage/:id', component: EditProductDetailComponent, canActivate: [AuthGuard]},

@@ -1,7 +1,7 @@
 <body>
   <div *ngIf="product">
     <!-- do a grid instead maybe. Just a 1x2 -->
-    <h2>{{product.name}}</h2>
+    <h3>{{product.name}}</h3>
 
     <img src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png" id="proImage">
     <div class="productAbout">
@@ -19,31 +19,32 @@
       <br>
       <input type="text" [(ngModel)]="quantity">
       <button type="button" (click)="addToCart()" class="buy">Add to cart</button>
+      <button type="button" (click)="starProduct()" class="back">Favorite</button>
+
       <br>
       <br>
       {{errorMessage}}
       <br>
     </div>
-    Quantity: <input type="text" [(ngModel)]="quantity">
-    <button type="button" (click)="addToCart()" class="back">Buy</button>
-    <button type="button" (click)="starProduct()" class="back">Favorite</button>
   </div>
-  <mat-grid-list cols="3" rowHeight="2:1">
+  <mat-grid-list cols="3" rowHeight="4:1">
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile><button type="button" (click)="goBack()" class="back">go back</button></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
   </mat-grid-list>
   <div class="reviews">
     <!-- Add a review form -->
+    <span style="font-size: x-large; font-weight: bold;">Reviews</span>
+
     <div class="column">
       <div>
-          <label for="review-rating" class="front">Rating: </label>
-          <input id="review-rating" [(ngModel)]="tempReview.stars"/>
+        <label for="review-rating" class="front">Rating: </label>
+        <input id="review-rating" [(ngModel)]="tempReview.stars" />
       </div>
       <br>
       <div>
-          <label for="quantity" class="front">Content: </label>
-          <input id="quantity" [(ngModel)]="tempReview.reviewContent"/>
+        <label for="quantity" class="front">Content: </label>
+        <input id="quantity" [(ngModel)]="tempReview.reviewContent" class="desc" />
       </div>
 
       <!-- Allow the user to submit -->
@@ -51,30 +52,112 @@
       <button type="button" (click)="deleteReview()" class="deleteReview">Delete Review</button>
     </div>
     <br>
-    <div class="front">
-      <span>Reviews: </span>
+
+    <div class="reviewSet">
       <span *ngFor="let review of reviews">
         <span *ngIf="product && review.productId === product.id">
-          <!-- TODO Add a ngIf to check if this is my review and highlight it -->
-          <div class="review">
-            <div class="front">
-              <span>Rating: </span>
+          <span *ngIf="review.customerId === getId()" class="reviewBox">
+            <div class="review">
+              <div class="front">
+                <span>Rating: </span>
+              </div>
+              <div class="starRow">
+                <div class="empty"></div>
+                <span *ngIf="review.stars == 0.5">
+                  <div class="stars" style="width: 10%;"></div>
+                </span>
+                <span *ngIf="review.stars == 1.0">
+                  <div class="stars" style="width: 20%;"></div>
+                </span>
+                <span *ngIf="review.stars == 1.5">
+                  <div class="stars" style="width: 30%;"></div>
+                </span>
+                <span *ngIf="review.stars == 2.0">
+                  <div class="stars" style="width: 40%;"></div>
+                </span>
+                <span *ngIf="review.stars == 2.5">
+                  <div class="stars" style="width: 50%;"></div>
+                </span>
+                <span *ngIf="review.stars == 3.0">
+                  <div class="stars" style="width: 50%;"></div>
+                </span>
+                <span *ngIf="review.stars == 3.5">
+                  <div class="stars" style="width: 70%;"></div>
+                </span>
+                <span *ngIf="review.stars == 4">
+                  <div class="stars" style="width: 80%;"></div>
+                </span>
+                <span *ngIf="review.stars == 4">
+                  <div class="stars" style="width: 90%;"></div>
+                </span>
+                <span *ngIf="review.stars == 5">
+                  <div class="stars" style="width: 100%;"></div>
+                </span>
+              </div>
+              <div>{{review.stars}}/5</div>
+              <br>
+              <div class="front">
+                <span>Content: </span>
+              </div>
+              <div style="font-weight: 100;">{{review.reviewContent}}</div>
+              <br>
+              <div class="owner">
+                <span class="front" *ngIf="review.ownerResponse !== ''">Owner Response: </span>
+                <div class="ee">{{review.ownerResponse}}</div>
+              </div>
             </div>
-            <div>{{review.stars}}/5</div>
-            <br>
-            <div class="front">
-              <span>Content: </span>
+          </span>
+          <span *ngIf="review.customerId !== getId()" class="reviewBox">
+            <div class="otherReview">
+              <div class="front">
+                <span>Rating: </span>
+              </div>
+              <div class="starRow">
+                <div class="empty"></div>
+                <span *ngIf="review.stars == 0.5">
+                  <div class="stars" style="width: 10%;"></div>
+                </span>
+                <span *ngIf="review.stars == 1.0">
+                  <div class="stars" style="width: 20%;"></div>
+                </span>
+                <span *ngIf="review.stars == 1.5">
+                  <div class="stars" style="width: 30%;"></div>
+                </span>
+                <span *ngIf="review.stars == 2.0">
+                  <div class="stars" style="width: 40%;"></div>
+                </span>
+                <span *ngIf="review.stars == 2.5">
+                  <div class="stars" style="width: 50%;"></div>
+                </span>
+                <span *ngIf="review.stars == 3.0">
+                  <div class="stars" style="width: 50%;"></div>
+                </span>
+                <span *ngIf="review.stars == 3.5">
+                  <div class="stars" style="width: 70%;"></div>
+                </span>
+                <span *ngIf="review.stars == 4">
+                  <div class="stars" style="width: 80%;"></div>
+                </span>
+                <span *ngIf="review.stars == 4">
+                  <div class="stars" style="width: 90%;"></div>
+                </span>
+                <span *ngIf="review.stars == 5">
+                  <div class="stars" style="width: 100%;"></div>
+                </span>
+              </div>
+              <div>{{review.stars}}/5</div>
+              <br>
+              <div class="front">
+                <span>Content: </span>
+              </div>
+              <div>{{review.reviewContent}}</div>
+              <br>
+              <span *ngIf="review.ownerResponse !== ''" class="front">Owner Response: </span>
+              <div>{{review.ownerResponse}}</div>
             </div>
-            <div>{{review.reviewContent}}</div>
-            <br>
-            <div class="front">
-              <span *ngIf="review.ownerResponse !== ''">Owner Response: </span>
-            </div>
-            <div>{{review.ownerResponse}}</div>
-          </div>
+          </span>
         </span>
       </span>
     </div>
-
   </div>
 </body>
