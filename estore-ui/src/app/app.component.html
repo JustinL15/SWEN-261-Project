@@ -2,8 +2,12 @@
   <nav>
     <h1>{{title}}</h1>
     <a routerLink="/home"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon></a>
-    <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> -->
+    <ng-container *ngIf="!userService.getCurrentUser()?.isAdmin">
     <a routerLink="/products">Products</a>
+    </ng-container>
+    <ng-container *ngIf="userService.getCurrentUser()?.isAdmin && userService.getCurrentUser()">
+      <a routerLink="/reviewManage">Reviews</a>
+      </ng-container>
     <ng-container *ngIf="!userService.getCurrentUser()?.isAdmin && userService.getCurrentUser()">
       <a routerLink="/cart">Cart</a>
     </ng-container>

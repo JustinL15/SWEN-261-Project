@@ -69,7 +69,7 @@ input {
     background-color: white;
     width: 100%;
     margin: auto;
-    border-radius: 30px;
+    border-radius: 0px 0px 30px 30px;
 }
 
 .reviewBox {
@@ -85,11 +85,7 @@ input {
     margin-top: 20px;
 }
 
-
-
-
-
-.ratings {
+.starRow {
     position: relative;
     vertical-align: middle;
     display: inline-block;
@@ -97,38 +93,33 @@ input {
     overflow: hidden;
 }
 
-.full-stars {
+.stars {
     position: absolute;
     left: 0;
     top: 0;
     white-space: nowrap;
     overflow: hidden;
-    color: #fde16d;
+    color: #ECBE24;
 }
 
-.empty-stars:before,
-.full-stars:before {
+.empty:before,
+.stars:before {
     content: "\2605\2605\2605\2605\2605";
     font-size: 14pt;
 }
 
-.empty-stars:before {
-    -webkit-text-stroke: 1px #848484;
+.empty:before {
+    -webkit-text-stroke: 1px #595959;
 }
 
-.full-stars:before {
-    -webkit-text-stroke: 1px orange;
+.stars:before {
+    -webkit-text-stroke: 1px #ECBE24;
 }
 
-/* Webkit-text-stroke is not supported on firefox or IE */
-/* Firefox */
-@-moz-document url-prefix() {
-    .full-stars {
-        color: #ECBE24;
-    }
+.stars {
+    color: red;
 }
 
-/* IE */
-.full-stars {
-    color: #ECBE24;
+.reviewSet{
+    padding-bottom: 20px;
 }
