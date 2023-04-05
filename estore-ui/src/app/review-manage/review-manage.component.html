@@ -1,0 +1,13 @@
+<div>Entered reviews:</div>
+<div *ngFor="let review of productReview">
+  <div class="review">
+    <div class="review-product">Product: {{review.productName}}</div>
+    <div class="review-rating">Rating: {{review.review.stars}}/5</div>
+    <div class="review-content">Review content: {{review.review.reviewContent}}</div>
+    <div class="current-response">Current Owner Response: {{review.review.ownerResponse}}</div>
+    <div class="review-edit">
+        <div>Owner Response:</div>
+      <input type="text" #ownerResponse>
+    </div>
+    <button type="button" title="save response" (click)="saveResponse(review.review, ownerResponse.value)">Save</button>
+  </div>

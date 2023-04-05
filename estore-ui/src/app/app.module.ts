@@ -29,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { StarredProductsComponent } from './starred-products/starred-products.component';
+import { ReviewManageComponent } from './review-manage/review-manage.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { StarredProductsComponent } from './starred-products/starred-products.co
     LoginDialogComponent,
     OrderDetailComponent,
     DeleteConfirmComponent,
-    StarredProductsComponent
+    StarredProductsComponent,
+    ReviewManageComponent
   ],
   imports: [
     BrowserModule,

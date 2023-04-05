@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.estore.api.estoreapi.model.Order;
 import com.estore.api.estoreapi.model.Customer;
 
 import org.junit.jupiter.api.BeforeEach;

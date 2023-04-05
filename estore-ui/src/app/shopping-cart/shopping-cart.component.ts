@@ -9,6 +9,7 @@ import { ProductReference } from '../product-reference';
 import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
 import { firstValueFrom } from 'rxjs';
+import { Customer } from '../customer';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -138,6 +139,11 @@ export class ShoppingCartComponent {
 
           // create snapshop of each product and quantity in cart
           products.push({id: prod.id, name: prod.name, price: prod.price, quantity: orderQuantity, description: prod.description, category: prod.category, ownerRecommended: prod.ownerRecommended} as Product); 
+
+          // This means we could buy it, so now we need to update purchased IDs of customer
+          this.userService.getCurrentUser()?.purchasedIds.push(prod.id);
+
+          this.userService.updateCustomer(this.userService.getCurrentUser() as Customer).subscribe();
 
         }
         this.productService.updateProduct(prod).subscribe();

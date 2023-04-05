@@ -10,4 +10,5 @@ export interface Customer {
     starred: Array<Product>;
     isAdmin: boolean;
     password: string;
+    purchasedIds: Array<number>;
 }

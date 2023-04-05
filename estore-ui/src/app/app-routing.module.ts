@@ -9,6 +9,7 @@ import { EditProductDetailComponent } from './edit-product-detail/edit-product-d
 import { OrderViewComponent } from './order-view/order-view.component';
 import { UserLoginComponent } from './userlogin/userlogin.component';
 import { StarredProductsComponent } from './starred-products/starred-products.component';
+import { ReviewManageComponent } from './review-manage/review-manage.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'orders', component: OrderViewComponent},
   { path: 'login', component: UserLoginComponent, canActivate: [LoginGuard]},
+  { path: 'reviewManage', component: ReviewManageComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -33,4 +33,48 @@
     <mat-grid-tile><button type="button" (click)="goBack()" class="back">go back</button></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
   </mat-grid-list>
+  <div class="reviews">
+    <!-- Add a review form -->
+    <div class="column">
+      <div>
+          <label for="review-rating" class="front">Rating: </label>
+          <input id="review-rating" [(ngModel)]="tempReview.stars"/>
+      </div>
+      <br>
+      <div>
+          <label for="quantity" class="front">Content: </label>
+          <input id="quantity" [(ngModel)]="tempReview.reviewContent"/>
+      </div>
+
+      <!-- Allow the user to submit -->
+      <button type="button" (click)="addReview()" class="addReview">Submit/Edit Review</button>
+      <button type="button" (click)="deleteReview()" class="deleteReview">Delete Review</button>
+    </div>
+    <br>
+    <div class="front">
+      <span>Reviews: </span>
+      <span *ngFor="let review of reviews">
+        <span *ngIf="product && review.productId === product.id">
+          <!-- TODO Add a ngIf to check if this is my review and highlight it -->
+          <div class="review">
+            <div class="front">
+              <span>Rating: </span>
+            </div>
+            <div>{{review.stars}}/5</div>
+            <br>
+            <div class="front">
+              <span>Content: </span>
+            </div>
+            <div>{{review.reviewContent}}</div>
+            <br>
+            <div class="front">
+              <span *ngIf="review.ownerResponse !== ''">Owner Response: </span>
+            </div>
+            <div>{{review.ownerResponse}}</div>
+          </div>
+        </span>
+      </span>
+    </div>
+
+  </div>
 </body>
