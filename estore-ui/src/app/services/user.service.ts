@@ -123,7 +123,7 @@ export class UserService {
     if(this.currentUser !== null) {
       this.currentUser = {id: this.currentUser.id, username: this.currentUser.username,
         name: this.currentUser.name, cartId: id, orders: this.currentUser.orders,
-        isAdmin: this.currentUser.isAdmin, password: this.currentUser.password}
+        isAdmin: this.currentUser.isAdmin, password: this.currentUser.password, purchasedIds: this.currentUser.purchasedIds};
     }
   }
 
