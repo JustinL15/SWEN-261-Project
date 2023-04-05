@@ -108,7 +108,7 @@ export class ProductDetailComponent implements OnInit {
     this.location.back();
   }
 
-  deleteReview(): void {
+  async deleteReview(): Promise<void> {
     if (this.user === null || this.user === undefined) {
       window.alert("You must be logged in to delete a review");
       return;
@@ -126,7 +126,7 @@ export class ProductDetailComponent implements OnInit {
       return;
     }
 
-    this.reviewService.deleteReview(reviewId).subscribe();
+    await firstValueFrom(this.reviewService.deleteReview(reviewId));
     this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
   }
 
@@ -170,22 +170,22 @@ export class ProductDetailComponent implements OnInit {
 
     // Loop through the purchased IDs of the customer and see if we match
     let found = false;
-    customer.purchasedIds.forEach(purchasedId => {
+    for (const purchasedId of customer.purchasedIds) {
       if (purchasedId === id) {
         if (!found) {
           // Either add a new review or update
           if (reviewId === 0) {
-            this.reviewService.addReview(review).subscribe();
+            await firstValueFrom(this.reviewService.addReview(review));
           }
           else {
-            this.reviewService.updateReview(review).subscribe();
+            await firstValueFrom(this.reviewService.updateReview(review));
           }
           this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
         }
         found = true;
       }
       
-    });
+    }
 
     if (!found) {
       window.alert("You must have purchased this product to add a review");
