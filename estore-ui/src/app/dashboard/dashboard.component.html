@@ -3,13 +3,32 @@
     <img class="pic" src="https://cdn-icons-png.flaticon.com/512/152/152760.png">
     <div *ngIf="userService.isLoggedIn()">
         <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
-        <div *ngFor="let product of productCopies">
-            {{product.name}}
-            {{product.price}}
-            {{product.description}}
-            {{product.category}}
-        </div>
+
+        <h3>Reccomended Products:</h3>
+        <mat-grid-list cols="3" rowHeight="2:1">
+            <span *ngFor="let product of productCopies">
+                <mat-grid-tile>
+                    <div class="card" routerLink="/detail/{{product.id}}">
+                        <span class="productName">{{product.name}}</span>
+                        <div class="productPrice">${{product.price}}</div><br>
+                        <span *ngIf="product.quantity === 0">
+                            <div class="productQuantity">OUT OF STOCK</div>
+                        </span>
+                        <span *ngIf="product.quantity !== 0">
+                            <div class="productQuantity">{{product.quantity}} available</div>
+                        </span>
+                        <div class="image">
+                            <!-- replace image with product image -->
+                            <img
+                                src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </span>
+        </mat-grid-list>
+
     </div>
+
     <div *ngIf="!userService.isLoggedIn()">
         <p>Welcome to the Java 19 Coffee Shop, you have not logged in yet.</p>
         <p>Proceed to the login page to login or register an account.</p>
