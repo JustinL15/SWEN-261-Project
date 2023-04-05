@@ -164,7 +164,7 @@ public class ProductTest {
     }
 
     @Test
-    public void testSetOwnerReccommended() {
+    public void testSetOwnerRecommended() {
         // Setup
         int id = 99;
         String name = "Wi-Fire";
