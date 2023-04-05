@@ -165,7 +165,8 @@ public class ProductFileDAO  implements ProductDAO {
     public Product createProduct(Product product) throws IOException {
         synchronized(productMap) {
             Product tmpProd = new Product(getNextId(), product.getName(), product.getPrice(),
-                                            product.getQuantity(), product.getDescription());
+                                            product.getQuantity(), product.getDescription(), product.getCategory(),
+                                            product.isOwnerRecommended());
             
             // Add to map and save to DAO
             productMap.put(tmpProd.getId(), tmpProd);

@@ -24,7 +24,7 @@ public class ProductTest {
 
         // Invoke
         Product product = new Product(expected_id,expected_name, expected_price, 
-        expected_quantity, expected_desc);
+        expected_quantity, expected_desc, null, false);
 
         // Analyze
         assertEquals(expected_id,product.getId());
@@ -42,7 +42,7 @@ public class ProductTest {
 
         // Invoke
         Product product = new Product(expected_id,expected_name, expected_price, 
-        expected_quantity, expected_desc);
+        expected_quantity, expected_desc, null, false);
 
         // Analyze
         assertEquals(expected_id,product.getId());
@@ -57,7 +57,7 @@ public class ProductTest {
         double price = 20;
         int quantity = 5;
         String desc = "cool name";
-        Product product = new Product(id,name,price,quantity,desc);
+        Product product = new Product(id,name,price,quantity,desc, null, false);
 
         int expected_Id = 100;
 
@@ -76,7 +76,7 @@ public class ProductTest {
         double price = 20;
         int quantity = 5;
         String desc = "cool name";
-        Product product = new Product(id,name,price,quantity,desc);
+        Product product = new Product(id,name,price,quantity,desc, null, false);
 
         double expected_price = 2;
 
@@ -95,7 +95,7 @@ public class ProductTest {
         double price = 20;
         int quantity = 5;
         String desc = "cool name";
-        Product product = new Product(id,name,price,quantity,desc);
+        Product product = new Product(id,name,price,quantity,desc, null, false);
 
         int espected_quantity = 2;
 
@@ -114,7 +114,7 @@ public class ProductTest {
         double price = 20;
         int quantity = 5;
         String desc = "cool name";
-        Product product = new Product(id,name,price,quantity,desc);
+        Product product = new Product(id,name,price,quantity,desc, null, false);
 
         String espected_desc = "wow how cool";
 
@@ -133,7 +133,7 @@ public class ProductTest {
                 double price = 20;
                 int quantity = 5;
                 String desc = "cool name";
-                Product product = new Product(id,name,price,quantity,desc);
+                Product product = new Product(id,name,price,quantity,desc, null, false);
         
                 String expected_name = "Galactic Agent";
         
@@ -152,7 +152,7 @@ public class ProductTest {
         double price = 20;
         int quantity = 5;
         String desc = "cool name";
-        Product product = new Product(id,name,price,quantity,desc);
+        Product product = new Product(id,name,price,quantity,desc, null, false);
         String expected_string = product.toString();
 
 
