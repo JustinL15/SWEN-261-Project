@@ -4,7 +4,7 @@ a {
     padding: 5px;
 }
 
-.searchBar{
+.searchBar {
     margin-bottom: 50px;
 }
 
@@ -19,7 +19,7 @@ a {
     height: 90%;
 }
 
-.productBoxes{
+.productBoxes {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -38,12 +38,12 @@ a {
     font-weight: 500;
 }
 
-.productPrice{
+.productPrice {
     padding-left: 10px;
     float: right;
 }
 
-.image{
+.image {
     padding-top: 20px;
     max-width: 100%;
     border-radius: 2em;
@@ -53,10 +53,16 @@ a {
     margin-left: auto;
     margin-right: auto;
 }
-::ng-deep .select{
+
+input{
+    margin-left: 10px;
+}
+
+::ng-deep .select {
     color: white;
-} 
-  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: #9a5129;
     color: white;
 }
