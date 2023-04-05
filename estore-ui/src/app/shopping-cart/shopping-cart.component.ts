@@ -156,9 +156,9 @@ export class ShoppingCartComponent {
 
     // create an order
     if(products.length >= 1){
-      var order: Order = { id: this.cart.id, totalPrice: totalPrice, products: products} as Order;
+      var order: Order = { id: 0, totalPrice: totalPrice, products: products} as Order;
       const observableOrder = this.orderService.addOrder(order);
-      observableOrder.subscribe(order => this.orderService.updateOrder(order).subscribe());
+      // observableOrder.subscribe(order => this.orderService.updateOrder(order).subscribe());
       var user = this.userService.getCurrentUser();
       if(user !== null) {
         user.orders.push((await firstValueFrom(observableOrder)).id);
