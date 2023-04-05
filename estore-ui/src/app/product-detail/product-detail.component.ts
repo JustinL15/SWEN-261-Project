@@ -108,6 +108,28 @@ export class ProductDetailComponent implements OnInit {
     this.location.back();
   }
 
+  deleteReview(): void {
+    if (this.user === null || this.user === undefined) {
+      window.alert("You must be logged in to delete a review");
+      return;
+    }
+    // Find the review in question
+    let reviewId = -1;
+    this.reviews.forEach(review => {
+      if (review.customerId === this.user?.id && review.productId === this.product?.id) {
+        reviewId = review.id;
+      }
+    });
+
+    if (reviewId == -1) {
+      window.alert("No review to delete");
+      return;
+    }
+
+    this.reviewService.deleteReview(reviewId).subscribe();
+    this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
+  }
+
   async addReview(): Promise<boolean> {
     var id: number | undefined = this.product?.id;
 
@@ -137,6 +159,11 @@ export class ProductDetailComponent implements OnInit {
         reviewId = review.id;
       }
     });
+
+    if (this.tempReview.stars < 0.5 || this.tempReview.stars > 5) {
+      window.alert("Must be between 0.5 and 5 stars");
+      return false;
+    }
 
     // Build the review
     let review = {id: reviewId, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent, ownerResponse: this.tempReview.ownerResponse} as Review;
