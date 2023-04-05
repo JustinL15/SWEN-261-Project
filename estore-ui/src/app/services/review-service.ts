@@ -63,6 +63,21 @@ export class ReviewService {
     );
   }
 
+  getReviewByProductId(id: number): Observable<Review[]> {
+    let productReviews: Review[] = [];
+
+    this.getReviews().subscribe(reviews => {
+      // Loop through all reviews
+      reviews.forEach(review => {
+        if (review.productId === id) {
+          productReviews.push(review);
+        }
+      });
+    });
+
+    return of(productReviews);
+  }
+
 
   //////// Save methods //////////
 
