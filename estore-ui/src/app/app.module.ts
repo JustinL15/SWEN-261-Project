@@ -21,9 +21,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input'
+import { MatDialogModule } from '@angular/material/dialog';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { StarredProductsComponent } from './starred-products/starred-products.component';
+import { ReviewManageComponent } from './review-manage/review-manage.component';
 
 
 @NgModule({
@@ -36,7 +42,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     InventoryComponent,
     EditProductDetailComponent,
     OrderViewComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    LoginDialogComponent,
+    OrderDetailComponent,
+    DeleteConfirmComponent,
+    StarredProductsComponent,
+    ReviewManageComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +66,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

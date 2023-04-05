@@ -2,7 +2,9 @@ import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { Order } from '../order';
+import { firstValueFrom } from 'rxjs';
 import { OrderService } from '../services/order-service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-order-view',
@@ -12,11 +14,12 @@ import { OrderService } from '../services/order-service';
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
   displayedColumns: string[] = ['id', 'total', 'products', 'time', 'complete', 'delete'];
-  displayedColumnsComp: string[] = ['id', 'name', 'products'];
+  displayedColumnsComp: string[] = ['id', 'total', 'products', 'time'];
   comp: boolean = false;
   total: number;
 
-  constructor(private orderService: OrderService) { this.total = 0; }
+  constructor(private orderService: OrderService,
+    private userService: UserService) { this.total = 0; }
 
   /* Displays the orders on initalization */
   ngOnInit(): void {
@@ -30,16 +33,28 @@ export class OrderViewComponent implements OnInit {
   }
 
   /* Removes an order, can not undo */
-  delete(order: Order): void {
-    this.orders = this.orders.filter(h => h !== order);
-    this.orderService.deleteOrder(order.id).subscribe();
+  async delete(order: Order): Promise<void> {
+    this.orders = this.orders.filter(h => h.id !== order.id);
+    let id = order.id;
+    await firstValueFrom(this.orderService.deleteOrder(id));
+
+    let customers = await firstValueFrom(this.userService.getCustomers());
+
+    for (let i = 0; i < customers.length; i++) {
+      if(customers[i].orders.includes(id)){
+        let ind = customers[i].orders.indexOf(id);
+        customers[i].orders.splice(ind, 1);
+        await firstValueFrom(this.userService.updateCustomer(customers[i], false));
+      }
+    }
   }
 
   /* Will mark the order as complete */
-  completeOrder(order: Order): void{
+  async completeOrder(order: Order): Promise<void> {
     order.complete = true;
     if(order){
-      this.orderService.updateOrder(order).subscribe(order => this.orders[order].complete = order);
+      await firstValueFrom(this.orderService.updateOrder(order));
+      this.getOrders();
     }
   }
 
@@ -52,9 +67,8 @@ export class OrderViewComponent implements OnInit {
   }
 
   getDate(order: Order): string{
-    // this.date = order.dateTime;
-    let date = new Date(order.dateTime);
-    // date.getDay;
-    return date.toString();
+
+    return (order.time[1] + '/' + order.time[2] + '/' + order.time[0] + 
+    ' - ' + order.time[3] + ':' + order.time[4] + ':' + order.time[5]);
   }
 }

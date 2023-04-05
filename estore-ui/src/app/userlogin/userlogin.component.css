@@ -1,10 +1,62 @@
-body{
-    text-align: center;
-}
 
 button{
     font-size: large;
     padding: 5px;
     font-size: 1rem;
     margin-top: 2rem;
+    background-color: #a18e6d;
+    color: black;
+}
+
+.deleteButton {
+    color: red;
+}
+
+.cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+}
+
+.add-button:hover {
+    color: white;
+    background-color: #544732;
+}
+
+button.redir {
+    position: relative;
+    padding: .25rem .5rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    margin: auto;
+}
+
+.matTab {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    color: #733927;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background-color: #FAF8F1;
+}
+
+.orderHeader {
+    height: 35px;
+    background-color: #E5BA73;
+}
+
+.orderRow {
+    background-color: #FAEAB1;
 }

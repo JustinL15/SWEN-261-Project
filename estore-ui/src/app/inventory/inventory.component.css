@@ -13,6 +13,14 @@ h2{
     text-align: center;
 }
 
+.head{
+    color: white;
+}
+
+.categories{
+    width: 70px;
+}
+
 .add-button {
     padding: .25em .5em;
     font-size: 1rem;
@@ -78,3 +86,8 @@ label {
 .mat-mdc-row:hover .mat-mdc-cell {
     background-color: #733927;
 }
+
+.errorMessage {
+    text-align: center;
+    color: red;
+  }

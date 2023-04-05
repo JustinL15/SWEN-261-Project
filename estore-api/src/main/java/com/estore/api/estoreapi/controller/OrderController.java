@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 @RequestMapping("orders")
 public class OrderController {
-    private static final Logger LOG = Logger.getLogger(ProductController.class.getName());
+    private static final Logger LOG = Logger.getLogger(OrderController.class.getName());
     private OrderDAO orderDAO;
 
     /**
@@ -93,18 +92,18 @@ public class OrderController {
      }
 
      /**
-     * Creates a {@linkplain Order order} with product object
+     * Creates a {@linkplain Order order} with order object
      * 
      * @param order - the {@link Order order} to create
      * @return ResponseEntity with created {@link Order order} object and HTTP
      *         status of CREATED
-     *         ResponseEntity with HTTP status of CONFLICT if {@link Product
-     *         product} object already exists
+     *         ResponseEntity with HTTP status of CONFLICT if {@link Order
+     *         order} object already exists
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        LOG.info("POST /order " + order);
+        LOG.info("POST /orders " + order);
         try {
 
             Order result = orderDAO.createOrder(order);

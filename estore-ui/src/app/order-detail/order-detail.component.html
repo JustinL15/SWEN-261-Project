@@ -1,0 +1,27 @@
+<body>
+    <div class="productBoxes">
+        <h2>Order Number #{{order?.id}} | Total Price: ${{order?.totalPrice}}</h2>
+        <button type="button" (click)="goBack()" class="back">go back</button>
+        <br> <br>
+        <mat-grid-list cols="3" rowHeight="2:1" gutterSize="20px">
+        <div class="products">
+            <span *ngFor="let product of order?.products">
+            <mat-grid-tile style="width: 80%;">
+                <div class="card">
+                <span class="productName">{{product.name}}</span>
+                <div class="productPrice">${{product.price}}</div><br>
+                <span *ngIf="product.quantity !== 0">
+                    <div class="productQuantity">{{product.quantity}} Ordered</div>
+                </span>
+                <div class="image">
+                    <!-- replace image with product image -->
+                    <img
+                    src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                </div>
+                </div>
+            </mat-grid-tile>
+            </span>
+        </div>
+        </mat-grid-list>
+    </div>
+</body>

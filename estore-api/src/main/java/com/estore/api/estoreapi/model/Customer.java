@@ -3,9 +3,6 @@ package com.estore.api.estoreapi.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,6 +22,8 @@ public class Customer {
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
     @JsonProperty("password") private String password;
+    @JsonProperty("starred") private List<Product> starred;
+    @JsonProperty("purchasedIds") private List<Integer> purchasedIds;
 
     /**
      * Construct a new customer
@@ -46,6 +45,8 @@ public class Customer {
         this.isAdmin = isAdmin;
         this.password = password;
         this.orders = new ArrayList<>();
+        this.starred = new ArrayList<>();
+        this.purchasedIds = new ArrayList<>();
     }
 
     /**
@@ -122,6 +123,24 @@ public class Customer {
     }
 
     /**
+     * Get the purchased products
+     * 
+     * @return products
+     */
+    public List<Integer> getPurchasedProducts() {
+        return purchasedIds;
+    }
+
+    /**
+     * Set the purchased products
+     * 
+     * @param productId customer productsIds
+     */
+    public void addPurchasedProduct(int productId) {
+        purchasedIds.add(productId);
+    }
+
+    /**
      * Get the cart ID of the customer
      * 
      * @return Cart ID
@@ -157,6 +176,8 @@ public class Customer {
         orders.add(orderId);
     }
 
+    
+
     /**
      * Check if the customer is an admin
      * 
@@ -165,5 +186,7 @@ public class Customer {
     public boolean isAdmin() {
         return isAdmin;
     }
+
+
 
 }

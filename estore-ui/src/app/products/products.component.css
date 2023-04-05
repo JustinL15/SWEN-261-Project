@@ -4,7 +4,7 @@ a {
     padding: 5px;
 }
 
-.searchBar{
+.searchBar {
     margin-bottom: 50px;
 }
 
@@ -19,7 +19,7 @@ a {
     height: 90%;
 }
 
-.productBoxes{
+.productBoxes {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -27,6 +27,9 @@ a {
 
 .productName {
     float: left;
+    width: 70%;
+    padding-left: 0%;
+    text-align: left;
     font-weight: 500;
 }
 
@@ -35,12 +38,12 @@ a {
     font-weight: 500;
 }
 
-.productPrice{
+.productPrice {
     padding-left: 10px;
     float: right;
 }
 
-.image{
+.image {
     padding-top: 20px;
     max-width: 100%;
     border-radius: 2em;
@@ -49,4 +52,33 @@ a {
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
+}
+
+input{
+    margin-left: 10px;
+}
+
+::ng-deep .select {
+    color: white;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #9a5129;
+    color: white;
+}
+
+::ng-deep .mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-color: #544732;
+}
+
+::ng-deep .mdc-text-field--filled {
+    border-bottom-color: #544732;
+}
+
+::ng-deep .mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-color: var(--mdc-theme-primary, #544732);
+}
+
+::ng-deep .mat-mdc-form-field.mat-accent:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: var(--mdc-theme-secondary, #544732);
 }

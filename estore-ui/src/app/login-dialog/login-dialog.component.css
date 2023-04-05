@@ -1,0 +1,26 @@
+.close-button {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    float: right;
+    --mat-mdc-button-persistent-ripple-color: transparent;
+    --mat-mdc-button-ripple-color: transparent;
+}
+mat-icon {
+    font-size: 16px;
+    float: center;
+}
+.header {
+    padding-bottom: 12px;
+}
+
+mat-dialog-actions {
+    padding-left: 24px;
+    padding-bottom: 18px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    font-size: 11px;
+}
