@@ -1,0 +1,55 @@
+a {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+.searchBar{
+    margin-bottom: 50px;
+}
+
+.productBoxes .card {
+    background-color: #A18E6D;
+    padding: 1em;
+    border-radius: 15px;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 5px #733927;
+    width: 60%;
+    height: 90%;
+}
+
+.productBoxes{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.productName {
+    float: left;
+    width: 70%;
+    padding-left: 0%;
+    text-align: left;
+    font-weight: 500;
+}
+
+.productQuantity {
+    float: left;
+    font-weight: 500;
+}
+
+.productPrice{
+    padding-left: 10px;
+    float: right;
+}
+
+.image{
+    padding-top: 20px;
+    max-width: 100%;
+    border-radius: 2em;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
