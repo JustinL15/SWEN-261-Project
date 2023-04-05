@@ -8,4 +8,5 @@ export interface Customer {
     orders: Array<Order>;
     isAdmin: boolean;
     password: string;
+    purchasedIds: Array<number>;
 }
