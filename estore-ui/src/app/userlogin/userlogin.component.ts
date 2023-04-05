@@ -32,7 +32,10 @@ export class UserLoginComponent implements OnInit{
   getUser(): void {
     this.user = this.userService.getCurrentUser();
     const orderObservables = this.user?.orders.map(id => this.orderService.getOrder(id)) || [];
-    forkJoin(orderObservables).subscribe((orders: Order[]) => {this.orders = orders; console.log(this.orders)});
+    forkJoin(orderObservables).subscribe((orders: Order[]) => {
+      this.orders = orders.filter(order => order !== undefined); 
+      this.orders;
+    });
   }
 
   getDate(order: Order): string {
