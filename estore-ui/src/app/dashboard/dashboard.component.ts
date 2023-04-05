@@ -4,22 +4,33 @@ import { Product } from '../product';
 import { ProductService } from '../services/product.service';
 import { CategoryService } from '../services/category.service'
 import { firstValueFrom } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent{
+export class DashboardComponent {
   productCopies: Product[] = [];
+  starred: Product[] | undefined = [];
+  products: Product[] = [];
   constructor(
     public userService: UserService,
     public categoryService: CategoryService,
-    public productService: ProductService
-    ) {}
+    public productService: ProductService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    this.getProducts();
     this.createRecommended();
+    this.starred = this.userService.getCurrentUser()?.starred;
+  }
+
+  getProducts(): void {
+    this.productService.getProducts()
+    .subscribe(products => this.products = products);
   }
 
   async createRecommended(): Promise<void> {
@@ -84,7 +95,7 @@ export class DashboardComponent{
         selectedProducts.push(products[0].id);
       }
     }
-    
+
     // Now we should have a list of products to display
     // Load them into product copies
     for (let productId of selectedProducts) {
@@ -92,4 +103,24 @@ export class DashboardComponent{
       this.productCopies.push(product);
     }
   }
+
+  unstar(product: Product): void {
+    if (this.starred !== null && this.starred !== undefined) {
+      const index = this.starred.indexOf(product, 0);
+      if (index > -1) {
+        this.starred.splice(index, 1);
+      }
+    }
+  }
+
+  isStarred(product: Product): boolean {
+    if (this.starred !== undefined) {
+        if (this.starred.find(starred => starred.id === product.id)) {
+          return true;
+        }
+    }
+
+    return false;
+  }
+
 }

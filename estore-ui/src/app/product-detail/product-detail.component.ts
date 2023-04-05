@@ -60,6 +60,10 @@ export class ProductDetailComponent implements OnInit {
     .subscribe(reviews => this.reviews = reviews);
   }
 
+  getId(): number | undefined{
+    return this.user?.id;
+  }
+
   addToCart(): void {
     var id: number | undefined = this.product?.id;
     if (this.user !== null && id !== undefined && this.user !== undefined) {
