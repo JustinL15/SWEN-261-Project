@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
@@ -26,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private location: Location,
     private userService: UserService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +61,11 @@ export class ProductDetailComponent implements OnInit {
         this.addProduct(this.user.cartId, id);
       }
     }
+    if(this.user === null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.goBack();
+    }
   }
 
   addProduct(cartId: number, pid: number): void {
@@ -80,6 +86,22 @@ export class ProductDetailComponent implements OnInit {
         }
       }
     })
+  }
+
+  starProduct(): void {
+    if(this.user !== null && this.product !== undefined && this.user !== undefined) {
+      const found = this.user.starred.some(product => {
+        if(this.product !== undefined){
+        return product.id === this.product.id
+        } else {
+        return false;
+        }
+      })
+      if(!found){
+        this.user.starred.push(this.product);
+        this.userService.updateCustomer(this.user).subscribe(user => this.user = user);
+      }
+    }
   }
 
   goBack(): void {

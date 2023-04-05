@@ -12,7 +12,7 @@ import { OrderService } from '../services/order-service';
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
   displayedColumns: string[] = ['id', 'total', 'products', 'time', 'complete', 'delete'];
-  displayedColumnsComp: string[] = ['id', 'name', 'products'];
+  displayedColumnsComp: string[] = ['id', 'total', 'products', 'time'];
   comp: boolean = false;
   total: number;
 
@@ -52,9 +52,8 @@ export class OrderViewComponent implements OnInit {
   }
 
   getDate(order: Order): string{
-    // this.date = order.dateTime;
-    let date = new Date(order.dateTime);
-    // date.getDay;
-    return date.toString();
+
+    return (order.time[1] + '/' + order.time[2] + '/' + order.time[0] + 
+    ' - ' + order.time[3] + ':' + order.time[4] + ':' + order.time[5]);
   }
 }

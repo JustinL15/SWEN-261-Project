@@ -1,0 +1,42 @@
+<mat-dialog-content>
+  <button mat-icon-button class="close-button" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+  <h2 class="header">{{ loginMode ? 'Login' : 'Register' }}</h2>
+  <form *ngIf="loginMode; else registerForm">
+    <mat-form-field appearance ="outline">
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="username" name="username" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance ="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="password" name="password" required>
+    </mat-form-field>
+  </form>
+  <ng-template #registerForm>
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name" name="name" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance ="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="username" name="username" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance ="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="password" name="password" required>
+      </mat-form-field>
+    </form>
+  </ng-template>
+  <div class="error"> {{errorMessage}}</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" *ngIf="loginMode" (click)="login()">Login</button>
+  <button mat-raised-button *ngIf="!loginMode" color="primary" (click)="register()">Register</button>
+  <button mat-raised-button (click)="toggleMode()">{{ loginMode ? 'Register' : 'Back' }}</button>
+</mat-dialog-actions>

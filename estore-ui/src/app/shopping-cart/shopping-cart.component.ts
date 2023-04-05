@@ -137,22 +137,29 @@ export class ShoppingCartComponent {
           totalPrice += orderQuantity * productPrice;
 
           // create snapshop of each product and quantity in cart
-          products.push(prod); 
+          products.push({id: prod.id, name: prod.name, price: prod.price, quantity: orderQuantity, description: prod.description, category: prod.category, ownerRecommended: prod.ownerRecommended} as Product); 
+
         }
         this.productService.updateProduct(prod).subscribe();
       }
 
     // clear shopping cart
     this.cart.inventory = {};
+    this.cartContents = [];
     this.cartService.updateCart(this.cart).subscribe();
 
     // create an order
     if(products.length >= 1){
       var order: Order = { id: this.cart.id, totalPrice: totalPrice, products: products} as Order;
-      this.orderService.addOrder(order).subscribe( order =>
-        this.orderService.updateOrder(order).subscribe()
-      );
-    }
+      const observableOrder = this.orderService.addOrder(order);
+      observableOrder.subscribe(order => this.orderService.updateOrder(order).subscribe());
+      var user = this.userService.getCurrentUser();
+      if(user !== null) {
+        user.orders.push((await firstValueFrom(observableOrder)).id);
+        console.log(user);
+        this.userService.updateCustomer(user).subscribe();
+      }
     }
   }
+}
 }
