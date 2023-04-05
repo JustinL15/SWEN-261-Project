@@ -50,10 +50,11 @@ export class OrderViewComponent implements OnInit {
   }
 
   /* Will mark the order as complete */
-  completeOrder(order: Order): void{
+  async completeOrder(order: Order): Promise<void> {
     order.complete = true;
     if(order){
-      this.orderService.updateOrder(order).subscribe(order => this.orders[order].complete = order);
+      await firstValueFrom(this.orderService.updateOrder(order));
+      this.getOrders();
     }
   }
 
