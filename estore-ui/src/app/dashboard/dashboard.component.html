@@ -4,7 +4,8 @@
     <div *ngIf="userService.isLoggedIn()">
         <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
         <div *ngFor="let product of products">
-            {{product.name}}
+            {{product}}
+            <!-- {{product.name}} -->
         </div>
     </div>
     <div *ngIf="!userService.isLoggedIn()">
