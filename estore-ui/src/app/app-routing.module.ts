@@ -11,10 +11,12 @@ import { UserLoginComponent } from './userlogin/userlogin.component';
 import { StarredProductsComponent } from './starred-products/starred-products.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
   { path: 'products', component: ProductsComponent},
+  { path: 'order/:id', component: OrderDetailComponent, canActivate: [LoginGuard]},
   { path: 'cart', component: ShoppingCartComponent, canActivate: [LoginGuard]},
   { path: 'starred', component: StarredProductsComponent, canActivate: [LoginGuard]},
   { path: 'detail/:id', component: ProductDetailComponent},
@@ -22,7 +24,7 @@ const routes: Routes = [
   { path: 'manage/:id', component: EditProductDetailComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'orders', component: OrderViewComponent},
-  { path: 'login', component: UserLoginComponent}
+  { path: 'login', component: UserLoginComponent, canActivate: [LoginGuard]},
 ];
 
 @NgModule({

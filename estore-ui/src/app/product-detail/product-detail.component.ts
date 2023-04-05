@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
@@ -26,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private location: Location,
     private userService: UserService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +60,11 @@ export class ProductDetailComponent implements OnInit {
       } else {
         this.addProduct(this.user.cartId, id);
       }
+    }
+    if(this.user === null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.goBack();
     }
   }
 

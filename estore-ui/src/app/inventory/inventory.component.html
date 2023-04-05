@@ -26,7 +26,9 @@
         Add Product
     </button>
 </div>
-
+<div class="errorMessage"> 
+{{errorMessage}}
+</div>
 <div class="matTab">
     <table mat-table [dataSource]="products" class="myT">
         <ng-container matColumnDef="id">
@@ -53,5 +55,4 @@
         <tr mat-row routerLink="/manage/{{product.id}}" *matRowDef="let row; columns: displayedColumns; let product"
             class="productRow"></tr>
     </table>
-    {{errorMessage}}
 </div>

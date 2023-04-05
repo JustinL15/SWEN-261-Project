@@ -151,10 +151,15 @@ export class ShoppingCartComponent {
     // create an order
     if(products.length >= 1){
       var order: Order = { id: this.cart.id, totalPrice: totalPrice, products: products} as Order;
-      this.orderService.addOrder(order).subscribe( order =>
-        this.orderService.updateOrder(order).subscribe()
-      );
-    }
+      const observableOrder = this.orderService.addOrder(order);
+      observableOrder.subscribe(order => this.orderService.updateOrder(order).subscribe());
+      var user = this.userService.getCurrentUser();
+      if(user !== null) {
+        user.orders.push((await firstValueFrom(observableOrder)).id);
+        console.log(user);
+        this.userService.updateCustomer(user).subscribe();
+      }
     }
   }
+}
 }

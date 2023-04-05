@@ -86,3 +86,8 @@ label {
 .mat-mdc-row:hover .mat-mdc-cell {
     background-color: #733927;
 }
+
+.errorMessage {
+    text-align: center;
+    color: red;
+  }
