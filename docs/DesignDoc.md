@@ -211,9 +211,11 @@ Every user story within sprint 2 pasts its acceptance criteria. Each team member
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
+![1680728754410](image/DesignDoc/1680728754410.png)
+
+![1680728817508](image/DesignDoc/1680728817508.png)
+
 ![Persistence](persistenceTest.png)
-![Controller](controllerTest.png)
-![Model](modelTest.png)
 
 Coverage is above 95% for all tests. Most anomolies occur with missed branches, especially within product controller
 and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products fucntion is missed in testing in a few branches. In CartDAO, the tests states of if the cart is null is not reached, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories.
