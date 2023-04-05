@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
   errorMessage = "";
 
   // Save the temporary review
-  tempReview: Review = {id: 0, productId: 0, customerId: 0, stars: 0, reviewContent: ""} as Review;
+  tempReview: Review = {id: 0, productId: 0, customerId: 0, stars: 0, reviewContent: "", ownerResponse: ""} as Review;
 
   reviews: Review[] = [];
   categories: string[] = [];
@@ -130,16 +130,29 @@ export class ProductDetailComponent implements OnInit {
         password: customer.password, purchasedIds: [] as number[]}));
     }
 
+    // Check if a review already exists for this user
+    let reviewId = 0;
+    this.reviews.forEach(review => {
+      if (review.customerId === this.user?.id && review.productId === id) {
+        reviewId = review.id;
+      }
+    });
+
     // Build the review
-    let review = {id: 0, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent} as Review;
+    let review = {id: reviewId, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent, ownerResponse: this.tempReview.ownerResponse} as Review;
 
     // Loop through the purchased IDs of the customer and see if we match
     let found = false;
-    console.log(customer.purchasedIds);
     customer.purchasedIds.forEach(purchasedId => {
       if (purchasedId === id) {
         if (!found) {
-          this.reviewService.addReview(review).subscribe();
+          // Either add a new review or update
+          if (reviewId === 0) {
+            this.reviewService.addReview(review).subscribe();
+          }
+          else {
+            this.reviewService.updateReview(review).subscribe();
+          }
         }
         found = true;
       }
