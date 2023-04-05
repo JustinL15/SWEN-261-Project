@@ -2,7 +2,9 @@ import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { Order } from '../order';
+import { firstValueFrom } from 'rxjs';
 import { OrderService } from '../services/order-service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-order-view',
@@ -16,7 +18,8 @@ export class OrderViewComponent implements OnInit {
   comp: boolean = false;
   total: number;
 
-  constructor(private orderService: OrderService) { this.total = 0; }
+  constructor(private orderService: OrderService,
+    private userService: UserService) { this.total = 0; }
 
   /* Displays the orders on initalization */
   ngOnInit(): void {
@@ -30,9 +33,20 @@ export class OrderViewComponent implements OnInit {
   }
 
   /* Removes an order, can not undo */
-  delete(order: Order): void {
+  async delete(order: Order): Promise<void> {
     this.orders = this.orders.filter(h => h !== order);
-    this.orderService.deleteOrder(order.id).subscribe();
+    let id = order.id;
+    await firstValueFrom(this.orderService.deleteOrder(id));
+
+    let customers = await firstValueFrom(this.userService.getCustomers());
+
+    for (let i = 0; i < customers.length; i++) {
+      if(customers[i].orders.includes(id)){
+        let ind = customers[i].orders.indexOf(id);
+        customers[i].orders.splice(ind, 1);
+        await firstValueFrom(this.userService.updateCustomer(customers[i]));
+      }
+    }
   }
 
   /* Will mark the order as complete */
