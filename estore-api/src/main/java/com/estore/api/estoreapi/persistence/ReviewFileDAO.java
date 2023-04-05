@@ -130,9 +130,8 @@ public class ReviewFileDAO implements ReviewDAO {
     @Override
     public Review createReview(Review review) throws IOException {
         synchronized(reviewMap) {
-            Review tmpRev = new Review(getNextId(), review.getProductId(), review.getCustomerUser(), 
-                            review.getStars(), review.getReviewContent(), review.getDateTime(), review.getCustomerUsername(),
-                            review.getProducts());
+            Review tmpRev = new Review(getNextId(), review.getProductId(), review.getCustomerId(), 
+                            review.getStars(), review.getReviewContent());
             
             // Add to map and save to DAO
             reviewMap.put(tmpRev.getId(), tmpRev);
