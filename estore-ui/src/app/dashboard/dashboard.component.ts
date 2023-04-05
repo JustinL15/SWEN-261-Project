@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Product } from '../product';
+import { CategoryService } from '../services/category.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -8,54 +9,28 @@ import { Product } from '../product';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent{
-  name: string | undefined = "";
-  topCategory: string = "";
-  categoryNum: number = 0;
-  constructor(public userService: UserService) {}
+  products: Product[] = [];
+  constructor(
+    public userService: UserService,
+    public categoryService: CategoryService
+    ) {}
 
   ngOnInit(): void {
     this.createRecommended();
   }
 
   async createRecommended(): Promise<void> {
-    var orders = this.userService.getCurrentUser()?.orders;
-    var orderIndex = 0;
-    var products: Product[] = [];
-    var categoryMap: Record<string, number> = {};
-    if(orders !== undefined){
-      while (orderIndex < orders.length){
-        products = orders[orderIndex].products;
-        var productIndex = 0;
-        while (productIndex < products.length){
-          if(products[productIndex].category in categoryMap){
-            categoryMap[products[productIndex].category] += 1;
-          } else{
-            categoryMap[products[productIndex].category] = 1;
-          }
-          if(categoryMap[products[productIndex].category] > this.categoryNum){
-            this.topCategory = products[productIndex].category;
-            this.categoryNum = categoryMap[products[productIndex].category];
-          }
-          productIndex += 1;
-        }
-        orderIndex += 1;
-      }
-    }
-    var starredIndex = 0;
     var user = await this.userService.getCurrentUser();
     if(user !== null && user !== undefined){
-      while (starredIndex < user.starred.length){
-        if(user.starred[starredIndex].category in categoryMap){
-          categoryMap[user.starred[starredIndex].category] += 1;
-        } else{
-          categoryMap[user.starred[starredIndex].category] = 1;
-        }
-        if(categoryMap[user.starred[starredIndex].category] > this.categoryNum){
-          this.topCategory = user.starred[starredIndex].category;
-          this.categoryNum = categoryMap[user.starred[starredIndex].category];
-        }
-        starredIndex += 1;
-      }
+      const min = 0;
+      const starredMax = user.starred.length - 1;
+      const starredInt = Math.floor(Math.random() * (starredMax - min + 1)) + min;
+      var category = user.starred[starredInt].category;
+      var productsInCategory: Product[] = [];
+      this.categoryService.getProductsByCategory(category).subscribe(prods => productsInCategory = prods);
+      const prodMax = this.products.length - 1; 
+      const prodInt = Math.floor(Math.random() * (prodMax - min + 1)) + min;
+      this.products.push(productsInCategory[prodInt])
     }
   }
 }
