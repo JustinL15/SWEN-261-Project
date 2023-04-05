@@ -94,41 +94,14 @@ public class Review {
     }
 
     /**
-     * Get the customer's previous orders
+     * Set the customer's id
      * 
-     * @return the customer's orders
+     * @return the customer's id
      */
-    public List<Integer> getProducts() {
-        return this.purchased;
+    public int setCustomerId() {
+        return this.customerId;
     }
-
-    /**
-     * Get the customer's admin status
-     * 
-     * @return the customer's admin status
-     */
-    public boolean isAdmin() {
-        return customerUser.isAdmin();
-    }
-
-    /**
-     * Get the customer
-     * 
-     * @return the customer
-     */
-    public Customer getCustomerUser() {
-        return customerUser;
-    }
-
-    /**
-     * Set the cusomer on the review
-     * 
-     * @param customer customer on the review
-     */
-    public void setCustomer(Customer customerUser) {
-        this.customerUser = customerUser;
-    }
-
+   
     /**
      * Get the stars on the review
      * 
@@ -166,24 +139,14 @@ public class Review {
     }
 
     /**
-     * Get the date and time of the order
-     * 
-     * @return date and time
-     */
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Review) {
             Review other = (Review) obj;
-            return id == other.id && productId == other.productId && stars == other.stars
-                            && dateTime == other.dateTime && other.reviewContent == reviewContent && 
-                            customerUser == other.customerUser;
+            return id == other.id && productId == other.productId && stars == other.stars 
+                            && other.reviewContent == reviewContent;
         }
         return false;
     }
