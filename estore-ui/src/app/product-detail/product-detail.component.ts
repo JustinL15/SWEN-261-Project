@@ -154,9 +154,11 @@ export class ProductDetailComponent implements OnInit {
 
     // Check if a review already exists for this user
     let reviewId = 0;
+    let ownerResp = "";
     this.reviews.forEach(review => {
       if (review.customerId === this.user?.id && review.productId === id) {
         reviewId = review.id;
+        ownerResp = review.ownerResponse;
       }
     });
 
@@ -166,7 +168,13 @@ export class ProductDetailComponent implements OnInit {
     }
 
     // Build the review
-    let review = {id: reviewId, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent, ownerResponse: this.tempReview.ownerResponse} as Review;
+    let review;
+    if (reviewId === 0) {
+      review = {id: 0, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent, ownerResponse: this.tempReview.ownerResponse} as Review;
+    }
+    else {
+      review = {id: reviewId, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent, ownerResponse: ownerResp} as Review;
+    }
 
     // Loop through the purchased IDs of the customer and see if we match
     let found = false;
