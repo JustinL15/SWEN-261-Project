@@ -26,6 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { MatSelectModule } from '@angular/material/select';
     EditProductDetailComponent,
     OrderViewComponent,
     UserLoginComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    OrderDetailComponent,
+    DeleteConfirmComponent
   ],
   imports: [
     BrowserModule,

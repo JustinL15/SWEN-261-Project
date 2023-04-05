@@ -10,10 +10,12 @@ import { OrderViewComponent } from './order-view/order-view.component';
 import { UserLoginComponent } from './userlogin/userlogin.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
   { path: 'products', component: ProductsComponent},
+  { path: 'order/:id', component: OrderDetailComponent, canActivate: [LoginGuard]},
   { path: 'cart', component: ShoppingCartComponent, canActivate: [LoginGuard]},
   { path: 'detail/:id', component: ProductDetailComponent},
   { path: 'manage', component: InventoryComponent, canActivate: [AuthGuard]},

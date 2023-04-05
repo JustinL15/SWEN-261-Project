@@ -25,44 +25,84 @@
     
       <button type="button" (click)="save()">Save</button>
       <button type="button" (click)="logout()">Log Out</button>
+      <button class="deleteButton" type="button" (click)="deleteUser()">Delete</button>
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Your Orders">
-    <div class="matTab">
-        <table mat-table [dataSource]="orders" class="myT">
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef>ID</th>
-                <td mat-cell *matCellDef="let order"> {{order.id}} </td>
-            </ng-container>
+  <ng-container *ngIf="user?.isAdmin !== true">
+    <mat-tab label="Your Orders">
+      <div class="matTab">
+        <h2>Pending Orders</h2>
+          <table mat-table [dataSource]="orders" class="myT">
+              <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+              </ng-container>
 
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let order"> {{order.name}} </td>
-            </ng-container>
+              <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let order"> {{order.name}} </td>
+              </ng-container>
 
-            <ng-container matColumnDef="products">
-                <th mat-header-cell *matHeaderCellDef>Products</th>
-                <td mat-cell *matCellDef="let order">
-                    <li *ngFor="let product of order.products">{{product.name}}</li>
-                </td>
-            </ng-container>
+              <ng-container matColumnDef="products">
+                  <th mat-header-cell *matHeaderCellDef>Products</th>
+                  <td mat-cell *matCellDef="let order">
+                      <li *ngFor="let product of order.products">{{product.name}}</li>
+                  </td>
+              </ng-container>
 
-            <ng-container matColumnDef="total">
-              <th mat-header-cell *matHeaderCellDef>Total Price</th>
-              <td mat-cell *matCellDef="let order"> ${{order.totalPrice}} </td>
-            </ng-container>
+              <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total Price</th>
+                <td mat-cell *matCellDef="let order"> ${{order.totalPrice}} </td>
+              </ng-container>
 
-            <ng-container matColumnDef="time">
-                <th mat-header-cell *matHeaderCellDef>Time Placed</th>
-                <td mat-cell *matCellDef="let order">{{getDate(order)}}</td>
-            </ng-container>
+              <ng-container matColumnDef="time">
+                  <th mat-header-cell *matHeaderCellDef>Time Placed</th>
+                  <td mat-cell *matCellDef="let order">{{getDate(order)}}</td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="orderHeader"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" class="orderHeader"></tr>
 
-            <tr mat-row *matRowDef="let row; columns: displayedColumns; let order" class="orderRow"
-                [hidden]="order.complete !== false"></tr>
-        </table>
-    </div>
-  </mat-tab>
+              <tr mat-row routerLink="/order/{{order.id}}" *matRowDef="let row; columns: displayedColumns; let order" class="orderRow"
+                  [hidden]="order.complete !== false"></tr>
+          </table>
+      </div>
+      <div class="matTab">
+        <h2>Completed Orders</h2>
+          <table mat-table [dataSource]="orders" class="myT">
+              <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let order"> {{order.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="products">
+                  <th mat-header-cell *matHeaderCellDef>Products</th>
+                  <td mat-cell *matCellDef="let order">
+                      <li *ngFor="let product of order.products">{{product.name}}</li>
+                  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total Price</th>
+                <td mat-cell *matCellDef="let order"> ${{order.totalPrice}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="time">
+                  <th mat-header-cell *matHeaderCellDef>Time Placed</th>
+                  <td mat-cell *matCellDef="let order">{{getDate(order)}}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" class="orderHeader"></tr>
+
+              <tr mat-row routerLink="/order/{{order.id}}" *matRowDef="let row; columns: displayedColumns; let order" class="orderRow"
+                  [hidden]="order.complete == false"></tr>
+          </table>
+      </div>
+    </mat-tab>
+  </ng-container>
 </mat-tab-group>

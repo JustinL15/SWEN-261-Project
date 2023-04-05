@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart } from '../cart';
+import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
 import { OrderService } from '../services/order-service';
 import { Customer } from '../customer';
 import { UserService } from '../services/user.service';
-import { ErrorService } from '../services/error.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Order } from '../order';
 import { forkJoin } from 'rxjs';
@@ -21,7 +21,8 @@ export class UserLoginComponent implements OnInit{
   constructor(
     private userService: UserService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +48,19 @@ export class UserLoginComponent implements OnInit{
   logout() {
     this.userService.logout();
     this.router.navigate(['/home']);
+  }
+
+  deleteUser() {
+    let confirm = this.matDialog.open(DeleteConfirmComponent);
+    confirm.afterClosed().subscribe(reply => {
+      if(reply === "true") {
+        if(this.user !== null) {
+          this.userService.deleteCustomer(this.user.id).subscribe(_ => {
+            this.logout();
+          });
+        }
+      }
+    })
   }
   
 }
