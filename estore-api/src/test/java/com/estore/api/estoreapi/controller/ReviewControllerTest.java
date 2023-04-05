@@ -11,7 +11,6 @@ import com.estore.api.estoreapi.persistence.ReviewDAO;
 import com.estore.api.estoreapi.model.Review;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +37,8 @@ public class ReviewControllerTest {
     @Test
     public void testGetReview() throws IOException {  // getReview may throw IOException
         // Setup
-        Review review = new Review(99,88,77,2, "good product", "asdadas");
-        // When the same id is passed in, our mock Review DAO will return the Customer object
+        Review review = new Review(99,88,77,2, "good product", "good to know");
+        // When the same id is passed in, our mock Review DAO will return the Review object
         when(mockReviewDAO.getReview(review.getId())).thenReturn(review);
 
         // Invoke
@@ -69,199 +68,192 @@ public class ReviewControllerTest {
     public void testGetReviewHandleException() throws Exception { // createReview may throw IOException
         // Setup
         int reviewId = 99;
-        // When getReview is called on the Mock Customer DAO, throw an IOException
+        // When getReview is called on the Mock Review DAO, throw an IOException
         doThrow(new IOException()).when(mockReviewDAO).getReview(reviewId);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.getCustomer(customerId);
+        ResponseEntity<Review> response = reviewController.getReview(reviewId);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     /*****************************************************************
-     * The following tests will fail until all CustomerController methods
+     * The following tests will fail until all ReviewController methods
      * are implemented.
      ****************************************************************/
 
     @Test
-    public void testCreateCustomer() throws IOException {  // createCustomer may throw IOException
+    public void testCreateReview() throws IOException {  // createReview may throw IOException
         // Setup
-        Customer customer = new Customer(99,"Wi-Fire","Wi-Fire", 153, false, "astyhhas");
-        // when createCustomer is called, return true simulating successful
+        Review review = new Review(99,88,77,2, "good product", "good to know");
+        // when createReview is called, return true simulating successful
         // creation and save
-        when(mockCustomerDAO.createCustomer(customer)).thenReturn(customer);
+        when(mockReviewDAO.createReview(review)).thenReturn(review);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.createCustomer(customer);
+        ResponseEntity<Review> response = reviewController.createReview(review);
 
         // Analyze
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
-        assertEquals(customer,response.getBody());
+        assertEquals(review,response.getBody());
     }
     
     @Test
-    public void testCreateCustomerFailed() throws IOException {  // createCustomer may throw IOException
+    public void testCreateReviewFailed() throws IOException {  // createReview may throw IOException
         // Setup
-        Customer customer = new Customer(99,"Bolt","Bolt", 153, false, "astyhhas");
-        // when createCustomer is called, return false simulating failed
+        Review review = new Review(99,88,77,2, "good product", "good to know");
+        // when createReview is called, return false simulating failed
         // creation and save
-        when(mockCustomerDAO.createCustomer(customer)).thenReturn(null);
-        String searchString = customer.getName();
-        Customer[] customers = new Customer[1];
-        customers[0] = new Customer(99,"Bolt","Bolt", 153, false, "astyhhas");
-        // When findCustomers is called with the search string, return the two
-        /// customers above
-        when(mockCustomerDAO.findCustomers(searchString)).thenReturn(customers);
-
+        when(mockReviewDAO.createReview(review)).thenReturn(null);
         // Invoke
-        ResponseEntity<Customer> response = customerController.createCustomer(customer);
+        ResponseEntity<Review> response = reviewController.createReview(review);
 
         // Analyze
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
     }
 
     @Test
-    public void testCreateCustomerHandleException() throws IOException {  // createCustomer may throw IOException
+    public void testCreateReviewHandleException() throws IOException {  // createReview may throw IOException
         // Setup
-        Customer customer = new Customer(99,"Ice Gladiator", "Ice Gladiator", 384, true, "ayths");
+        Review review = new Review(99,88,77,2, "good product", "good to know");
 
-        // When createCustomer is called on the Mock Customer DAO, throw an IOException
-        doThrow(new IOException()).when(mockCustomerDAO).createCustomer(customer);
+        // When createReview is called on the Mock Review DAO, throw an IOException
+        doThrow(new IOException()).when(mockReviewDAO).createReview(review);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.createCustomer(customer);
+        ResponseEntity<Review> response = reviewController.createReview(review);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     @Test
-    public void testUpdateCustomer() throws IOException { // updateCustomer may throw IOException
+    public void testUpdateReview() throws IOException { // updateReview may throw IOException
         // Setup
-        Customer customer = new Customer(99,"Wi-Fire","Wi-Fire", 153, false, "astyhhas");
-        // when updateCustomer is called, return true simulating successful
+        Review review = new Review(99,88,77,2, "good product", "good to know");
+        // when updateReview is called, return true simulating successful
         // update and save
-        when(mockCustomerDAO.updateCustomer(customer)).thenReturn(customer);
-        ResponseEntity<Customer> response = customerController.updateCustomer(customer);
-        customer.setName("Bolt");
+        when(mockReviewDAO.updateReview(review)).thenReturn(review);
+        ResponseEntity<Review> response = reviewController.updateReview(review);
+        review.setReviewContent("bad product");
 
         // Invoke
-        response = customerController.updateCustomer(customer);
+        response = reviewController.updateReview(review);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(customer,response.getBody());
+        assertEquals(review,response.getBody());
     }
 
     @Test
-    public void testUpdateCustomerFailed() throws IOException { // updateCustomer may throw IOException
+    public void testUpdateReviewFailed() throws IOException { // updateReview may throw IOException
         // Setup
-        Customer customer = new Customer(99,"Galactic Agent", "Galactic Agent", 123, false, "asdadas");
-        // when updateCustomer is called, return true simulating successful
+        Review review = new Review(99,88,77,2, "good product", "good to know");
+        // when updateReview is called, return true simulating successful
         // update and save
-        when(mockCustomerDAO.updateCustomer(customer)).thenReturn(null);
+        when(mockReviewDAO.updateReview(review)).thenReturn(null);
         
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.updateCustomer(customer);
+        ResponseEntity<Review> response = reviewController.updateReview(review);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
     @Test
-    public void testUpdateCustomerHandleException() throws IOException { // updateCustomer may throw IOException
+    public void testUpdateReviewHandleException() throws IOException { // updateReview may throw IOException
         // Setup
-        Customer customer = new Customer(99,"Galactic Agent", "Galactic Agent", 123, false, "asdadas");
-        // When updateCustomer is called on the Mock Customer DAO, throw an IOException
-        doThrow(new IOException()).when(mockCustomerDAO).updateCustomer(customer);
+        Review review = new Review(99,88,77,2, "good product", "good to know");
+        // When updateReview is called on the Mock Review DAO, throw an IOException
+        doThrow(new IOException()).when(mockReviewDAO).updateReview(review);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.updateCustomer(customer);
+        ResponseEntity<Review> response = reviewController.updateReview(review);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     @Test
-    public void testGetCustomers() throws IOException { // getCustomers may throw IOException
+    public void testGetReviews() throws IOException { // getReviews may throw IOException
         // Setup
-        Customer[] customers = new Customer[2];
-        customers[0] = new Customer(99,"Bolt","Bolt", 153, false, "astyhhas");
-        customers[1] = new Customer(100,"The Great Iguana","The Great Iguana", 153, true, "jkyhhas");
-        // When getCustomers is called return the customers created above
-        when(mockCustomerDAO.getCustomers()).thenReturn(customers);
+        Review[] reviews = new Review[2];
+        reviews[0] = new Review(99,88,77,2, "good product", "good to know");
+        reviews[1] = new Review(98,87,76,1, "bad product", "sorry");
+        // When getReviews is called return the reviews created above
+        when(mockReviewDAO.getReviews()).thenReturn(reviews);
 
         // Invoke
-        ResponseEntity<Customer[]> response = customerController.getCustomers();
+        ResponseEntity<Review[]> response = reviewController.getReviews();
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(customers,response.getBody());
+        assertEquals(reviews,response.getBody());
     }
 
     @Test
-    public void testGetCustomersNotFound() throws IOException { // getCustomers may throw IOException
-        when(mockCustomerDAO.getCustomers()).thenReturn(null);
+    public void testGetReviewsNotFound() throws IOException { // getReviews may throw IOException
+        when(mockReviewDAO.getReviews()).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Customer[]> response = customerController.getCustomers();
+        ResponseEntity<Review[]> response = reviewController.getReviews();
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
     @Test
-    public void testGetCustomersHandleException() throws IOException { // getCustomers may throw IOException
+    public void testGetReviewsHandleException() throws IOException { // getReviews may throw IOException
         // Setup
-        // When getCustomers is called on the Mock Customer DAO, throw an IOException
-        doThrow(new IOException()).when(mockCustomerDAO).getCustomers();
+        // When getReviews is called on the Mock Review DAO, throw an IOException
+        doThrow(new IOException()).when(mockReviewDAO).getReviews();
 
         // Invoke
-        ResponseEntity<Customer[]> response = customerController.getCustomers();
+        ResponseEntity<Review[]> response = reviewController.getReviews();
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     @Test
-    public void testDeleteCustomer() throws IOException { // deleteCustomer may throw IOException
+    public void testDeleteReview() throws IOException { // deleteReview may throw IOException
         // Setup
-        int customerId = 99;
-        // when deleteCustomer is called return true, simulating successful deletion
-        when(mockCustomerDAO.deleteCustomer(customerId)).thenReturn(true);
+        int reviewId = 99;
+        // when deleteReview is called return true, simulating successful deletion
+        when(mockReviewDAO.deleteReview(reviewId)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.deleteCustomer(customerId);
+        ResponseEntity<Review> response = reviewController.deleteReview(reviewId);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
     }
 
     @Test
-    public void testDeleteCustomerNotFound() throws IOException { // deleteCustomer may throw IOException
+    public void testDeleteReviewNotFound() throws IOException { // deleteReview may throw IOException
         // Setup
-        int customerId = 99;
-        // when deleteCustomer is called return false, simulating failed deletion
-        when(mockCustomerDAO.deleteCustomer(customerId)).thenReturn(false);
+        int reviewId = 99;
+        // when deleteReview is called return false, simulating failed deletion
+        when(mockReviewDAO.deleteReview(reviewId)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.deleteCustomer(customerId);
+        ResponseEntity<Review> response = reviewController.deleteReview(reviewId);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
     @Test
-    public void testDeleteCustomerHandleException() throws IOException { // deleteCustomer may throw IOException
+    public void testDeleteReviewHandleException() throws IOException { // deleteReview may throw IOException
         // Setup
-        int customerId = 99;
-        // When deleteCustomer is called on the Mock Customer DAO, throw an IOException
-        doThrow(new IOException()).when(mockCustomerDAO).deleteCustomer(customerId);
+        int reviewId = 99;
+        // When deleteReview is called on the Mock Review DAO, throw an IOException
+        doThrow(new IOException()).when(mockReviewDAO).deleteReview(reviewId);
 
         // Invoke
-        ResponseEntity<Customer> response = customerController.deleteCustomer(customerId);
+        ResponseEntity<Review> response = reviewController.deleteReview(reviewId);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
