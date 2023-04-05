@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { firstValueFrom } from 'rxjs';
 import { Product } from '../product';
 import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
@@ -10,6 +10,7 @@ import { CartService } from '../services/cart.service';
 import { Review } from '../review';
 import { Customer } from '../customer';
 import { ReviewService } from '../services/review-service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,10 +20,15 @@ import { ReviewService } from '../services/review-service';
 
 export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
-  reviews: Review | undefined;
   user: Customer | null | undefined;
   quantity: number = 1;
   errorMessage = "";
+
+  // Save the temporary review
+  tempReview: Review = {id: 0, productId: 0, customerId: 0, stars: 0, reviewContent: ""} as Review;
+
+  reviews: Review[] = [];
+  categories: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -31,17 +37,27 @@ export class ProductDetailComponent implements OnInit {
     private location: Location,
     private userService: UserService,
     private cartService: CartService
-  ) { }
+  ) {
+    
+  }
 
   ngOnInit(): void {
     this.getProduct();
     this.user = this.userService.getCurrentUser();
+
+    this.getReviews();
+
   }
 
   getProduct(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.productService.getProduct(id)
       .subscribe(product => this.product = product);
+  }
+
+  getReviews(): void {
+    this.reviewService.getReviews()
+    .subscribe(reviews => this.reviews = reviews);
   }
 
   addToCart(): void {
@@ -53,7 +69,7 @@ export class ProductDetailComponent implements OnInit {
             this.userService.updateCustomer({
               id: this.user.id, username: this.user.username,
               name: this.user.name, cartId: cart.id, orders: this.user.orders,
-              isAdmin: this.user.isAdmin, password: this.user.password
+              isAdmin: this.user.isAdmin, password: this.user.password,purchasedIds: this.user.purchasedIds
             }).subscribe(user => {
               if (id !== undefined) {
                 this.addProduct(user.cartId, id);
@@ -92,22 +108,50 @@ export class ProductDetailComponent implements OnInit {
     this.location.back();
   }
 
-  addReview(review: Review): boolean {
+  async addReview(): Promise<boolean> {
     var id: number | undefined = this.product?.id;
-    while (review.purchased != null) {
-      for (let i = 0; review.purchased.length; i++) {
-        if (id == review.purchased[i]) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
 
-  writeReview(prodId: number, stars: number, content: string) {
-    let uID = 1;
-    let usr = this.user;
-    this.reviewService.addReview({ prodId, uID, usr, stars, content } as unknown as Review).subscribe();
+    if (id === undefined) {
+      window.alert("A product must be selected");
+      return false;
+    }
+
+    if (this.user === null || this.user === undefined) {
+      window.alert("You must be logged in to add a review");
+      return false;
+    }
+
+    let customer = await firstValueFrom(this.userService.getCustomer(this.user.id));
+    // Now if purchasedIds are undefined then we will create a blank array and update the customer, then reset it
+    if (customer.purchasedIds === undefined) {
+      customer.purchasedIds = [];
+      customer = await firstValueFrom(this.userService.updateCustomer({id: customer.id, username: customer.username,
+        name: customer.name, cartId: customer.cartId, orders: customer.orders, isAdmin: customer.isAdmin,
+        password: customer.password, purchasedIds: [] as number[]}));
+    }
+
+    // Build the review
+    let review = {id: 0, productId: id, customerId: this.user.id, stars: this.tempReview.stars, reviewContent: this.tempReview.reviewContent} as Review;
+
+    // Loop through the purchased IDs of the customer and see if we match
+    let found = false;
+    console.log(customer.purchasedIds);
+    customer.purchasedIds.forEach(purchasedId => {
+      if (purchasedId === id) {
+        if (!found) {
+          this.reviewService.addReview(review).subscribe();
+        }
+        found = true;
+      }
+      
+    });
+
+    if (!found) {
+      window.alert("You must have purchased this product to add a review");
+    }
+
+    return found;
+    
   }
 
 }
