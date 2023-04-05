@@ -131,7 +131,7 @@ public class ReviewFileDAO implements ReviewDAO {
     public Review createReview(Review review) throws IOException {
         synchronized(reviewMap) {
             Review tmpRev = new Review(getNextId(), review.getProductId(), review.getCustomerId(), 
-                            review.getStars(), review.getReviewContent());
+                            review.getStars(), review.getReviewContent(), review.getOwnerResponse());
             
             // Add to map and save to DAO
             reviewMap.put(tmpRev.getId(), tmpRev);

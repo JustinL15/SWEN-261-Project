@@ -21,6 +21,7 @@ public class Review {
     @JsonProperty("customerId") private int customerId;
     @JsonProperty("stars") private float stars;
     @JsonProperty("reviewContent") private String reviewContent;
+    @JsonProperty("ownerResponse") private String ownerResponse;
 
     /**
      * Constructor for the reviews
@@ -33,7 +34,8 @@ public class Review {
      */
     public Review(@JsonProperty("id") int id, @JsonProperty("productId") int productId, 
                 @JsonProperty("customerId") int customerId,
-                @JsonProperty("stars") float stars, @JsonProperty("reviewContent") String reviewContent) {
+                @JsonProperty("stars") float stars, @JsonProperty("reviewContent") String reviewContent,
+                @JsonProperty("ownerResponse") String ownerResponse) {
         this.id = id;
         this.productId = productId;
         this.customerId = customerId;
@@ -44,6 +46,13 @@ public class Review {
         }
         else {
             this.reviewContent = reviewContent;
+        }
+
+        if (ownerResponse == null) {
+            this.ownerResponse = "";
+        }
+        else {
+            this.ownerResponse = ownerResponse;
         }
 
     }
@@ -100,6 +109,15 @@ public class Review {
      */
     public int setCustomerId() {
         return this.customerId;
+    }
+
+    /**
+     * Get the owner's response
+     * 
+     * @return the owner's response
+     */
+    public String getOwnerResponse() {
+        return this.ownerResponse;
     }
    
     /**
