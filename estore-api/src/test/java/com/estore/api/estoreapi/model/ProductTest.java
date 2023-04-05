@@ -162,4 +162,23 @@ public class ProductTest {
         // Analyze
         assertEquals(expected_string,actual_string);
     }
+
+    @Test
+    public void testSetOwnerReccommended() {
+        // Setup
+        int id = 99;
+        String name = "Wi-Fire";
+        double price = 20;
+        int quantity = 5;
+        String desc = "cool name";
+        Product product = new Product(id,name,price,quantity,desc, null, false);
+
+        boolean expected_recommended = false;
+
+        // Invoke
+        product.setOwnerRecommended(false);
+
+        // Analyze
+        assertEquals(expected_recommended,product.isOwnerRecommended());
+    }
 }

@@ -86,22 +86,6 @@ public class ReviewFileDAOTest {
         assertEquals(reviewFileDAO.reviewMap.size(),testReviews.length-1);
     }
 
-   // @Test
-    //public void testCreateReview() {
-        // Setup
-      //  Review review = new Review(90,80, 70, 3, "decent", "comment");
-
-        // Invoke
-      //  Review result = assertDoesNotThrow(() -> reviewFileDAO.createReview(review),
-      //                          "Unexpected exception thrown");
-
-        // Analyze
-    //    assertNotNull(result);
-   //     Review actual = reviewFileDAO.getReview(review.getId());
-   //     assertEquals(actual.getId(), review.getId());
-   //     assertEquals(actual.getReviewContent(),review.getReviewContent());
-  //  }
-
     @Test
     public void testUpdateReview() {
         // Setup
