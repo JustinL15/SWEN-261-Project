@@ -60,3 +60,10 @@ div{
     margin-left: auto;
     margin-right: auto;
 }
+
+.unstar{
+    color: #fcba03;
+    background-color: transparent;
+    border: none;
+    float: right;
+}

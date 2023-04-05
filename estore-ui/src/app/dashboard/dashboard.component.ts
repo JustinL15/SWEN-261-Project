@@ -12,6 +12,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class DashboardComponent{
   productCopies: Product[] = [];
+  starred: Product[] | undefined = [];
   constructor(
     public userService: UserService,
     public categoryService: CategoryService,
@@ -20,6 +21,7 @@ export class DashboardComponent{
 
   ngOnInit(): void {
     this.createRecommended();
+    this.starred = this.userService.getCurrentUser()?.starred;
   }
 
   async createRecommended(): Promise<void> {
@@ -90,6 +92,23 @@ export class DashboardComponent{
     for (let productId of selectedProducts) {
       let product = await firstValueFrom(this.productService.getProduct(productId));
       this.productCopies.push(product);
+    }
+  }
+
+  unstar(product: Product): void {
+    if (this.starred !== null && this.starred !== undefined){
+      const index = this.starred.indexOf(product, 0);
+      if (index > -1) {
+        this.starred.splice(index, 1);
+      }
+    }
+  }
+
+  isStarred(product: Product): boolean{
+    if(this.starred){
+      return true;
+    }else{
+      return false;
     }
   }
 }
