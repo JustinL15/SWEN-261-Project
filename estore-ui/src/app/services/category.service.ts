@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 
 import { ProductService } from './product.service';
 import { Product } from '../product';
@@ -37,17 +37,17 @@ export class CategoryService {
    * @param category Category to find from
    */
   getProductsByCategory(category: string): Observable<Product[]> {
-    let matchingIds: Product[] = [];
-    // Grab all products
-    this.productService.getProducts().subscribe(products => {
-      // Now loop and see if there is a match
-      products.forEach(product => {
-        if (product.category === category) {
-          matchingIds.push(product);
-        }
-      });
-    });
-
-    return of(matchingIds);
+    return this.productService.getProducts().pipe(
+      map(products => {
+        const matchingIds: Product[] = [];
+        products.forEach(product => {
+          if (product.category === category) {
+            matchingIds.push(product);
+          }
+        });
+        return matchingIds;
+      })
+    );
   }
+
 }
