@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { ProductService } from '../services/product.service';
-import { UserService } from '../services/user.service';
-import { CartService } from '../services/cart.service';
 import { ReviewService } from '../services/review-service';
 import { Review } from '../review';
-import { Product } from '../product';
 
 @Component({
   selector: 'app-review-manage',
@@ -18,7 +13,6 @@ export class ReviewManageComponent implements OnInit {
   productReview: {productName: string, review: Review}[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private reviewService: ReviewService,
     private productService: ProductService,
   ) {

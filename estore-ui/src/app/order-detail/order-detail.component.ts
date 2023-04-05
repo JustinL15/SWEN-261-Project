@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product } from '../product';
-import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
 import { OrderService } from '../services/order-service';
 import { Customer } from '../customer';
@@ -21,7 +20,6 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
     private location: Location,
     private userService: UserService,
     private orderService: OrderService

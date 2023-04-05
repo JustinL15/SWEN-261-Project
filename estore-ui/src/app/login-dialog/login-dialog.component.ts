@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { ErrorService } from '../services/error.service';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Customer } from '../customer';
 
 
@@ -21,7 +21,6 @@ export class LoginDialogComponent {
     public userService: UserService,
     private errorService: ErrorService,
     private dialogRef: MatDialogRef<LoginDialogComponent>,
-    private matDialog: MatDialog
     ) {}
 
   login(): void {
