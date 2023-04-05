@@ -44,7 +44,7 @@
       </div>
 
       <!-- Allow the user to submit -->
-      <button type="button" (click)="addReview()" class="addReview">Submit Review</button>
+      <button type="button" (click)="addReview()" class="addReview">Submit/Edit Review</button>
     </div>
     <br>
     <div class="front">
@@ -55,13 +55,17 @@
             <div class="front">
               <span>Rating: </span>
             </div>
-            <div>{{review.stars}}</div>
+            <div>{{review.stars}}/5</div>
             <br>
             <div class="front">
               <span>Content: </span>
             </div>
             <div>{{review.reviewContent}}</div>
             <br>
+            <div class="front">
+              <span *ngIf="review.ownerResponse !== ''">Owner Response: </span>
+            </div>
+            <div>{{review.ownerResponse}}</div>
           </div>
         </span>
       </span>
