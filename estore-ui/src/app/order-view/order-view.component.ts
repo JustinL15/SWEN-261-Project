@@ -12,7 +12,7 @@ import { OrderService } from '../services/order-service';
 export class OrderViewComponent implements OnInit {
   orders: Order[] = [];
   displayedColumns: string[] = ['id', 'total', 'products', 'time', 'complete', 'delete'];
-  displayedColumnsComp: string[] = ['id', 'name', 'products'];
+  displayedColumnsComp: string[] = ['id', 'total', 'products', 'time'];
   comp: boolean = false;
   total: number;
 
