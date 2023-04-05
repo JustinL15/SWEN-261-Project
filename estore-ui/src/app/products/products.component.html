@@ -3,50 +3,48 @@
 
   <div id="search-component">
     <div class="searchBar">
-      <label for="search-box">Search </label>
-      <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+      <mat-grid-list cols="3" rowHeight="10:1">
+        <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile><label for="search-box">Search </label>
+      <input #searchBox id="search-box" (input)="search(searchBox.value)" /></mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
     </div>
     <div class="categorySelect">
-      <mat-label>Category </mat-label>
-      <mat-select [(ngModel)]="selectedCategory">
-        <mat-option *ngFor="let category of categories" [value]="category">
-          {{category}}
-        </mat-option>
-      </mat-select>
+      <mat-form-field class="form" appearance="fill" color="primary">
+        <mat-label>Category </mat-label>
+        <mat-select [(ngModel)]="selectedCategory" class="select">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
     </div>
-
-    <!-- <ul class="search-result">
-      <li *ngFor="let product of products$ | async">
-        <a routerLink="/detail/{{product.id}}">
-          {{product.name}}
-        </a>
-      </li>
-    </ul> -->
 
     <div class="search-result">
       <div class="productBoxes" *ngIf="(selectedCategory !== '')">
-        <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-list cols="3" rowHeight="1.6:1">
           <div class="products">
             <span *ngFor="let product of products">
               <span *ngIf="product.category === selectedCategory">
-              <mat-grid-tile style="width: 80%;">
-                <div class="card" routerLink="/detail/{{product.id}}">
-                  <span class="productName">{{product.name}}</span>
-                  <div class="productPrice">${{product.price}}</div><br>
-                  <span *ngIf="product.quantity === 0">
-                    <div class="productQuantity">OUT OF STOCK</div>
-                  </span>
-                  <span *ngIf="product.quantity !== 0">
-                    <div class="productQuantity">{{product.quantity}} available</div>
-                  </span>
-                  <div class="image">
-                    <!-- replace image with product image -->
-                    <img
-                      src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                <mat-grid-tile style="width: 80%;">
+                  <div class="card" routerLink="/detail/{{product.id}}">
+                    <span class="productName">{{product.name}}</span>
+                    <div class="productPrice">${{product.price}}</div><br>
+                    <span *ngIf="product.quantity === 0">
+                      <div class="productQuantity">OUT OF STOCK</div>
+                    </span>
+                    <span *ngIf="product.quantity !== 0">
+                      <div class="productQuantity">{{product.quantity}} available</div>
+                    </span>
+                    <div class="image">
+                      <!-- replace image with product image -->
+                      <img
+                        src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                    </div>
                   </div>
-                </div>
-              </mat-grid-tile>
+                </mat-grid-tile>
               </span>
             </span>
           </div>
@@ -56,7 +54,7 @@
 
     <div class="search-result">
       <div class="productBoxes" *ngIf="(searchBox.value !== '' && selectedCategory === '')">
-        <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-list cols="3" rowHeight="1.6:1">
           <div class="products">
             <span *ngFor="let product of products$ | async">
               <mat-grid-tile style="width: 80%;">
@@ -84,7 +82,7 @@
   </div>
 
   <div class="productBoxes" *ngIf="(searchBox.value === '' && selectedCategory === '')">
-    <mat-grid-list cols="3" rowHeight="2:1" gutterSize="20px">
+    <mat-grid-list cols="3" rowHeight="1.6:1" gutterSize="20px">
       <div class="products">
         <span *ngFor="let product of products">
           <mat-grid-tile style="width: 80%;">
@@ -99,8 +97,7 @@
               </span>
               <div class="image">
                 <!-- replace image with product image -->
-                <img
-                  src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                <img src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
               </div>
             </div>
           </mat-grid-tile>
