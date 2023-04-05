@@ -25,7 +25,7 @@ public class Customer {
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
     @JsonProperty("password") private String password;
-    @JsonProperty("starred") private List<Integer> starred;
+    @JsonProperty("starred") private List<Product> starred;
 
     /**
      * Construct a new customer

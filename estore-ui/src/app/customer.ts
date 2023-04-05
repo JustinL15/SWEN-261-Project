@@ -6,7 +6,7 @@ export interface Customer {
     username: string;
     name: string;
     cartId: number;
-    orders: Array<Order>;
+    orders: Array<number>;
     starred: Array<Product>;
     isAdmin: boolean;
     password: string;

@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Customer } from './customer';
 import { MessageService } from './message.service';
 import { CartService } from './cart.service';
+import { Product } from './product';
 
 @Injectable({
   providedIn: 'root'
