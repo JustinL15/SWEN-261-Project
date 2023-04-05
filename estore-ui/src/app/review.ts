@@ -4,4 +4,5 @@ export interface Review {
     customerId: number;
     stars: number;
     reviewContent: string;
+    ownerResponse: string;
 }
