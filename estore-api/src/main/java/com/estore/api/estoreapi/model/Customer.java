@@ -25,7 +25,7 @@ public class Customer {
     @JsonProperty("orders") private List<Integer> orders;
     @JsonProperty("isAdmin") private boolean isAdmin;
     @JsonProperty("password") private String password;
-    @JsonProperty("products") private List<Integer> products;
+    @JsonProperty("purchasedIds") private List<Integer> purchasedIds;
 
     /**
      * Construct a new customer
@@ -47,7 +47,7 @@ public class Customer {
         this.isAdmin = isAdmin;
         this.password = password;
         this.orders = new ArrayList<>();
-        this.products = new ArrayList<>();
+        this.purchasedIds = new ArrayList<>();
     }
 
     /**
@@ -129,7 +129,7 @@ public class Customer {
      * @return products
      */
     public List<Integer> getPurchasedProducts() {
-        return products;
+        return purchasedIds;
     }
 
     /**
@@ -138,7 +138,7 @@ public class Customer {
      * @param productId customer productsIds
      */
     public void addPurchasedProduct(int productId) {
-        products.add(productId);
+        purchasedIds.add(productId);
     }
 
     /**
