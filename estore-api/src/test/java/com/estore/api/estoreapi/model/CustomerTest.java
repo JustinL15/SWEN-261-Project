@@ -122,5 +122,26 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void testProductId() {
+        // Setup
+        int id = 99;
+        String username = "user1234";
+        String name = "John Smith";
+        int cartId = 77;
+        boolean isAdmin = false;
+        String password = "Sw3niZcooL";
+        Customer customer = new Customer(id,username,name,cartId,isAdmin,password);
+
+        int product_id = 10;
+        List<Integer> products;
+        // Invoke
+        customer.addPurchasedProduct(product_id);
+        products = customer.getPurchasedProducts();
+
+        // Analyze
+        assertEquals(products,customer.getPurchasedProducts());
+    }
+
 }
 
