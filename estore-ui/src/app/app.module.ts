@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReviewManageComponent } from './review-manage/review-manage.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     InventoryComponent,
     EditProductDetailComponent,
     OrderViewComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ReviewManageComponent
   ],
   imports: [
     BrowserModule,

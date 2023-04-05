@@ -51,6 +51,7 @@
       <span>Reviews: </span>
       <span *ngFor="let review of reviews">
         <span *ngIf="product && review.productId === product.id">
+          <!-- TODO Add a ngIf to check if this is my review and highlight it -->
           <div class="review">
             <div class="front">
               <span>Rating: </span>

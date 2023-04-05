@@ -153,6 +153,7 @@ export class ProductDetailComponent implements OnInit {
           else {
             this.reviewService.updateReview(review).subscribe();
           }
+          this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
         }
         found = true;
       }

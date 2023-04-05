@@ -8,6 +8,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { EditProductDetailComponent } from './edit-product-detail/edit-product-detail.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { UserLoginComponent } from './userlogin/userlogin.component';
+import { ReviewManageComponent } from './review-manage/review-manage.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'orders', component: OrderViewComponent},
   { path: 'login', component: UserLoginComponent},
+  { path: 'reviewManage', component: ReviewManageComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
