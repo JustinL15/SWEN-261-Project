@@ -1,7 +1,7 @@
 <body>
     <div></div>
     <img class="pic" src="https://cdn-icons-png.flaticon.com/512/152/152760.png">
-    <div *ngIf="userService.isLoggedIn()">
+    <div *ngIf="userService.isLoggedIn() && !userService.getCurrentUser()?.isAdmin">
         <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
 
         <p>Starred Products</p>
@@ -45,8 +45,8 @@
                             <div class="productQuantity">{{product.quantity}} available</div>
                         </span>
                         <span *ngIf="isStarred(product) !== false">
-                            <button type="button" class="unstar" title="unstar product" (click)="unstar(product)"><mat-icon
-                                class="star">star</mat-icon></button>
+                            <button type="button" class="unstar" title="unstar product"
+                                (click)="unstar(product)"><mat-icon class="star">star</mat-icon></button>
                         </span>
                         <span *ngIf="isStarred(product) == false">
                             <button class="star"><mat-icon>star_border</mat-icon></button>
@@ -60,11 +60,21 @@
                 </mat-grid-tile>
             </span>
         </mat-grid-list>
+    </div>
 
-        <h3>Owner Reccomended Products</h3>
-        <mat-grid-list cols="3" rowHeight="2:1">
-            <span *ngFor="let product of products">
-                <span *ngIf="product"></span>
+    <div *ngIf="userService.isLoggedIn() && userService.getCurrentUser()?.isAdmin">
+    <p>Welcome, {{userService.getCurrentUser()?.username}} to the Java 19 Coffee Shop!</p>
+    </div>
+    
+
+    <div *ngIf="!userService.isLoggedIn()">
+        <p>Welcome to the Java 19 Coffee Shop, you have not logged in yet.</p>
+        <p>Proceed to the login page to login or register an account.</p>
+    </div>
+    <h3>Owner Reccomended Products</h3>
+    <mat-grid-list cols="3" rowHeight="2:1">
+        <span *ngFor="let product of products">
+            <span *ngIf="product.ownerRecommended == true">
                 <mat-grid-tile>
                     <div class="card" routerLink="/detail/{{product.id}}">
                         <span class="productName">{{product.name}}</span>
@@ -76,8 +86,8 @@
                             <div class="productQuantity">{{product.quantity}} available</div>
                         </span>
                         <span *ngIf="isStarred(product) !== false">
-                            <button type="button" class="unstar" title="unstar product" (click)="unstar(product)"><mat-icon
-                                class="star">star</mat-icon></button>
+                            <button type="button" class="unstar" title="unstar product"
+                                (click)="unstar(product)"><mat-icon class="star">star</mat-icon></button>
                         </span>
                         <span *ngIf="isStarred(product) == false">
                             <button class="star"><mat-icon>star_border</mat-icon></button>
@@ -90,11 +100,7 @@
                     </div>
                 </mat-grid-tile>
             </span>
-        </mat-grid-list>
-    </div>
+        </span>
+    </mat-grid-list>
 
-    <div *ngIf="!userService.isLoggedIn()">
-        <p>Welcome to the Java 19 Coffee Shop, you have not logged in yet.</p>
-        <p>Proceed to the login page to login or register an account.</p>
-    </div>
 </body>
