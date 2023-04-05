@@ -5,6 +5,7 @@ import { Customer } from '../customer';
 import { UserService } from '../services/user.service';
 import { ErrorService } from '../services/error.service';
 
+
 @Component({
   selector: 'app-userlogin',
   templateUrl: './userlogin.component.html',
@@ -64,7 +65,7 @@ export class UserLoginComponent {
         return;
       }
       this.userService.register(
-        {name: this.name, username: this.username, password: this.password} as Customer).subscribe(_ => {
+        {id: 0, username: this.username, name: this.name, password: this.password, purchasedIds: []} as unknown as Customer).subscribe(_ => {
           if(this.errorService.errorCode === 409) {
             this.errorMessage = "Username is already taken."
           }
