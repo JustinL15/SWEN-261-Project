@@ -41,7 +41,6 @@ export class ReviewManageComponent implements OnInit {
 
   saveResponse(review: Review, newOwnerResponse: string): void {
     review.ownerResponse = newOwnerResponse;
-    console.log(review);
     this.reviewService.updateReview(review).subscribe();
   }
 
