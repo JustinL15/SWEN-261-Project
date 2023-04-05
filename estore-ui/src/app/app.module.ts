@@ -29,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { ReviewManageComponent } from './review-manage/review-manage.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { ReviewManageComponent } from './review-manage/review-manage.component';
     MatFormFieldModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
