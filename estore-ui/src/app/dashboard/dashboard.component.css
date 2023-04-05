@@ -67,3 +67,10 @@ div{
     border: none;
     float: right;
 }
+
+.star{
+    color: #fcba03;
+    background-color: transparent;
+    border: none;
+    float: right;
+}

@@ -31,7 +31,7 @@
         </mat-grid-list>
 
 
-        <h3>Reccomended Products:</h3>
+        <h3>Reccomended Products</h3>
         <mat-grid-list cols="3" rowHeight="2:1">
             <span *ngFor="let product of productCopies">
                 <mat-grid-tile>
@@ -44,8 +44,12 @@
                         <span *ngIf="product.quantity !== 0">
                             <div class="productQuantity">{{product.quantity}} available</div>
                         </span>
-                        <span *ngIf="isStarred(product)">
-                            <mat-icon>star_border</mat-icon>
+                        <span *ngIf="isStarred(product) !== false">
+                            <button type="button" class="unstar" title="unstar product" (click)="unstar(product)"><mat-icon
+                                class="star">star</mat-icon></button>
+                        </span>
+                        <span *ngIf="isStarred(product) == false">
+                            <button class="star"><mat-icon>star_border</mat-icon></button>
                         </span>
                         <div class="image">
                             <!-- replace image with product image -->
@@ -57,6 +61,36 @@
             </span>
         </mat-grid-list>
 
+        <h3>Owner Reccomended Products</h3>
+        <mat-grid-list cols="3" rowHeight="2:1">
+            <span *ngFor="let product of products">
+                <span *ngIf="product"></span>
+                <mat-grid-tile>
+                    <div class="card" routerLink="/detail/{{product.id}}">
+                        <span class="productName">{{product.name}}</span>
+                        <div class="productPrice">${{product.price}}</div><br>
+                        <span *ngIf="product.quantity === 0">
+                            <div class="productQuantity">OUT OF STOCK</div>
+                        </span>
+                        <span *ngIf="product.quantity !== 0">
+                            <div class="productQuantity">{{product.quantity}} available</div>
+                        </span>
+                        <span *ngIf="isStarred(product) !== false">
+                            <button type="button" class="unstar" title="unstar product" (click)="unstar(product)"><mat-icon
+                                class="star">star</mat-icon></button>
+                        </span>
+                        <span *ngIf="isStarred(product) == false">
+                            <button class="star"><mat-icon>star_border</mat-icon></button>
+                        </span>
+                        <div class="image">
+                            <!-- replace image with product image -->
+                            <img
+                                src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </span>
+        </mat-grid-list>
     </div>
 
     <div *ngIf="!userService.isLoggedIn()">
