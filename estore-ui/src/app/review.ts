@@ -1,13 +1,7 @@
-import { Customer } from './customer';
-import { Product } from './product';
-
 export interface Review {
     id: number;
     productId: number;
-    customerUser: Customer;
+    customerId: number;
     stars: number;
     reviewContent: string;
-    dateTime: Date | null;
-    username: String;
-    purchased: Array<number>;
 }
