@@ -24,14 +24,48 @@
       {{errorMessage}}
       <br>
     </div>
-    Quantity: <input type="text" [(ngModel)]="quantity">
-    <button type="button" (click)="addToCart()" class="back">Buy</button>
-    <br>
-    <button type="button" (click)="goBack()" class="back">go back</button>
   </div>
   <mat-grid-list cols="3" rowHeight="2:1">
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile><button type="button" (click)="goBack()" class="back">go back</button></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
   </mat-grid-list>
+  <div class="reviews">
+    <!-- Add a review form -->
+    <div class="column">
+      <div>
+          <label for="review-rating" class="front">Rating: </label>
+          <input id="review-rating" [(ngModel)]="tempReview.stars"/>
+      </div>
+      <br>
+      <div>
+          <label for="quantity" class="front">Content: </label>
+          <input id="quantity" [(ngModel)]="tempReview.reviewContent"/>
+      </div>
+
+      <!-- Allow the user to submit -->
+      <button type="button" (click)="addReview()" class="addReview">Submit Review</button>
+    </div>
+    <br>
+    <div class="front">
+      <span>Reviews: </span>
+      <span *ngFor="let review of reviews">
+        <span *ngIf="product && review.productId === product.id">
+          <div class="review">
+            <div class="front">
+              <span>Rating: </span>
+            </div>
+            <div>{{review.stars}}</div>
+            <br>
+            <div class="front">
+              <span>Content: </span>
+            </div>
+            <div>{{review.reviewContent}}</div>
+            <br>
+          </div>
+        </span>
+      </span>
+    </div>
+
+  </div>
 </body>
