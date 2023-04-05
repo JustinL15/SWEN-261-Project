@@ -141,20 +141,9 @@ export class ShoppingCartComponent {
           products.push({id: prod.id, name: prod.name, price: prod.price, quantity: orderQuantity, description: prod.description, category: prod.category, ownerRecommended: prod.ownerRecommended} as Product); 
 
           // This means we could buy it, so now we need to update purchased IDs of customer
-          let customer = this.userService.getCurrentUser();
-          let newIds: number[];
-          if (customer?.purchasedIds === undefined){
-            newIds = [];
-          }
-          else {
-            newIds = customer.purchasedIds;
-          }
-          newIds.push(prod.id);
-          console.log(newIds);
+          this.userService.getCurrentUser()?.purchasedIds.push(prod.id);
 
-          this.userService.updateCustomer({id: customer?.id, username: customer?.username,
-            password: customer?.password, name: customer?.name,
-            cartId: customer?.cartId, purchasedIds: newIds} as Customer);
+          this.userService.updateCustomer(this.userService.getCurrentUser() as Customer).subscribe();
 
         }
         this.productService.updateProduct(prod).subscribe();
