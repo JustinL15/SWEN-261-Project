@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Product } from '../product';
-import { Customer } from '../customer';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +13,9 @@ export class DashboardComponent{
   categoryNum: number = 0;
   constructor(public userService: UserService) {}
 
+  ngOnInit(): void {
+    this.createRecommended();
+  }
 
   async createRecommended(): Promise<void> {
     var orders = this.userService.getCurrentUser()?.orders;
