@@ -12,6 +12,7 @@ import { Review } from '../review';
 import { Customer } from '../customer';
 import { ReviewService } from '../services/review-service';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
@@ -38,7 +39,8 @@ export class ProductDetailComponent implements OnInit {
     private location: Location,
     private userService: UserService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -122,7 +124,12 @@ export class ProductDetailComponent implements OnInit {
       })
       if(!found){
         this.user.starred.push(this.product);
-        this.userService.updateCustomer(this.user).subscribe(user => this.user = user);
+        this.userService.updateCustomer(this.user).subscribe(user => {
+          this.user = user;
+          let snackBarRef = this.snackBar.open("You've starred this product", "Close");
+        });
+      } else {
+        let snackBarRef = this.snackBar.open("You've already starred this product", "Close");
       }
     }
   }
