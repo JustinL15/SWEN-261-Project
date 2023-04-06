@@ -10,6 +10,7 @@ import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
 import { firstValueFrom } from 'rxjs';
 import { Customer } from '../customer';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -25,7 +26,8 @@ export class ShoppingCartComponent {
     private orderService:OrderService,
     private cartService:CartService, 
     private productService: ProductService,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar
     ) {
       this.cartContents = [];
     }
@@ -143,7 +145,9 @@ export class ShoppingCartComponent {
           // This means we could buy it, so now we need to update purchased IDs of customer
           this.userService.getCurrentUser()?.purchasedIds.push(prod.id);
 
-          this.userService.updateCustomer(this.userService.getCurrentUser() as Customer).subscribe();
+          this.userService.updateCustomer(this.userService.getCurrentUser() as Customer).subscribe(_ =>{
+            let success = this.snackBar.open("Checkout Successful", "Close");
+            });
 
         }
         this.productService.updateProduct(prod).subscribe();
