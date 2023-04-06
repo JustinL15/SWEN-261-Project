@@ -1,0 +1,38 @@
+.review{
+    margin-top: 30px;
+    width: 75%;
+    border: solid black;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+.front{
+    font-weight: bold;
+    font-size: medium;
+}
+
+.review-product{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-rating{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-content{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-response{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-edit{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

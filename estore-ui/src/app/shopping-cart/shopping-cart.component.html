@@ -7,15 +7,34 @@
 
 <ul class="cart">
     <div *ngIf="cart">
-        <div *ngFor="let product of cartContents">
-            <span class="badge">{{product.name}}</span>
-            <button type="button" class="decrease" title="decrease product"
-                (click)="decrease(product)">-</button>
-            {{product.quantity}}
-            <button type="button" class="increase" title="increase product"
-                (click)="increase(product)">+</button>
-            <button type="button" class="remove" title="remove product"
-                (click)="remove(product)">remove</button>
+        <div class="productBoxes">
+        <mat-grid-list cols="3" rowHeight="1.6:1" gutterSize="20px">
+            <div class="products">
+                <div *ngFor="let product of cartContents">
+                <mat-grid-tile style="width: 80%;">
+                    <div class="card">
+                    <span class="productName">{{product.name}}</span>
+                    <div class="productPrice">${{product.price}}</div><br>
+                    <span *ngIf="product.quantity !== 0">
+                        <div class="productQuantity">{{product.quantity}} In Cart</div>
+                    </span>
+                    <div class="image">
+                        <!-- replace image with product image -->
+                        <img
+                        src="https://cdn.discordapp.com/attachments/930865385778061373/1089236013391560865/jessica.png">
+                    </div>
+                    <button type="button" class="decrease" title="decrease product"
+                        (click)="decrease(product)">-</button>
+                    {{product.quantity}}
+                    <button type="button" class="increase" title="increase product"
+                        (click)="increase(product)">+</button>
+                    <button type="button" class="remove" title="remove product"
+                        (click)="remove(product)">remove</button>
+                    </div>
+                </mat-grid-tile>
+            </div>
         </div>
+        </mat-grid-list>
+    </div>
     </div>
 </ul>

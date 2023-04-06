@@ -44,7 +44,7 @@ export class InventoryComponent implements OnInit{
       if(this.errorService.errorCode === 409) {
         this.errorMessage = "A product with that name already exists.";
       } else {
-        this.products.push(product);
+        this.getProducts();
       } 
     });
   }

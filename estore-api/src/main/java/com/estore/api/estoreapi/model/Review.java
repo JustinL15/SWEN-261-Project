@@ -105,10 +105,10 @@ public class Review {
     /**
      * Set the customer's id
      * 
-     * @return the customer's id
+     * @param customerId the customer's id
      */
-    public int setCustomerId() {
-        return this.customerId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     /**
@@ -118,6 +118,15 @@ public class Review {
      */
     public String getOwnerResponse() {
         return this.ownerResponse;
+    }
+
+    /**
+     * Set the owner response
+     * 
+     * @param ownerResponse owner response
+     */
+    public void setOwnerResponse(String ownerResponse) {
+        this.ownerResponse = ownerResponse;
     }
    
     /**
@@ -163,8 +172,8 @@ public class Review {
     public boolean equals(Object obj) {
         if (obj instanceof Review) {
             Review other = (Review) obj;
-            return id == other.id && productId == other.productId && stars == other.stars 
-                            && other.reviewContent == reviewContent;
+            return id == other.id && productId == other.productId && customerId == other.customerId && 
+                    stars == other.stars && other.reviewContent == reviewContent && ownerResponse == other.ownerResponse;
         }
         return false;
     }
