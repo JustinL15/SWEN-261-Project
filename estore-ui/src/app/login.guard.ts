@@ -25,7 +25,9 @@ export class LoginGuard implements CanActivate {
       let login = this.matDialog.open(LoginDialogComponent);
       login.afterClosed().subscribe(() => {
         // User logged in successfully, navigate to the current route again to reload the page with the new user data
-        window.history.back();
+        if(this.userService.isLoggedIn()) {
+          this.router.navigate(['/home']);
+        }
       });
       return false;
     }
