@@ -20,10 +20,12 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 
 ## How to run it
 
-1. Clone the repository and go to the root directory.
-2. Execute `mvn compile exec:java`
-3. Open in your browser `http://localhost:8080/`
-4.  _add any other steps required or examples of how to use/run_
+1. Clone the repository and go to the estore-api/ directory
+2. Execute `mvn compile exec:java` to run the backend
+3. Open another terminal and navigate to the estore-ui/ directory
+4. Run `npm install` to install all dependencies
+5. Run `ng add @angular/material` to install the materials library
+6. Run `ng serve --open` to launch the frontend
 
 ## Known bugs and disclaimers
 (It may be the case that your implementation is not perfect.)
