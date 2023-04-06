@@ -15,10 +15,11 @@
         <mat-label>Category </mat-label>
         <mat-select [(ngModel)]="selectedCategory" class="select">
           <mat-option *ngFor="let category of categories" [value]="category">
-            {{category}}
+            {{category}} 
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <button (click)="selectedCategory = ''">Clear</button>
 
     </div>
 

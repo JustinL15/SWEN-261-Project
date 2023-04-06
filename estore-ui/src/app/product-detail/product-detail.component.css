@@ -1,4 +1,4 @@
-body{
+body {
     text-align: center;
 }
 
@@ -8,35 +8,118 @@ button.back {
     margin-right: auto;
 }
 
-button{
+button {
     padding: 5px;
     font-size: 1rem;
 }
 
-img{
+img {
     width: 30%;
     height: 40%;
 }
 
-#proImage{
+#proImage {
     float: left;
     padding-left: 15%;
 }
 
-.productAbout{
+.productAbout {
     width: 100%;
     height: 40%;
     padding-top: 10%;
     padding-bottom: 5%;
 }
 
-.front{
+.front {
     font-weight: bold;
     font-size: larger;
 }
 
-input{
+input {
     width: 30px;
     text-align: center;
     margin-right: 10px;
+}
+
+.front .rev {
+    font-weight: bold;
+    font-size: larger;
+    margin: auto;
+    /* padding-left: 10px; */
+}
+
+.review {
+    border: solid black;
+    background-color: #cca460;
+    width: 65%;
+    margin: auto;
+    border-radius: 30px;
+}
+
+.otherReview {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: solid black;
+    width: 65%;
+    margin: auto;
+    border-radius: 30px;
+}
+
+.owner {
+    background-color: white;
+    width: 100%;
+    margin: auto;
+    border-radius: 0px 0px 30px 30px;
+}
+
+.reviewBox {
+    margin-top: 30px;
+}
+
+.desc {
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.column {
+    margin-top: 20px;
+}
+
+.starRow {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    color: #b1b1b1;
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #ECBE24;
+}
+
+.empty:before,
+.stars:before {
+    content: "\2605\2605\2605\2605\2605";
+    font-size: 14pt;
+}
+
+.empty:before {
+    -webkit-text-stroke: 1px #595959;
+}
+
+.stars:before {
+    -webkit-text-stroke: 1px #ECBE24;
+}
+
+.stars {
+    color: red;
+}
+
+.reviewSet{
+    padding-bottom: 20px;
 }

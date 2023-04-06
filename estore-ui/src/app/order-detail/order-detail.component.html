@@ -3,7 +3,7 @@
         <h2>Order Number #{{order?.id}} | Total Price: ${{order?.totalPrice}}</h2>
         <button type="button" (click)="goBack()" class="back">go back</button>
         <br> <br>
-        <mat-grid-list cols="3" rowHeight="2:1" gutterSize="20px">
+        <mat-grid-list cols="3" rowHeight="1.6:1" gutterSize="20px">
         <div class="products">
             <span *ngFor="let product of order?.products">
             <mat-grid-tile style="width: 80%;">
