@@ -197,6 +197,12 @@ export class ProductDetailComponent implements OnInit {
       return false;
     }
 
+    // Make sure it is an increment of 0.5
+    if (this.tempReview.stars % 0.5 !== 0) {
+      window.alert("Must be an increment of 0.5");
+      return false;
+    }
+
     // Build the review
     let review;
     if (reviewId === 0) {
