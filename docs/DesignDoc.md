@@ -206,6 +206,7 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 
 **Future refactoring**
 If we had more time to work on this project we would try and implement the following:
+
 - Add images to our products page
   - This would involve working out a method to save an image from a URL or file to the backend to be later retrieved in the frontend
   - We did not implement this feature in our project since we were not allowed to just link to external resources online and ultimately it would have distracted us from the MVP and enhancements
@@ -228,11 +229,6 @@ Every user story within sprint 2 pasts its acceptance criteria. Each team member
 
 ### Unit Testing and Code Coverage
 
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
-
 ![1680728754410](image/DesignDoc/1680728754410.png)
 
 ![1680730721242](image/DesignDoc/1680730721242.png)
@@ -241,3 +237,5 @@ Every user story within sprint 2 pasts its acceptance criteria. Each team member
 
 Coverage is above 95% for all tests. Most anomolies occur with missed branches, especially within product controller
 and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products fucntion is missed in testing in a few branches. In CartDAO, the tests states of if the cart is null is not reached, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories.
+
+Our strategy was to use Jacoco to see the code coverage and worked to get as close to 100% coverage as possible.
