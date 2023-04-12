@@ -114,6 +114,9 @@ Once the user navigates to the log in page, they have the option to log in or cr
 **Adding Reviews Sequence Diagrams**
 ![Reviews Sequence Diagram](ReviewsSequenceDiagram.png)
 
+**Checking Out Sequence Diagram**
+![Checkout Sequence Diagram](CheckoutSequenceDiagram.png)
+
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
 >
 > * _Class diagrams only apply to the **ViewModel** and **Model** Tier_
