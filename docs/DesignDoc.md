@@ -36,7 +36,7 @@ Creating a e-store that sells coffee related products. The customers are the imp
 | TS   | Type Script               |
 | HTML | Hypertext Markup Language |
 
-Angular material is just an extra set of components to be integrated into the already existing angular components. Has a few cool features that help keep consistent designs. A con is that it could stop being supported by the angular team. This is unlikely as it is backed by Angular. However, the included features expand the possibilities for our development. We will use it to consistently display data across the system. It will also be used to be more organized with our css implementation.
+Angular material is an extra set of components to be integrated into the already existing angular components. Has a few cool features that help keep consistent designs. A con is that it could stop being supported by the angular team. This is unlikely as it is backed by Angular. However, the included features expand the possibilities for our development. We will use it to consistently display data across the system. It will also be used to be more organized with our css implementation.
 
 ## Requirements
 
@@ -123,18 +123,11 @@ Once the user navigates to the log in page, they have the option to log in or cr
 
 ### ViewModel Tier
 
-> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
-
 ![1681333779555](image/DesignDoc/1681333779555.png)
 
 ![1681333809319](image/DesignDoc/1681333809319.png)
+
+This is our up to date UML diagram with all of the neccecary view and viewmodels. It shows the connections between all of the sections of the tiers. They include all of the properties in the tiers and the directionality of communication. For example, User View is reliant on Backend Components in order to display. The views are in charge of communicating what is needed to display for the viewmodels.
 
 ### Model Tier
 
@@ -202,6 +195,7 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 > Include any relevant screenshot(s) with each area._
 
 **Future refactoring**
+
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
 ## Testing
