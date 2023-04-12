@@ -55,11 +55,26 @@ The data stored within the shopping carts and the inventory should be saved and 
 
 ### MVP Features
 
-> _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+#### Owner Implementation
+The owner is able to add, delete, and edit products in the inventory. Owners can view customer orders. They are able to delete orders
+if necessary as well as mark them as complete. 
+
+#### Customer Implementation
+The customer is able to view and search all products in the inventory. They are also able to add and remove products from a cart,
+which will remain unchanged after logging out and logging back in. The customer can check out which will create an order consisting 
+of the products within their cart at the time of checkout and remove these products from the inventory.
 
 ### Enhancements
 
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+#### Reviews
+
+This feature allows users to review products that they have purchased as well as read reviews from other customers.
+The admin is able to respond to a specific review. This response can then be viewed by a user under the review it was a response to. 
+
+#### Recommendations
+
+This feature allows users to favorite products they are interested in and gives them recommendations for other products based on these selections.The owner is also able to recommend products that will be visible to anyone whether or not they are logged into the site.
+
 
 ## Application Domain
 
@@ -224,4 +239,4 @@ Every user story within sprint 2 pasts its acceptance criteria. Each team member
 ![1680730756556](image/DesignDoc/1680730756556.png)
 
 Coverage is above 95% for all tests. Most anomolies occur with missed branches, especially within product controller
-and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products fucntion is missed in testing in a few branches. In CartDAO, the tests states of if the cart is null is not reached, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories.
+and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products function is missed in testing in a few branches. In CartDAO, the tests states of if the cart is null is not reached, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories.
