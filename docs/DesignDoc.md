@@ -200,7 +200,12 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 > Include any relevant screenshot(s) with each area._
 
 **Future refactoring**
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+If we had more time to work on this project we would try and implement the following:
+- Add images to our products page
+  - This would involve working out a method to save an image from a URL or file to the backend to be later retrieved in the frontend
+  - We did not implement this feature in our project since we were not allowed to just link to external resources online and ultimately it would have distracted us from the MVP and enhancements
+- Add an average review feature
+  - This would involve computing the average review and displaying it at the top of the reviews page of a product
 
 ## Testing
 
