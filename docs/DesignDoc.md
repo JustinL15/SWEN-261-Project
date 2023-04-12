@@ -137,8 +137,6 @@ When a user loads up the website, the first thing they will see is the user dash
 
 This is our up to date UML diagram with all of the neccecary view and viewmodels. It shows the connections between all of the sections of the tiers. They include all of the properties in the tiers and the directionality of communication. For example, User View is reliant on Backend Components in order to display. The views are in charge of communicating what is needed to display for the viewmodels._
 
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
-
 ![1681333779555](image/DesignDoc/1681333779555.png)
 
 ![1681333809319](image/DesignDoc/1681333809319.png)
