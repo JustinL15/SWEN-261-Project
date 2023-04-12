@@ -123,11 +123,14 @@ Once the user navigates to the log in page, they have the option to log in or cr
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects
-> of the design that you are describing.  For example, in e-store you might create a
-> sequence diagram of a customer searching for an item and adding to their cart.
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
-> to help illustrate the end-to-end flow._
+**Add To Cart Functionality Sequence Diagram**
+![Cart Sequence Diagram](AddToCartSequenceDiagram.png)
+
+**Adding Reviews Sequence Diagrams**
+![Reviews Sequence Diagram](ReviewsSequenceDiagram.png)
+
+**Checking Out Sequence Diagram**
+![Checkout Sequence Diagram](CheckoutSequenceDiagram.png)
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
 >
@@ -146,6 +149,10 @@ Once the user navigates to the log in page, they have the option to log in or cr
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
+
+![1681333779555](image/DesignDoc/1681333779555.png)
+
+![1681333809319](image/DesignDoc/1681333809319.png)
 
 ### Model Tier
 
@@ -205,8 +212,6 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 
 ![1679358538861](image/DesignDoc/1679358538861.png)
 
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
-
 ## Static Code Analysis/Future Design Improvements
 
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise,
@@ -214,7 +219,13 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.
 > Include any relevant screenshot(s) with each area._
 
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+**Future refactoring**
+If we had more time to work on this project we would try and implement the following:
+- Add images to our products page
+  - This would involve working out a method to save an image from a URL or file to the backend to be later retrieved in the frontend
+  - We did not implement this feature in our project since we were not allowed to just link to external resources online and ultimately it would have distracted us from the MVP and enhancements
+- Add an average review feature
+  - This would involve computing the average review and displaying it at the top of the reviews page of a product
 
 ## Testing
 

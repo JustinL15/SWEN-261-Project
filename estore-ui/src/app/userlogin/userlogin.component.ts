@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
 export class UserLoginComponent implements OnInit{
   user: Customer | null = null;
   orders: Order[] = [];
-  displayedColumns: string[] = ['id', 'name', 'products', 'total', 'time'];
+  displayedColumns: string[] = ['id', 'products', 'total', 'time'];
 
   constructor(
     private userService: UserService,
