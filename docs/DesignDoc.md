@@ -108,11 +108,11 @@ Once the user navigates to the log in page, they have the option to log in or cr
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects
-> of the design that you are describing.  For example, in e-store you might create a
-> sequence diagram of a customer searching for an item and adding to their cart.
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
-> to help illustrate the end-to-end flow._
+**Add To Cart Functionality Sequence Diagram**
+![Cart Sequence Diagram](AddToCartSequenceDiagram.png)
+
+**Adding Reviews Sequence Diagrams**
+![Reviews Sequence Diagram](ReviewsSequenceDiagram.png)
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
 >
@@ -199,6 +199,7 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.
 > Include any relevant screenshot(s) with each area._
 
+**Future refactoring**
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
 ## Testing
