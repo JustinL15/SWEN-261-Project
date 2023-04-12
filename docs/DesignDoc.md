@@ -36,7 +36,7 @@ Creating a e-store that sells coffee related products. The customers are the imp
 | TS   | Type Script               |
 | HTML | Hypertext Markup Language |
 
-Angular material is an extra set of components to be integrated into the already existing angular components. Has a few cool features that help keep consistent designs. A con is that it could stop being supported by the angular team. This is unlikely as it is backed by Angular. However, the included features expand the possibilities for our development. We will use it to consistently display data across the system. It will also be used to be more organized with our css implementation.
+Angular material is just an extra set of components to be integrated into the already existing angular components. Has a few cool features that help keep consistent designs. A con is that it could stop being supported by the angular team. This is unlikely as it is backed by Angular. However, the included features expand the possibilities for our development. We will use it to consistently display data across the system. It will also be used to be more organized with our css implementation.
 
 ## Requirements
 
@@ -126,11 +126,18 @@ Once the user navigates to the log in page, they have the option to log in or cr
 
 ### ViewModel Tier
 
+> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
+> section will follow the same instructions that are given for the View
+> Tier above._
+
+> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
+> static models (UML class diagrams) with some details such as critical attributes and methods._
+
+![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
+
 ![1681333779555](image/DesignDoc/1681333779555.png)
 
 ![1681333809319](image/DesignDoc/1681333809319.png)
-
-This is our up to date UML diagram with all of the neccecary view and viewmodels. It shows the connections between all of the sections of the tiers. They include all of the properties in the tiers and the directionality of communication. For example, User View is reliant on Backend Components in order to display. The views are in charge of communicating what is needed to display for the viewmodels.
 
 ### Model Tier
 
@@ -191,20 +198,11 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 ![1679358538861](image/DesignDoc/1679358538861.png)
 
 ## Static Code Analysis/Future Design Improvements
-The following issues were found by the static code analysis tool:
-![Alt Text Bug](altTextBug.png)
-> Here we can see that SonarQube is recommending that we add an alt text to our images.
-> This is a good suggestion as it makes the website more accessible and is something we should have considered
-![Override hashcode bug](overrideHashcodeBug.png)
-> Here SonarQube identified that we override the equals() method in a few of our objects without overriding the hashcode() method
-> This can cause issues if we intended to put these objects in a hashset or similar structure that uses hashing and comparison
-> In the future this would be a good thing to implement to prevent excess bugs in our code from the default hashcode() function
-![Add description bug](addDescriptionBug.png)
-> Here it found that we do not have a description for our HTML table
-> A description again would increase the accessibility and better communicate what we are attempting to display within the table
-![LI Outside List](liOutsideList.png)
-> Here it has identified that we use an li (list item) tag outside of a list. There is not an unordered list or ordered list as a parent to this tag and so it shows bad practice
-> This is definitely something to fix in the future as it will better communicate our design better and allow for more expandability if we were ever to theme unordered list in a certain way
+
+> _**[Sprint 4]** With the results from the Static Code Analysis exercise,
+> **Identify 3-4** areas within your code that have been flagged by the Static Code
+> Analysis Tool (SonarQube) and provide your analysis and recommendations.
+> Include any relevant screenshot(s) with each area._
 
 **Future refactoring**
 If we had more time to work on this project we would try and implement the following:
@@ -213,6 +211,11 @@ If we had more time to work on this project we would try and implement the follo
   - We did not implement this feature in our project since we were not allowed to just link to external resources online and ultimately it would have distracted us from the MVP and enhancements
 - Add an average review feature
   - This would involve computing the average review and displaying it at the top of the reviews page of a product
+- Add a feature so that owner can delete reviews from customers for products.
+  - This would involve adding a delete button associated with each review so that the owner can just click delete for a review hw wanted to delete
+  - We did not implement this before since we thought giving the owner a blanket delete button may not be good for getting geniuine reviews.
+- Add a feature where you can log out from any page on the site sintead of having to navigate to the user profile.
+  - This would entail just adding a button to the nav bar that logs you out when clicked.
 
 ## Testing
 
