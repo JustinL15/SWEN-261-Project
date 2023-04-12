@@ -132,6 +132,10 @@ Once the user navigates to the log in page, they have the option to log in or cr
 
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
+![1681333779555](image/DesignDoc/1681333779555.png)
+
+![1681333809319](image/DesignDoc/1681333809319.png)
+
 ### Model Tier
 
 The Model Tier consists of classes that represent our objects within the code. They are leveraged in the DAOs in order to save their data and keep persistence. They are also used by the controllers to process API requests.
@@ -189,8 +193,6 @@ Models only call on others when needed. Information is only passed when neccisar
 Each class has one purpose. To achieve other purposes it calls on other classes. The ts calls upon the DAOs in order to create, update, delete etc. this ensures that the code is not only reusable but also not hard coded and can change with each need. Products is a good example because they are all connected but do not do multiple things. These then get called in the ts files to use the functions.
 
 ![1679358538861](image/DesignDoc/1679358538861.png)
-
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
 ## Static Code Analysis/Future Design Improvements
 
