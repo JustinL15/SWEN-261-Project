@@ -55,11 +55,26 @@ The data stored within the shopping carts and the inventory should be saved and 
 
 ### MVP Features
 
-> _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+#### Owner Implementation
+The owner is able to add, delete, and edit products in the inventory. Owners can view customer orders. They are able to delete orders
+if necessary as well as mark them as complete. 
+
+#### Customer Implementation
+The customer is able to view and search all products in the inventory. They are also able to add and remove products from a cart,
+which will remain unchanged after logging out and logging back in. The customer can check out which will create an order consisting 
+of the products within their cart at the time of checkout and remove these products from the inventory.
 
 ### Enhancements
 
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+#### Reviews
+
+This feature allows users to review products that they have purchased as well as read reviews from other customers.
+The admin is able to respond to a specific review. This response can then be viewed by a user under the review it was a response to. 
+
+#### Recommendations
+
+This feature allows users to favorite products they are interested in and gives them recommendations for other products based on these selections.The owner is also able to recommend products that will be visible to anyone whether or not they are logged into the site.
+
 
 ## Application Domain
 
@@ -98,8 +113,7 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application. `<br>`
 
-When a user first enters the website, they will be prompted with a screen asking them to login or create an account.
-Once the user navigates to the log in page, they have the option to log in or create an account. If they choose to login, but use an invalid user or pass, the website will inform them and deny the login. After logging in or creating, if the user goes back to the home page, it will show a welcome "user" screen. If the user logs in as a customer, they can click on the products page to view and search through all the products. If they see one they like, they can click on that product, specify how much they want, and click "buy" to add it to the cart. Once they've added all they want, they then can navigate over to the cart page to view their shopping cart. This page displayes the products in the cart and the amount of each. The user can then press checkout, which will clear their cart. If they navigate back to the login page, they can log out. If the user logs in as an admin, the view will be relatively the same, with the addition of the manage page. On the manage page, the user can view the inventory, and can click on products to make adjustments, such as price, quantity, name, or description. They can also click on the button that leads them to orders, in which they can see all orders in progress or that are completed.
+When a user first enters the website, they will be presented with the dashboard which displays products recommended by the estore owners. Once the user navigates to the log in page, they have the option to log in or create an account. If they choose to login, but use an invalid user or pass, the website will inform them and deny the login. After logging in or creating an account, if the user goes back to the home page, it will show a welcome "user" screen and display products both recommended from the estore owner and products specific to that user. If the user logs in as a customer, they can click on the products page to view and search through all the products. If they see one they like, they can click on that product, specify how much they want, and click "add to cart" to add it to the cart. Once they've added all they want, they then can navigate over to the cart page to view their shopping cart. This page displays the products in the cart and the amount of each. The user can then press checkout, which will clear their cart, and create a new order. If they navigate back to the login page, they can log out. If the user logs in as an admin, the view will be relatively the same, replacing the cart page with a manage page and adding a review page. On the manage page, the user can view the inventory, and can click on products to make adjustments, such as price, quantity, name, or description. They can also click on the button that leads them to orders, in which they can see all orders in progress or that are completed. They can also mark an order as complete or delete an order. If the user navigates to the review tab, they will see the all of the reviews on the site. They can then respond to any one review or edit a response that was already made. 
 
 ### View Tier
 
