@@ -82,12 +82,12 @@ This section describes the application domain.
 
 ![Domain Model](DomainAnalysis.png)
 
-The main interactions within our domain model take place through a customer's interactions with the store. `<br>`
-A **customer** will create an account and then browse the store's **inventory** which will display a collection of **product**. `<br>`
-The user can view existing **review** for each **product**, view **product** sorted by **category** as well as receive a **recommendation** for other products, this assists the user in making purchases. `<br>`
-Once the **customer** has decided to purchase a **product** they can add the item to their **cart** and continue to add more items until they are ready to purchase. `<br>`
-When purchasing, their **cart** will be moved to the **checkout** phase and all items will be marked as purchased and saved in an **order**. `<br>`
-The **customer** can then view the status of their **order**. `<br>`
+The main interactions within our domain model take place through a customer's interactions with the store.
+A **customer** will create an account and then browse the store's **inventory** which will display a collection of **product**.
+The **customer** can view existing **review** for each **product**, view **product** sorted by **category** as well as receive a **recommendation** for other products, this assists the user in making purchases.
+Once the **customer** has decided to purchase a **product** they can add the item to their **cart** and continue to add more items until they are ready to purchase.
+When purchasing, their **cart** will be moved to the **checkout** phase and all items will be marked as purchased and saved in an **order**.
+The **customer** can then view the status of their **order**.
 The **owner** can mark an **order** as complete, which will notify the **customer** that their order has been processed.
 
 ## Architecture and Design
