@@ -82,12 +82,12 @@ This section describes the application domain.
 
 ![Domain Model](DomainAnalysis.png)
 
-The main interactions within our domain model take place through a customer's interactions with the store. `<br>`
-A **customer** will create an account and then browse the store's **inventory** which will display a collection of **product**. `<br>`
-The user can view existing **review** for each **product**, view **product** sorted by **category** as well as receive a **recommendation** for other products, this assists the user in making purchases. `<br>`
-Once the **customer** has decided to purchase a **product** they can add the item to their **cart** and continue to add more items until they are ready to purchase. `<br>`
-When purchasing, their **cart** will be moved to the **checkout** phase and all items will be marked as purchased and saved in an **order**. `<br>`
-The **customer** can then view the status of their **order**. `<br>`
+The main interactions within our domain model take place through a customer's interactions with the store.
+A **customer** will create an account and then browse the store's **inventory** which will display a collection of **product**.
+The **customer** can view existing **review** for each **product**, view **product** sorted by **category** as well as receive a **recommendation** for other products, this assists the user in making purchases.
+Once the **customer** has decided to purchase a **product** they can add the item to their **cart** and continue to add more items until they are ready to purchase.
+When purchasing, their **cart** will be moved to the **checkout** phase and all items will be marked as purchased and saved in an **order**.
+The **customer** can then view the status of their **order**.
 The **owner** can mark an **order** as complete, which will notify the **customer** that their order has been processed.
 
 ## Architecture and Design
@@ -240,7 +240,7 @@ If we had more time to work on this project we would try and implement the follo
 
 ### Acceptance Testing
 
-Every user story within sprint 2 pasts its acceptance criteria. Each team member was given 2-4 user stories to complete and acceptance criteria for each was determined as a team. During pull requests, team members reviewed the code and the user stories defined and determined whether that user story was implemented successfully before a merge was accepted. The main issues that occurred with acceptance criteria was that for some user stories, the implementation was more difficult, making the criteria harder to reach. However, whenever a teammate had an issue or a question, there was never hesitation to ask for help and all user stories were able to fully meet their acceptance criteria by the end of the sprint.
+Every user story within sprint 2 passes its acceptance criteria. Each team member was given 2-4 user stories to complete and acceptance criteria for each was determined as a team. During pull requests, team members reviewed the code and the user stories defined and determined whether that user story was implemented successfully before a merge was accepted. The main issues that occurred with acceptance criteria was that for some user stories, the implementation was more difficult, making the criteria harder to reach. For instance with reviwes. The backend implementation of reviews was relatively simple, but the front end became more difficult when we added the layer of a user only being able to review a product when it was purchased. However, whenever a teammate had an issue or a question, there was never hesitation to ask for help and all user stories were able to fully meet their acceptance criteria by the end of the sprint, which was the case with reviews. We had a team meeting and worked together to get the front end fully implemented and were able to accomplish the task successfully. 
 
 ### Unit Testing and Code Coverage
 
@@ -251,6 +251,6 @@ Every user story within sprint 2 pasts its acceptance criteria. Each team member
 ![1680730756556](image/DesignDoc/1680730756556.png)
 
 Coverage is above 95% for all tests. Most anomolies occur with missed branches, especially within product controller
-and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products fucntion is missed in testing in a few branches. In CartDAO, the tests states of if the cart is null is not reached, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories.
+and model. In model, this is due to an equals function, where there is no test to if something is not an instance of product. In controller, the search products fucntion is missed in testing in a few branches. In CartDAO, the tests is looking for a null cart, so an error occurs there in several test functions. In OrderDAO, the updateOrder function does not get fully tested as the order does not return null. In CustomerController, the create customer function is missed in several branches. Overall, the coverage is near 100% in all categories.
 
-Our strategy was to use Jacoco to see the code coverage and worked to get as close to 100% coverage as possible.
+Our strategy was to use Jacoco to see the code coverage and worked to get as close to 100% coverage as possible. In instances where we were unable to reach 100%, our minimum requirement was 95% for model tier and 90% for persistence and controller tiers. 
