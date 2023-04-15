@@ -200,11 +200,20 @@ Each class has one purpose. To achieve other purposes it calls on other classes.
 ![1679358538861](image/DesignDoc/1679358538861.png)
 
 ## Static Code Analysis/Future Design Improvements
-
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise,
-> **Identify 3-4** areas within your code that have been flagged by the Static Code
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.
-> Include any relevant screenshot(s) with each area._
+The following issues were found by the static code analysis tool:
+![Alt Text Bug](altTextBug.png)
+> Here we can see that SonarQube is recommending that we add an alt text to our images.
+> This is a good suggestion as it makes the website more accessible and is something we should have considered
+![Override hashcode bug](overrideHashcodeBug.png)
+> Here SonarQube identified that we override the equals() method in a few of our objects without overriding the hashcode() method
+> This can cause issues if we intended to put these objects in a hashset or similar structure that uses hashing and comparison
+> In the future this would be a good thing to implement to prevent excess bugs in our code from the default hashcode() function
+![Add description bug](addDescriptionBug.png)
+> Here it found that we do not have a description for our HTML table
+> A description again would increase the accessibility and better communicate what we are attempting to display within the table
+![LI Outside List](liOutsideList.png)
+> Here it has identified that we use an li (list item) tag outside of a list. There is not an unordered list or ordered list as a parent to this tag and so it shows bad practice
+> This is definitely something to fix in the future as it will better communicate our design better and allow for more expandability if we were ever to theme unordered list in a certain way
 
 **Future refactoring**
 If we had more time to work on this project we would try and implement the following:
