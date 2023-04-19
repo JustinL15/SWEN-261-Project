@@ -192,7 +192,7 @@ A controller can be used in our implementations of owner product control, custom
 Models only call on others when needed. Information is only passed when necessary to accomplish other tasks. This prevents too much dependency among the modules. A good example is the AuthGuard hooking to the Owner View. This allows AuthGuard to ensure that only owners can view specific parts of the site and easily allows that access.
 AuthGuard itself is also minimally dependent, having only one dependency which is the UserService.
 
-![1679358202811](image/DesignDoc/1679358202811.png)
+![1679358202811](image/DesignDoc/SWEN SPRINT 1 DIAGRAM.svg)
 
 **Single responsibility**
 
