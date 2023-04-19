@@ -177,7 +177,7 @@ The reviews model saves the customer reviews of a specific product and their rat
 **Information Expert** states that the behavior of a class or object should have functions to interpret its own data and not have to pass around its own data to different objects in order to parse the final meaning. Adhering to the principle results in programs that have low coupling and are less complex.
 The current ProductFileDAO class has the methods to create, delete, get, update, and search for products because it has the name of the file we are storing the product data in and thus has an easier time accessing the data.
 
-![Information Expert Implementation Example](information-expert-example.png)
+![Information Expert Implementation Example](informationExpertExample.png)
 
 **Controller** represents the user functions. It is a non-user interface that handles the system events. It breaks up the work done by other modules and it controls object activity. It provides a basis to then be performed by other objects within the project. For example, CartController (As seen below) implements all the necessary methods that the cart model needs and is the only one of the controllers that can edit the cart json file.
 
@@ -185,7 +185,7 @@ The current ProductFileDAO class has the methods to create, delete, get, update,
 
 A controller can be used in our implementations of owner product control, customer shopping cart, custom reviews, customer recommendations, and the controller responsible for logging on to the website itself.
 
-![Controller Implementation Example](controller-example.png)
+![Controller Implementation Example](controllerExample.png)
 
 **Low coupling**
 
